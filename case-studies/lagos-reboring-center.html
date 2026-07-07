@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engine Reboring Service Center Setup — Lagos | TME Africa</title>
+  <meta name="description" content="How TME built a complete automotive engine reconditioning centre in Lagos State — from engine block reboring machine to welding station — enabling 35 engine reconditions monthly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            steel:   "#1C2128",
+            orange:  "#FF6B00",
+            crisp:   "#F5F5F5",
+            midgrey: "#3A4149",
+            fog:     "#8A8F94",
+          },
+          fontFamily: {
+            sans:      ["Barlow", "sans-serif"],
+            condensed: ['"Barlow Condensed"', "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="../assets/css/custom.css" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+  <style>
+    #cs-nav { height:64px; background:transparent; border-bottom:1px solid transparent; transition:background 300ms ease,border-color 300ms ease,box-shadow 300ms ease; }
+    #cs-nav.scrolled { background:rgba(12,15,20,0.97); border-bottom-color:rgba(255,107,0,0.4); backdrop-filter:blur(16px); box-shadow:0 4px 32px rgba(0,0,0,0.4); }
+    .why-card { border-left:3px solid transparent; transition:all 200ms ease; }
+    .why-card:hover { border-left-color:#FF6B00; background:rgba(255,107,0,0.04); }
+    .related-card { transition:all 200ms ease; }
+    .related-card:hover { transform:translateY(-3px); border-color:rgba(255,107,0,0.6); }
+    @keyframes countUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  </style>
+</head>
+<body class="bg-steel text-crisp font-sans antialiased">
+
+
+  <!-- NAV -->
+  <header id="cs-nav" class="fixed top-0 left-0 right-0 z-[100]">
+    <div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between">
+      <a href="../index.html" class="flex items-center shrink-0">
+        <img src="../assets/logo/new-logo.png" alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd." style="height:50px;width:auto;" />
+      </a>
+      <div class="flex items-center gap-6">
+        <a href="../index.html#case-studies" class="hidden sm:block font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200" style="color:rgba(245,245,245,0.75);">&#8592; All Projects</a>
+        <a href="../index.html#contact" class="font-condensed font-bold uppercase tracking-[0.1em] text-steel text-[13px] px-5 py-2.5 transition-colors duration-200" style="background:#FF6B00;">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="relative min-h-[70vh] flex items-end" style="padding-bottom:4rem;padding-top:8rem;">
+    <div class="absolute inset-0" style="background-image:url('../assets/images/case-reboring-center.jpg');background-size:cover;background-position:center;background-color:#0A0D12;"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(8,12,16,0.98) 0%, rgba(8,12,16,0.65) 50%, rgba(8,12,16,0.30) 100%);"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <span class="inline-block bg-orange text-steel font-condensed font-bold text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 mb-5">Case Study — 03</span>
+      <h1 class="font-condensed font-extrabold uppercase text-crisp mb-4 leading-tight" style="font-size:clamp(32px,5vw,60px);">Engine Reboring Service Center Setup — Lagos</h1>
+      <div class="flex flex-wrap gap-4 text-xs font-condensed font-semibold uppercase tracking-wide text-fog">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange inline-block"></span>Automotive &amp; Engine Repair</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange inline-block"></span>Lagos State, Nigeria</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange inline-block"></span>2024</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- META BAR -->
+  <div class="bg-[#0D1117] border-b border-steel">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div>
+          <span class="block text-fog text-[10px] uppercase tracking-wide mb-1">Sector</span>
+          <span class="text-crisp font-semibold text-sm">Automotive &amp; Engine Repair</span>
+        </div>
+        <div>
+          <span class="block text-fog text-[10px] uppercase tracking-wide mb-1">Location</span>
+          <span class="text-crisp font-semibold text-sm">Lagos State, Nigeria</span>
+        </div>
+        <div>
+          <span class="block text-fog text-[10px] uppercase tracking-wide mb-1">Equipment</span>
+          <span class="text-crisp font-semibold text-sm">3 Machine Installations</span>
+        </div>
+        <div>
+          <span class="block text-fog text-[10px] uppercase tracking-wide mb-1">Timeline</span>
+          <span class="text-crisp font-semibold text-sm">4 Weeks — Setup to First Engine</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+
+    <!-- Equipment List -->
+    <div class="bg-[#0D1117] border border-steel/60 p-6 mb-14">
+      <span class="block text-fog text-[10px] uppercase tracking-[0.2em] mb-3">Equipment Delivered</span>
+      <p class="font-condensed font-bold text-crisp text-lg">Engine Block Reboring Machine · MIG Welding Station · Hydraulic Press</p>
+    </div>
+
+    <!-- Challenge -->
+    <div class="mb-14">
+      <span class="block text-orange font-condensed font-bold text-xs uppercase tracking-[0.2em] mb-4">The Challenge</span>
+      <div class="w-10 h-[3px] bg-orange mb-6"></div>
+      <p class="text-crisp/90 text-base sm:text-lg leading-relaxed">
+              A Lagos automotive technician with 15 years of engine overhaul experience was ready to
+              formalise his operation into a standalone reconditioning centre — but the barrier was
+              equipment. Engine block reboring machines with local after-sales support were nearly
+              impossible to source legitimately in Nigeria, and the few available through grey
+              channels came with no warranty, no commissioning, and no training. He needed a
+              complete solution, not just a machine.
+    </p>
+    </div>
+
+    <!-- Solution -->
+    <div class="mb-14">
+      <span class="block text-orange font-condensed font-bold text-xs uppercase tracking-[0.2em] mb-4">Our Solution</span>
+      <div class="w-10 h-[3px] bg-orange mb-6"></div>
+      <p class="text-crisp/90 text-base sm:text-lg leading-relaxed">
+              TME supplied and commissioned a precision engine block reboring machine rated for diesel
+              and petrol blocks from 50mm to 200mm bore diameter — covering everything from commercial
+              trucks to passenger vehicles. We paired it with a MIG welding station for block crack
+              repair and a small hydraulic press for bush pressing, creating a self-contained
+              reconditioning bay.
+              <br /><br />
+              Beyond equipment, TME delivered two days of operator training on the reboring machine:
+              bore gauging, tool setting, feed rate calibration, and surface finish specification for
+              different engine types. The client's lead technician was running unsupervised by
+              day three of commissioning.
+    </p>
+    </div>
+
+    <!-- Outcome Stats -->
+    <div class="mb-10">
+      <span class="block text-orange font-condensed font-bold text-xs uppercase tracking-[0.2em] mb-4">The Outcome</span>
+      <div class="w-10 h-[3px] bg-orange mb-8"></div>
+      <div class="grid grid-cols-3 gap-3 mb-10">
+              <div class="text-center bg-[#0D1117] border border-steel/60 py-8 px-4">
+                <span class="counter block font-condensed font-extrabold text-orange text-4xl sm:text-5xl mb-2" data-target="35" data-suffix=" Engines">0</span>
+                <span class="block text-crisp text-xs uppercase tracking-wide">Reconditioned Monthly</span>
+              </div>
+              <div class="text-center bg-[#0D1117] border border-steel/60 py-8 px-4">
+                <span class="counter block font-condensed font-extrabold text-orange text-4xl sm:text-5xl mb-2" data-target="4" data-suffix=" Wks">0</span>
+                <span class="block text-crisp text-xs uppercase tracking-wide">Setup to First Engine</span>
+              </div>
+              <div class="text-center bg-[#0D1117] border border-steel/60 py-8 px-4">
+                <span class="counter block font-condensed font-extrabold text-orange text-4xl sm:text-5xl mb-2" data-target="3" data-suffix=" Staff">0</span>
+                <span class="block text-crisp text-xs uppercase tracking-wide">Trained &amp; Certified</span>
+              </div>
+      </div>
+      <p class="text-crisp/90 text-base sm:text-lg leading-relaxed">
+              The reconditioning centre was processing its first customer engine within four weeks of
+              equipment delivery. At full capacity, the facility now handles 35 engine reconditions
+              per month — a volume that would have required sending blocks to specialist shops across
+              Lagos, adding cost and turnaround time. The centre has since become the preferred
+              reboring referral for three local workshops in the area.
+    </p>
+    </div>
+
+    <!-- Quote -->
+    <div class="border-l-4 border-orange pl-8 py-4 my-14">
+      <span class="block text-orange font-condensed text-5xl leading-none mb-3">&ldquo;</span>
+      <p class="font-sans italic text-crisp text-lg sm:text-xl leading-relaxed mb-5">Before TME, getting a proper reboring machine in Nigeria felt impossible. They brought the machine, commissioned it, trained my guys, and now we are the go-to shop in our area. That is exactly what I needed.</p>
+      <p class="text-orange text-xs font-condensed font-semibold uppercase tracking-wide">— Centre Owner, Automotive Engine Reconditioning &mdash; Lagos State, 2024</p>
+    </div>
+
+  </main>
+
+
+  <!-- WHY TME -->
+  <section class="bg-[#0D1117] py-16 lg:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="font-condensed font-bold text-orange text-xs uppercase tracking-[0.2em] mb-3">Why Clients Choose Us</p>
+      <h2 class="font-condensed font-extrabold uppercase text-3xl sm:text-4xl text-crisp mb-12 leading-tight">
+        Why TME For Your Next Project
+      </h2>
+      <div class="space-y-4">
+        <div class="why-card bg-midgrey/40 p-6 lg:p-8">
+          <div class="flex gap-5">
+            <span class="text-orange font-condensed font-extrabold text-3xl leading-none shrink-0">01</span>
+            <div>
+              <h3 class="font-condensed font-bold text-crisp uppercase text-lg mb-2">OEM Direct — No Brokers, No Markup</h3>
+              <p class="text-fog text-sm leading-relaxed">We source machinery directly from certified manufacturers in China's industrial provinces. Eliminating the middleman saves clients 30–40% versus traditional import channels — the same specification, at a price that makes financial sense for African markets.</p>
+            </div>
+          </div>
+        </div>
+        <div class="why-card bg-midgrey/40 p-6 lg:p-8">
+          <div class="flex gap-5">
+            <span class="text-orange font-condensed font-extrabold text-3xl leading-none shrink-0">02</span>
+            <div>
+              <h3 class="font-condensed font-bold text-crisp uppercase text-lg mb-2">Full Integration — Not Just a Delivery</h3>
+              <p class="text-fog text-sm leading-relaxed">We do not drop machines at your gate. Our engineers handle site surveys, foundation preparation, machine positioning, electrical commissioning to your local power supply, test runs, and formal handover documentation. You get a working production line, not a crate.</p>
+            </div>
+          </div>
+        </div>
+        <div class="why-card bg-midgrey/40 p-6 lg:p-8">
+          <div class="flex gap-5">
+            <span class="text-orange font-condensed font-extrabold text-3xl leading-none shrink-0">03</span>
+            <div>
+              <h3 class="font-condensed font-bold text-crisp uppercase text-lg mb-2">Nigerian Field Experience</h3>
+              <p class="text-fog text-sm leading-relaxed">We understand 415V site power, PHCN load-shedding and the need for surge protection, Nigerian customs clearance timelines, and the practical realities of both northern and southern site conditions. European or Asian suppliers quoting from a brochure don't. We've worked on the ground — and it shows.</p>
+            </div>
+          </div>
+        </div>
+        <div class="why-card bg-midgrey/40 p-6 lg:p-8">
+          <div class="flex gap-5">
+            <span class="text-orange font-condensed font-extrabold text-3xl leading-none shrink-0">04</span>
+            <div>
+              <h3 class="font-condensed font-bold text-crisp uppercase text-lg mb-2">Lifecycle Support After Handover</h3>
+              <p class="text-fog text-sm leading-relaxed">The job does not end at commissioning. TME offers SLA maintenance contracts, emergency breakdown response, and a stocked spare parts supply programme — because a machine that goes down and stays down costs you production. We keep your line running.</p>
+            </div>
+          </div>
+        </div>
+        <div class="why-card bg-midgrey/40 p-6 lg:p-8">
+          <div class="flex gap-5">
+            <span class="text-orange font-condensed font-extrabold text-3xl leading-none shrink-0">05</span>
+            <div>
+              <h3 class="font-condensed font-bold text-crisp uppercase text-lg mb-2">Proven Across Nigeria's Industrial Sectors</h3>
+              <p class="text-fog text-sm leading-relaxed">From Kaduna fabrication workshops to Lagos automotive service centres to Rivers oil-field engineering bays — TME has delivered complete machine installations across Nigeria's industrial landscape. Each completed project is proof we can deliver on yours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- OTHER PROJECTS -->
+  <section class="py-16 lg:py-20 bg-steel">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-condensed font-extrabold uppercase text-2xl sm:text-3xl text-crisp mb-8">Other Projects</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="kaduna-workshop.html" class="related-card block bg-midgrey border border-steel/60 overflow-hidden">
+          <div class="relative aspect-video bg-steel overflow-hidden">
+            <img src="../assets/images/case-kaduna-workshop.jpg" alt="Heavy-Duty Workshop Machinery Installation" loading="lazy" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" onerror="this.style.display='none'" />
+          </div>
+          <div class="p-5">
+            <span class="block text-orange font-condensed font-bold text-[10px] uppercase tracking-[0.2em] mb-1">Case Study — 01</span>
+            <h3 class="font-condensed font-bold text-crisp uppercase text-base leading-snug mb-1">Heavy-Duty Workshop Machinery Installation</h3>
+            <p class="text-fog text-xs">Kaduna State</p>
+          </div>
+        </a>
+        <a href="ogun-hydraulic-press.html" class="related-card block bg-midgrey border border-steel/60 overflow-hidden">
+          <div class="relative aspect-video bg-steel overflow-hidden">
+            <img src="../assets/images/case-hydraulic-press.jpg" alt="Hydraulic Press Line Commissioning" loading="lazy" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" onerror="this.style.display='none'" />
+          </div>
+          <div class="p-5">
+            <span class="block text-orange font-condensed font-bold text-[10px] uppercase tracking-[0.2em] mb-1">Case Study — 02</span>
+            <h3 class="font-condensed font-bold text-crisp uppercase text-base leading-snug mb-1">Hydraulic Press Line Commissioning</h3>
+            <p class="text-fog text-xs">Ogun State</p>
+          </div>
+        </a>
+        <a href="rivers-workshop.html" class="related-card block bg-midgrey border border-steel/60 overflow-hidden">
+          <div class="relative aspect-video bg-steel overflow-hidden">
+            <img src="../assets/images/case-workshop-integration.jpg" alt="Multi-Machine Workshop Integration" loading="lazy" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" onerror="this.style.display='none'" />
+          </div>
+          <div class="p-5">
+            <span class="block text-orange font-condensed font-bold text-[10px] uppercase tracking-[0.2em] mb-1">Case Study — 04</span>
+            <h3 class="font-condensed font-bold text-crisp uppercase text-base leading-snug mb-1">Multi-Machine Workshop Integration</h3>
+            <p class="text-fog text-xs">Rivers State</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section style="background:#FF6B00;" class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-condensed font-extrabold uppercase text-3xl sm:text-4xl text-steel mb-4 leading-tight">
+        Ready to Discuss Your Project?
+      </h2>
+      <p class="font-sans text-steel/80 text-base sm:text-lg mb-8 max-w-xl mx-auto">
+        Every installation we do starts with a conversation. Tell us your industry, your machines, your site — and we'll come back with a plan that works.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="../index.html#contact" class="font-condensed font-bold uppercase tracking-[0.1em] text-orange text-sm px-8 py-4 bg-steel hover:bg-[#0D1117] transition-colors duration-200">Request a Quote</a>
+        <a href="https://wa.me/2348117788403?text=Hello%2C%20I%20saw%20your%20case%20study%20and%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="font-condensed font-bold uppercase tracking-[0.1em] text-steel text-sm px-8 py-4 border-2 border-steel hover:bg-steel hover:text-orange transition-all duration-200">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-[#080C10] border-t border-steel py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <a href="../index.html">
+        <img src="../assets/logo/new-logo.png" alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd." style="height:38px;width:auto;opacity:0.8;" />
+      </a>
+      <p class="text-fog text-xs text-center">
+        &copy; 2025 TME Africa. All rights reserved.
+      </p>
+      <a href="../index.html#contact" class="font-condensed font-bold uppercase tracking-wide text-[12px] text-orange hover:text-crisp transition-colors">Discuss a Project &#8594;</a>
+    </div>
+  </footer>
+
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('cs-nav');
+    window.addEventListener('scroll', () => {{
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }}, {{ passive: true }});
+
+    // Counter animation
+    function animateCounter(el) {{
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const isFloat = !Number.isInteger(target);
+      const duration = 1800;
+      const steps = 60;
+      const increment = target / steps;
+      let current = 0;
+      let step = 0;
+      const timer = setInterval(() => {{
+        step++;
+        current = Math.min(current + increment, target);
+        el.textContent = (isFloat ? current.toFixed(1) : Math.round(current)) + suffix;
+        if (step >= steps) clearInterval(timer);
+      }}, duration / steps);
+    }}
+
+    const io = new IntersectionObserver((entries) => {{
+      entries.forEach(e => {{
+        if (e.isIntersecting) {{
+          animateCounter(e.target);
+          io.unobserve(e.target);
+        }}
+      }});
+    }}, {{ threshold: 0.5 }});
+
+    document.querySelectorAll('[data-target]').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

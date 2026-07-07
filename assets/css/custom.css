@@ -1,0 +1,1209 @@
+/* ============================================================
+   TME Africa — Custom Stylesheet
+   Anything Tailwind's utility classes can't express cleanly
+   lives here. Keep this file lean — utilities first, always.
+   ============================================================ */
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO & NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Nav — height + transparent default; JS adds .nav-scrolled */
+#main-nav {
+  height: 72px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 300ms ease, border-color 300ms ease,
+              backdrop-filter 300ms ease, box-shadow 300ms ease;
+}
+
+@media (max-width: 767px) {
+  #main-nav { height: 64px; }
+}
+
+.nav-scrolled {
+  background: rgba(12, 15, 20, 0.97) !important;
+  border-bottom-color: rgba(255, 107, 0, 0.4) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Active nav link */
+.hero-nav-link.nav-link-active {
+  color: #FF6B00 !important;
+  border-bottom: 2px solid #FF6B00;
+  padding-bottom: 2px;
+}
+
+/* Nav CTA hover */
+.nav-cta-btn:hover {
+  background: transparent !important;
+  color: #FF6B00 !important;
+  transform: translateY(-1px);
+}
+
+/* Mobile drawer — starts off-screen right */
+#mobile-drawer {
+  right: -100%;
+  transition: right 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Drawer nav link hover */
+.drawer-nav-link:hover {
+  background: rgba(255, 107, 0, 0.08);
+  border-left: 3px solid #FF6B00;
+  padding-left: calc(32px - 3px);
+}
+
+/* Hamburger open state — top and bottom lines cross to form × */
+#hamburger.is-open .hline:nth-child(1) {
+  transform: rotate(45deg) translateY(7px);
+}
+#hamburger.is-open .hline:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+#hamburger.is-open .hline:nth-child(3) {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+/* Hero two-column grid */
+.hero-content-grid {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .hero-content-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-right { display: none !important; }
+}
+
+/* Hero headline responsive size */
+.hero-headline {
+  font-size: clamp(52px, 6.5vw, 92px);
+}
+
+@media (max-width: 767px) {
+  .hero-headline { font-size: clamp(44px, 11vw, 68px); }
+  .hero-cta-group { flex-direction: column; }
+  .hero-cta-primary,
+  .hero-cta-secondary { width: 100%; justify-content: center; }
+  /* Stats: 2×2 grid on mobile */
+  .hero-stats { display: grid !important; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stat-divider { display: none !important; }
+  .stat-item { text-align: center; }
+  /* Trust pills: centered */
+  .trust-pill { display: inline-flex; }
+}
+
+/* Industrial texture */
+.hero-texture {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 107, 0, 0.008) 3px,
+    rgba(255, 107, 0, 0.008) 4px
+  );
+}
+
+/* iOS fix — no fixed bg on mobile */
+@media (max-width: 767px) {
+  #hero-bg { background-attachment: scroll !important; }
+}
+
+/* Animations */
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(255, 107, 0, 0); }
+}
+.pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
+
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+  50%       { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+}
+.pulse-green { animation: pulseGreen 2s ease-in-out infinite; }
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.card-float { animation: floatCard 7s ease-in-out infinite; }
+
+@keyframes scrollTrack {
+  0%   { top: 0;    opacity: 1; }
+  80%  { top: 32px; opacity: 0.3; }
+  100% { top: 0;    opacity: 0; }
+}
+.scroll-track-dot { animation: scrollTrack 1.6s ease-in-out infinite; }
+
+/* Hero CTA states */
+.hero-cta-primary:hover {
+  background: #E55F00 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 107, 0, 0.3);
+}
+.hero-cta-secondary:hover {
+  color: #F5F5F5 !important;
+  border-color: rgba(245, 245, 245, 0.6) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Service tiles grid */
+.service-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255, 107, 0, 0.08);
+}
+.service-tile {
+  cursor: pointer;
+  transition: all 200ms ease;
+  border-top: 2px solid transparent;
+}
+.service-tile:hover {
+  background: rgba(255, 107, 0, 0.06) !important;
+  border-top-color: #FF6B00;
+}
+
+/* Scroll indicator */
+#scroll-indicator { transition: opacity 400ms ease; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card-float, .pulse-dot, .pulse-green, .scroll-track-dot { animation: none; }
+  #scroll-indicator { display: none !important; }
+  #hero-bg { background-attachment: scroll !important; }
+}
+
+/* File upload zone */
+#upload-zone:hover,
+#upload-zone.drag-over {
+  border-color: rgba(255, 107, 0, 0.5);
+  background: rgba(255, 107, 0, 0.04);
+}
+#upload-zone.drag-over {
+  border-color: #FF6B00;
+  background: rgba(255, 107, 0, 0.08);
+}
+
+/* Trust Bar — capabilities ticker.
+   Track holds two identical copies of the content (see index.html);
+   animating to -50% loops seamlessly with no visible reset jump. */
+.marquee-track {
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* WhatsApp floating button — gentle attention-pulse, stops on hover
+   so it doesn't fight the hover:scale-105 already on the element. */
+#whatsapp-float {
+  animation: whatsapp-pulse 2.5s ease-out infinite;
+}
+
+#whatsapp-float:hover {
+  animation: none;
+}
+
+@keyframes whatsapp-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MACHINE DETAIL MODAL — Phase 2 Section 7
+   ═══════════════════════════════════════════════════════════════ */
+
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 16px;
+}
+
+#modal-overlay.modal-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  height: 90vh;
+  max-height: 90vh;
+  background: #0D1117;
+  border: 1px solid rgba(255, 107, 0, 0.25);
+  border-top: 3px solid #FF6B00;
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(255, 107, 0, 0.08), 0 32px 80px rgba(0, 0, 0, 0.8);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms ease;
+}
+
+#modal-overlay.modal-open #modal-panel {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+#modal-header {
+  height: 56px;
+  flex-shrink: 0;
+  background: rgba(255, 107, 0, 0.05);
+  border-bottom: 1px solid rgba(255, 107, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.modal-header-label {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #FF6B00;
+}
+
+.modal-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF6B00;
+  flex-shrink: 0;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+.modal-ref-tag {
+  font-family: monospace;
+  font-size: 10px;
+  color: #9BA3AE;
+}
+
+.modal-close-btn {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #F5F5F5;
+  font-size: 18px;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 107, 0, 0.15);
+  border-color: rgba(255, 107, 0, 0.4);
+  color: #FF6B00;
+}
+
+/* ── Scrollable body ──────────────────────────────────────── */
+#modal-body {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+#modal-body::-webkit-scrollbar { width: 4px; }
+#modal-body::-webkit-scrollbar-track { background: #1C2128; }
+#modal-body::-webkit-scrollbar-thumb { background: #FF6B00; border-radius: 2px; }
+
+/* ── Two-column layout ────────────────────────────────────── */
+#modal-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100%;
+}
+
+/* ── Left column ──────────────────────────────────────────── */
+#modal-left {
+  background: #080C10;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+#modal-image-area {
+  flex: 1;
+  min-height: 280px;
+  background: #1C2128;
+  position: relative;
+  overflow: hidden;
+}
+
+#modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: none;
+}
+
+#modal-img.modal-img-visible { display: block; }
+
+#modal-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+}
+
+#modal-placeholder-name {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.modal-cat-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(8, 12, 16, 0.9);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  padding: 6px 12px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #FF6B00;
+  text-transform: uppercase;
+}
+
+.modal-tag-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #FF6B00;
+  padding: 4px 10px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: white;
+  text-transform: uppercase;
+}
+
+.modal-img-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(transparent, #080C10);
+  pointer-events: none;
+}
+
+#modal-name-block {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modal-section-micro {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #9BA3AE;
+  margin-bottom: 6px;
+}
+
+.modal-machine-name {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #F5F5F5;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.modal-meta-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.modal-ref-inline {
+  font-family: monospace;
+  font-size: 10px;
+  color: #9BA3AE;
+}
+
+.modal-origin-inline {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  color: #22C55E;
+}
+
+#modal-quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 107, 0, 0.05);
+}
+
+.modal-quick-stat {
+  background: #080C10;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.modal-stat-value {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FF6B00;
+}
+
+.modal-stat-label {
+  display: block;
+  font-family: "Barlow", sans-serif;
+  font-size: 9px;
+  color: #9BA3AE;
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+#modal-compat-row {
+  padding: 16px 24px;
+  background: rgba(34, 197, 94, 0.04);
+  border-top: 1px solid rgba(34, 197, 94, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Barlow", sans-serif;
+  font-size: 11px;
+  color: #22C55E;
+  margin-top: auto;
+}
+
+/* ── Right column ─────────────────────────────────────────── */
+#modal-right {
+  background: #0D1117;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+#modal-right::-webkit-scrollbar { width: 4px; }
+#modal-right::-webkit-scrollbar-track { background: #1C2128; }
+#modal-right::-webkit-scrollbar-thumb { background: #FF6B00; border-radius: 2px; }
+
+#modal-tab-bar {
+  height: 44px;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.modal-tab {
+  padding: 0 20px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #9BA3AE;
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  transition: all 200ms ease;
+  white-space: nowrap;
+}
+
+.modal-tab:hover { color: #F5F5F5; }
+
+.modal-tab.modal-tab-active {
+  color: #FF6B00;
+  border-bottom-color: #FF6B00;
+  background: rgba(255, 107, 0, 0.04);
+}
+
+.modal-tab-content { padding: 24px; }
+
+#modal-overview-block { margin-bottom: 20px; }
+
+.modal-tab-section-label {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #FF6B00;
+  margin-bottom: 8px;
+}
+
+.modal-description {
+  font-family: "Barlow", sans-serif;
+  font-size: 13px;
+  color: #9BA3AE;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.modal-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modal-spec-th {
+  background: rgba(255, 107, 0, 0.06);
+  border-bottom: 1px solid rgba(255, 107, 0, 0.15);
+  padding: 10px 16px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: #FF6B00;
+  text-align: left;
+}
+
+.modal-spec-tr { border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+.modal-spec-tr:nth-child(even) { background: rgba(255, 255, 255, 0.018); }
+
+.modal-spec-td-key {
+  padding: 11px 16px;
+  font-family: monospace;
+  font-size: 10px;
+  color: #9BA3AE;
+  text-transform: uppercase;
+}
+
+.modal-spec-td-val {
+  padding: 11px 16px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #F5F5F5;
+  text-align: right;
+}
+
+/* Services tab */
+.modal-service-list { margin-top: 16px; }
+
+.modal-service-block {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-service-num {
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  width: 28px;
+  height: 28px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: #FF6B00;
+  flex-shrink: 0;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 28px;
+}
+
+.modal-service-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #F5F5F5;
+  margin-bottom: 4px;
+}
+
+.modal-service-sub {
+  font-family: "Barlow", sans-serif;
+  font-size: 11px;
+  color: #9BA3AE;
+  line-height: 1.5;
+}
+
+/* Accessories tab */
+.modal-accessories-sub {
+  font-family: "Barlow", sans-serif;
+  font-size: 11px;
+  color: #9BA3AE;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.modal-accessory-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  margin-bottom: 6px;
+}
+
+.modal-accessory-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #F5F5F5;
+}
+
+.modal-accessory-diamond {
+  color: #FF6B00;
+  font-size: 8px;
+  flex-shrink: 0;
+}
+
+.modal-add-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  color: #FF6B00;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 150ms ease;
+  white-space: nowrap;
+}
+
+.modal-add-btn:hover:not(:disabled) { background: rgba(255, 107, 0, 0.1); }
+
+.modal-add-btn.modal-added {
+  color: #22C55E;
+  border-color: rgba(34, 197, 94, 0.3);
+  cursor: default;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+#modal-footer {
+  height: 72px;
+  flex-shrink: 0;
+  background: rgba(8, 12, 16, 0.98);
+  border-top: 1px solid rgba(255, 107, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.modal-footer-ready {
+  font-family: "Barlow", sans-serif;
+  font-size: 12px;
+  color: #9BA3AE;
+}
+
+.modal-footer-sub {
+  font-family: "Barlow", sans-serif;
+  font-size: 10px;
+  color: rgba(155, 163, 174, 0.6);
+}
+
+.modal-footer-btns {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.modal-btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #9BA3AE;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 0 20px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+
+.modal-btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #F5F5F5;
+}
+
+.modal-btn-primary {
+  background: #FF6B00;
+  color: white;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 0 28px;
+  height: 40px;
+  border: 2px solid #FF6B00;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+
+.modal-btn-primary:hover {
+  background: #E55F00;
+  border-color: #E55F00;
+  transform: translateY(-1px);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 767px) {
+  #modal-panel {
+    height: 95vh;
+    max-height: 95vh;
+  }
+
+  #modal-layout {
+    grid-template-columns: 1fr;
+  }
+
+  #modal-image-area {
+    min-height: 220px;
+    height: 220px;
+    flex: none;
+  }
+
+  #modal-right {
+    overflow-y: visible;
+  }
+
+  #modal-quick-stats {
+    overflow-x: auto;
+    grid-template-columns: repeat(3, minmax(80px, 1fr));
+  }
+
+  #modal-tab-bar {
+    overflow-x: auto;
+  }
+
+  #modal-footer {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 24px;
+  }
+
+  .modal-footer-btns {
+    width: 100%;
+  }
+
+  .modal-btn-secondary,
+  .modal-btn-primary {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #modal-overlay,
+  #modal-panel { transition: none; }
+  .modal-pulse-dot { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS PASS — Phase 2 Section 8
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Safe-area insets: home bar & notch ─────────────────────── */
+/* Nav background extends behind notch automatically with viewport-fit=cover.
+   Only the WhatsApp float needs explicit safe-area offset at the bottom. */
+#whatsapp-float {
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  right: calc(20px + env(safe-area-inset-right));
+}
+
+/* ── Prevent any horizontal overflow at every width ─────────── */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; max-width: 100%; }
+
+/* ── 44px minimum tap target: hamburger ─────────────────────── */
+#hamburger { min-width: 44px; min-height: 44px; }
+
+/* ── Footer social icons: pad invisible area to 44px target ─── */
+footer a[aria-label] {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* ── Filter bar: hide scrollbar, keep it functional ─────────── */
+#catalog-filters {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#catalog-filters::-webkit-scrollbar { display: none; }
+
+/* ── iOS momentum scrolling on scrollable containers ─────────── */
+#modal-body,
+#catalog-filters,
+#mobile-drawer nav {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── WhatsApp float: raise above mobile browser chrome/home bar */
+@media (max-width: 767px) {
+  #whatsapp-float {
+    bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ── Form inputs: 16px minimum on mobile — prevents iOS auto-zoom */
+@media (max-width: 767px) {
+  .form-field,
+  #enquiry-form input,
+  #enquiry-form select,
+  #enquiry-form textarea,
+  #catalog-search {
+    font-size: 16px !important;
+    line-height: 1.5;
+  }
+}
+
+/* ── Catalog Load More: full-width on small mobile ──────────── */
+@media (max-width: 639px) {
+  /* When JS removes .hidden, override inline-flex to stretch full width */
+  #catalog-load-more:not(.hidden) {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Disable floating card animation on mobile (battery / GPU)  */
+@media (max-width: 767px) {
+  .card-float { animation: none !important; }
+}
+
+/* ── Hero: tighten headline & tracking at 320px ─────────────── */
+@media (max-width: 360px) {
+  .hero-headline {
+    font-size: clamp(36px, 9vw, 48px);
+  }
+  /* Pre-label: wide tracking overflows at 320px — reduce it */
+  #hero .font-condensed {
+    letter-spacing: 0.09em;
+  }
+}
+
+/* ── Modal: mobile-specific overrides ───────────────────────── */
+@media (max-width: 767px) {
+  /* Panel: 95vw wide, 92vh tall, centered */
+  #modal-overlay {
+    padding: 4vh 2.5%;
+  }
+
+  #modal-panel {
+    width: 95vw;
+    max-width: 95vw;
+    height: 92vh;
+    max-height: 92vh;
+  }
+
+  /* Close button: enlarge to 44px tap target */
+  .modal-close-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  /* Tab bar: tighter padding so all 3 tabs fit at 320px */
+  .modal-tab {
+    padding: 0 10px;
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* Tab content: reduce padding */
+  .modal-tab-content { padding: 16px; }
+
+  /* Spec table: prevent parameter column overflow */
+  .modal-spec-td-key {
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Name block: tighter on small screens */
+  #modal-name-block { padding: 14px 16px; }
+  #modal-header { padding: 0 16px; }
+
+  /* Footer: hide "Ready to proceed?" text — save vertical space */
+  .modal-footer-ready { display: none; }
+  #modal-footer { padding: 12px 16px; }
+
+  /* Accessory add button: compact on mobile */
+  .modal-add-btn { font-size: 8px; padding: 4px 8px; }
+
+  /* Open animation: lighter transform for mobile performance */
+  #modal-panel {
+    transform: translateY(14px) scale(0.98);
+    opacity: 0;
+  }
+  #modal-overlay.modal-open #modal-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── iOS scroll lock helper — applied by JS via classList ────── */
+body.modal-scroll-locked {
+  position: fixed;
+  width: 100%;
+  overflow-y: scroll;
+  /* preserves scrollbar gutter so page doesn't jump in width */
+}
+
+/* ── Drawer overlay: -webkit-backdrop-filter for iOS Safari ──── */
+#drawer-overlay {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL ANIMATION SYSTEM — Phase 2 Section 9
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes heroFadeRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+@keyframes navReveal {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+/* ── Nav: slides in immediately on load ─────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  #main-nav {
+    animation: navReveal 400ms cubic-bezier(0.4,0,0.2,1) both;
+  }
+}
+
+/* ── WhatsApp float: starts hidden, JS adds .wa-visible at 300ms */
+@media (prefers-reduced-motion: no-preference) {
+  #whatsapp-float {
+    opacity: 0;
+    transform: scale(0);
+  }
+  #whatsapp-float.wa-visible {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 400ms cubic-bezier(0.4,0,0.2,1),
+                transform 400ms cubic-bezier(0.4,0,0.2,1);
+  }
+}
+
+/* ── Hero load sequence (CSS keyframes, fires once on load) ──── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-anim-prelabel {
+    opacity: 0;
+    animation: heroFadeUp 600ms cubic-bezier(0.4,0,0.2,1) 200ms both;
+  }
+  .hero-h1-l1 {
+    opacity: 0;
+    animation: heroFadeUp 700ms cubic-bezier(0.4,0,0.2,1) 350ms both;
+    display: block;
+  }
+  .hero-h1-l2 {
+    opacity: 0;
+    animation: heroFadeUp 700ms cubic-bezier(0.4,0,0.2,1) 450ms both;
+    display: block;
+  }
+  .hero-h1-l3 {
+    opacity: 0;
+    animation: heroFadeUp 700ms cubic-bezier(0.4,0,0.2,1) 550ms both;
+    display: block;
+  }
+  .hero-anim-subtext {
+    opacity: 0;
+    animation: heroFadeIn 600ms cubic-bezier(0.4,0,0.2,1) 650ms both;
+  }
+  .hero-anim-pills {
+    opacity: 0;
+    animation: heroFadeUp 500ms cubic-bezier(0.4,0,0.2,1) 750ms both;
+  }
+  .hero-cta-group {
+    opacity: 0;
+    animation: heroFadeUp 500ms cubic-bezier(0.4,0,0.2,1) 850ms both;
+  }
+  .hero-stats {
+    opacity: 0;
+    animation: heroFadeIn 600ms cubic-bezier(0.4,0,0.2,1) 950ms both;
+  }
+  .hero-anim-card {
+    opacity: 0;
+    animation: heroFadeRight 700ms cubic-bezier(0.4,0,0.2,1) 600ms both;
+  }
+  .hero-anim-tiles {
+    opacity: 0;
+    animation: heroFadeUp 500ms cubic-bezier(0.4,0,0.2,1) 1100ms both;
+  }
+}
+
+/* ── Scroll animation base classes ──────────────────────────── */
+/* Opacity:0 only applied when animations are desired.
+   Users with prefers-reduced-motion: reduce see full content. */
+@media (prefers-reduced-motion: no-preference) {
+  .anim-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 600ms cubic-bezier(0.4,0,0.2,1),
+                transform 600ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .anim-fade-in {
+    opacity: 0;
+    transition: opacity 600ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .anim-fade-left {
+    opacity: 0;
+    transform: translateX(-24px);
+    transition: opacity 600ms cubic-bezier(0.4,0,0.2,1),
+                transform 600ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .anim-fade-right {
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity 600ms cubic-bezier(0.4,0,0.2,1),
+                transform 600ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .anim-scale-in {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 500ms cubic-bezier(0.4,0,0.2,1),
+                transform 500ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .anim-fade-down {
+    opacity: 0;
+    transform: translateY(-16px);
+    transition: opacity 600ms cubic-bezier(0.4,0,0.2,1),
+                transform 600ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .anim-line-grow {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 700ms cubic-bezier(0.4,0,0.2,1);
+  }
+}
+
+/* Animated-in state — added by JS observer */
+.anim-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Orange accent line special: triggered by .anim-visible on parent or self */
+.anim-line-grow.anim-visible {
+  transform: scaleX(1) !important;
+}
+
+/* ── Mobile: simplify left/right to vertical fade ───────────── */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .anim-fade-left,
+  .anim-fade-right {
+    transform: translateY(16px);
+  }
+  .anim-fade-up {
+    transform: translateY(16px);
+    transition-duration: 500ms;
+  }
+}
+
+/* ── Section reveal: thin orange sweep line on section entry ─── */
+.section-reveal { position: relative; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .section-reveal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 107, 0, 0.4) 50%,
+      transparent 100%
+    );
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1000ms cubic-bezier(0.4,0,0.2,1);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .section-reveal.anim-visible::before {
+    transform: scaleX(1);
+  }
+}

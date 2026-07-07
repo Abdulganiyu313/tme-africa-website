@@ -1,0 +1,29 @@
+# Videos — too large for GitHub (425MB). Host separately on a CDN.
+assets/videos/
+
+# Source zip and raw originals — not needed on server
+assets/favicon_io (1).zip
+assets/logo/Claude-1.jpg
+assets/logo/TME Logo.html
+assets/logo/logo-nav.png
+assets/logo/logo-transparent.png
+assets/logo/logo-white.png
+assets/logo/new logo.jpg
+assets/logo/new-logo.jpg
+assets/case-hydraulic-press.jpeg
+assets/case-kaduna-workshop.jpeg
+assets/case-reboring-center.jpeg
+assets/case-workshop-integration.jpeg
+assets/1
+assets/email-templates/
+
+# Build artifacts
+tme-africa-site.zip
+zirJ2deR
+
+# macOS
+.DS_Store
+.localized
+
+# Editor
+.vscode/

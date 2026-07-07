@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tme-africa.com/sitemap.xml
