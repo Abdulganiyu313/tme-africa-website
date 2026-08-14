@@ -56,13 +56,23 @@
 // files go together when you're managing a lot of them.
 //   - Main photo (the "image" field above):  assets/images/lathe.jpg
 //   - Extra gallery photos:                  assets/images/lathe-2.jpg, lathe-3.jpg
-//   - Videos (go in their own folder, same base name):
-//                                             assets/videos/lathe.mp4, lathe-2.mp4
+//   - Videos: just the filename, prefixed with VIDEO_BASE (see below),
+//                                             e.g. lathe.mp4, lathe-2.mp4
 // Example once you have media for the lathe:
 //   gallery: ["assets/images/lathe-2.jpg", "assets/images/lathe-3.jpg"],
-//   videos: ["assets/videos/lathe.mp4"],
+//   videos: [`${VIDEO_BASE}lathe.mp4`],
 // If a machine has no extra photos or videos, just leave both as
 // empty lists [] — nothing breaks, the lightbox simply shows less.
+//
+// WHERE VIDEOS ACTUALLY LIVE (VIDEO_BASE)
+// ------------------------
+// Video files are too large to keep in this repo (see assets/videos/
+// in .gitignore), so in production they're served from a separate
+// video host/CDN. VIDEO_BASE below is the ONE place that controls
+// where every video URL points — change it once you have your CDN
+// URL and every machine's videos update automatically. Locally, it
+// still points at the local assets/videos/ folder so playback works
+// on your machine before you've set up hosting.
 // specs           — Up to 5 key/value pairs shown on the card. Keep
 //                    the labels short (they're column headers). Use
 //                    "Control": "Manual" or "Control": "CNC" /
@@ -88,6 +98,11 @@
 //                    "General Enquiry"
 // ============================================================
 
+// Change this ONE line once your videos are uploaded to a CDN (e.g.
+// Cloudflare R2) — every video path below is built from it. Keep the
+// trailing slash.
+const VIDEO_BASE = "assets/videos/";
+
 const machinesData = [
   {
     id: 1,
@@ -98,10 +113,10 @@ const machinesData = [
     hasPhoto: true,
     gallery: [],
     videos: [
-      "assets/videos/lathe-heavy-duty-1.mp4",
-      "assets/videos/lathe-heavy-duty-2.mp4",
-      "assets/videos/lathe-heavy-duty-4.mp4",
-      "assets/videos/lathe-heavy-duty-5.mp4",
+      `${VIDEO_BASE}lathe-heavy-duty-1.mp4`,
+      `${VIDEO_BASE}lathe-heavy-duty-2.mp4`,
+      `${VIDEO_BASE}lathe-heavy-duty-4.mp4`,
+      `${VIDEO_BASE}lathe-heavy-duty-5.mp4`,
     ],
     specs: {
       "Max Swing": "660mm",
@@ -122,7 +137,7 @@ const machinesData = [
     image: "assets/images/milling-machine.jpg",
     hasPhoto: true,
     gallery: ["assets/images/milling-machine-2.jpg"],
-    videos: ["assets/videos/milling-machine.mp4", "assets/videos/milling-machine-2.mp4", "assets/videos/milling-machine-3.mp4"],
+    videos: [`${VIDEO_BASE}milling-machine.mp4`, `${VIDEO_BASE}milling-machine-2.mp4`, `${VIDEO_BASE}milling-machine-3.mp4`],
     specs: {
       "Table Size": "1370 x 360mm",
       "Spindle Speed": "30–1500 RPM",
@@ -145,7 +160,7 @@ const machinesData = [
       "assets/images/shaping-machine-2.jpg",
       "assets/images/shaping-machine-3.jpg",
     ],
-    videos: ["assets/videos/shaping-machine.mp4"],
+    videos: [`${VIDEO_BASE}shaping-machine.mp4`],
     specs: {
       "Max Stroke": "650mm",
       "Ram Speed": "Variable",
@@ -183,7 +198,7 @@ const machinesData = [
     image: "assets/images/bending-machine.jpg",
     hasPhoto: true,
     gallery: ["assets/images/bending-machine-2.jpg"],
-    videos: ["assets/videos/bending-machine.mp4", "assets/videos/bending-machine-2.mp4"],
+    videos: [`${VIDEO_BASE}bending-machine.mp4`, `${VIDEO_BASE}bending-machine-2.mp4`],
     specs: {
       "Max Bending Length": "3200mm",
       "Bending Force": "200 Tons",
@@ -300,7 +315,7 @@ const machinesData = [
     image: "assets/images/laser-cutting-machine.jpg",
     hasPhoto: true,
     gallery: ["assets/images/laser-cutting-machine-2.jpg"],
-    videos: ["assets/videos/laser-cutting-machine.mp4"],
+    videos: [`${VIDEO_BASE}laser-cutting-machine.mp4`],
     specs: {
       "Cutting Thickness": "Up to 20mm",
       Control: "CNC",
@@ -356,7 +371,7 @@ const machinesData = [
     image: "assets/images/3-jaw-chuck.jpg",
     hasPhoto: true,
     gallery: ["assets/images/3-jaw-chuck-2.jpg"],
-    videos: ["assets/videos/3-jaw-chuck.mp4"],
+    videos: [`${VIDEO_BASE}3-jaw-chuck.mp4`],
     specs: {
       "Diameter Range": "100–315mm",
       Type: "Self-Centering",
@@ -452,9 +467,9 @@ const machinesData = [
     hasPhoto: true,
     gallery: ["assets/images/lathe-750mm-2.jpg"],
     videos: [
-      "assets/videos/lathe-750mm.mp4",
-      "assets/videos/lathe-750mm-2.mp4",
-      "assets/videos/lathe-750mm-3.mp4",
+      `${VIDEO_BASE}lathe-750mm.mp4`,
+      `${VIDEO_BASE}lathe-750mm-2.mp4`,
+      `${VIDEO_BASE}lathe-750mm-3.mp4`,
     ],
     specs: {
       "Swing Over Bed": "750mm",
@@ -493,7 +508,7 @@ const machinesData = [
     image: "assets/images/lathe-1m.jpg",
     hasPhoto: true,
     gallery: ["assets/images/lathe-1m-2.jpg"],
-    videos: ["assets/videos/lathe-1m.mp4", "assets/videos/lathe-1m-2.mp4", "assets/videos/lathe-1m-3.mp4", "assets/videos/lathe-1m-4.mp4"],
+    videos: [`${VIDEO_BASE}lathe-1m.mp4`, `${VIDEO_BASE}lathe-1m-2.mp4`, `${VIDEO_BASE}lathe-1m-3.mp4`, `${VIDEO_BASE}lathe-1m-4.mp4`],
     specs: {
       "Bed Length": "1000mm",
       "Swing Over Bed": "400mm",
@@ -516,7 +531,7 @@ const machinesData = [
       "assets/images/lathe-3m-3.jpg",
       "assets/images/lathe-3m-4.jpg",
     ],
-    videos: ["assets/videos/lathe-3m.mp4"],
+    videos: [`${VIDEO_BASE}lathe-3m.mp4`],
     specs: {
       "Bed Length": "3000mm",
       "Swing Over Bed": "500mm",
@@ -535,7 +550,7 @@ const machinesData = [
     image: "assets/images/lathe-4m.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/lathe-4m-2.mp4", "assets/videos/lathe-4m-3.mp4", "assets/videos/lathe-4m-4.mp4"],
+    videos: [`${VIDEO_BASE}lathe-4m-2.mp4`, `${VIDEO_BASE}lathe-4m-3.mp4`, `${VIDEO_BASE}lathe-4m-4.mp4`],
     specs: {
       "Bed Length": "4000mm",
       "Swing Over Bed": "630mm",
@@ -554,7 +569,7 @@ const machinesData = [
     image: "assets/images/lathe-5m.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/lathe-5m.mp4"],
+    videos: [`${VIDEO_BASE}lathe-5m.mp4`],
     specs: {
       "Bed Length": "5000mm",
       "Swing Over Bed": "800mm",
@@ -682,7 +697,7 @@ const machinesData = [
       "assets/images/radial-drilling-machine-3.jpg",
       "assets/images/radial-drilling-machine-4.jpg",
     ],
-    videos: ["assets/videos/radial-drilling-machine.mp4", "assets/videos/radial-drilling-machine-2.mp4", "assets/videos/radial-drilling-machine-3.mp4"],
+    videos: [`${VIDEO_BASE}radial-drilling-machine.mp4`, `${VIDEO_BASE}radial-drilling-machine-2.mp4`, `${VIDEO_BASE}radial-drilling-machine-3.mp4`],
     specs: {
       "Max Drilling Diameter": "50mm",
       "Arm Radius": "1200mm",
@@ -720,7 +735,7 @@ const machinesData = [
     image: "assets/images/surface-grinder.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/surface-grinder.mp4"],
+    videos: [`${VIDEO_BASE}surface-grinder.mp4`],
     specs: {
       "Table Size": "400 x 200mm",
       "Grinding Wheel": "Up to 300mm",
@@ -739,7 +754,7 @@ const machinesData = [
     image: "assets/images/power-saw.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/power-saw.mp4"],
+    videos: [`${VIDEO_BASE}power-saw.mp4`],
     specs: {
       "Blade Diameter": "Up to 400mm",
       Application: "Round & Rectangular Stock",
@@ -758,7 +773,7 @@ const machinesData = [
     image: "assets/images/generator-set.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/generator-set.mp4"],
+    videos: [`${VIDEO_BASE}generator-set.mp4`],
     specs: {
       "Output Range": "20–500 kVA",
       Fuel: "Diesel",
@@ -776,7 +791,7 @@ const machinesData = [
     image: "assets/images/electric-motor.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/electric-motor.mp4"],
+    videos: [`${VIDEO_BASE}electric-motor.mp4`],
     specs: {
       "Power Range": "0.5–75 kW",
       Voltage: "380V / 3-Phase",
@@ -794,7 +809,7 @@ const machinesData = [
     image: "assets/images/rubber-hose-machine.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/rubber-hose-machine.mp4", "assets/videos/rubber-hose-machine-2.mp4"],
+    videos: [`${VIDEO_BASE}rubber-hose-machine.mp4`, `${VIDEO_BASE}rubber-hose-machine-2.mp4`],
     specs: {
       Application: "Hydraulic & Industrial Hose Production",
       Control: "Automatic",
@@ -812,7 +827,7 @@ const machinesData = [
     image: "assets/images/rod-bending-machine.jpg",
     hasPhoto: true,
     gallery: [],
-    videos: ["assets/videos/rod-bending-machine.mp4"],
+    videos: [`${VIDEO_BASE}rod-bending-machine.mp4`],
     specs: {
       "Max Rod Diameter": "32mm",
       Application: "Rebar & Rod Bending",

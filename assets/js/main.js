@@ -2,6 +2,25 @@
 // TME Africa — Site JS
 // ============================================================
 
+// ── Analytics (GA4) — safe no-op if gtag failed to load (ad
+//    blockers etc.) so tracking can never break real functionality.
+function trackEvent(name, params = {}) {
+  if (typeof gtag === "function") gtag("event", name, params);
+}
+
+// Delegated so it covers every wa.me link on the page (nav drawer,
+// FAQ, contact section, footer, floating button, form upload note)
+// without wiring each one individually. Each link carries
+// data-cta-location so the source is visible in GA4.
+document.addEventListener("click", (e) => {
+  const link = e.target.closest('a[href^="https://wa.me/"]');
+  if (!link) return;
+  trackEvent("contact", {
+    method: "whatsapp",
+    link_location: link.dataset.ctaLocation || "unspecified",
+  });
+});
+
 // ═══════════════════════════════════════════════════════════════
 // HERO & NAVIGATION BEHAVIORS
 // ═══════════════════════════════════════════════════════════════
@@ -44,7 +63,7 @@
 
   // 2. ACTIVE SECTION DETECTION ─────────────────────────────────
   const navLinks = document.querySelectorAll(".hero-nav-link");
-  const sectionIds = ["hero", "services", "machinery", "case-studies", "contact"];
+  const sectionIds = ["hero", "services", "machinery", "case-studies", "faq", "contact"];
 
   const sectionObserver = new IntersectionObserver(
     (entries) => {
@@ -219,6 +238,11 @@ function initCounters(scope = document) {
 // optionally pre-selects a matching Equipment Interest option, and
 // scrolls to #contact.
 function preFillEnquiry(subject, equipment, description = "") {
+  // Every "Request a Quote" CTA on the site (hero, nav, spec card,
+  // spare parts, custom sourcing, and the machine-modal quote button)
+  // funnels through here — one hook covers all of them.
+  trackEvent("select_content", { content_type: "quote_cta", item_id: subject });
+
   const subjectField   = document.getElementById("enquiry-subject");
   const equipmentField = document.getElementById("equipment-interest");
   const descField      = document.getElementById("project-description");
@@ -499,16 +523,14 @@ initCounters(document);
 // ============================================================
 // Section: Machine Media Lightbox
 // ============================================================
-// Triggered by clicking a catalog card's photo (".gallery-trigger").
-// Shows the machine's main photo, plus everything in its "gallery"
-// and "videos" arrays from machines-data.js, in one swipeable/
-// arrow-key-navigable viewer. Machines with no extra media still
-// open the lightbox — it just shows the single main photo.
+// Launched via the "Gallery" button inside the machine detail modal
+// (see window.openLightbox below). Shows the machine's main photo,
+// plus everything in its "gallery" and "videos" arrays from
+// machines-data.js, in one swipeable/arrow-key-navigable viewer.
 
 (function () {
   const modal = document.getElementById("machine-lightbox");
-  const grid = document.getElementById("catalog-grid");
-  if (!modal || !grid) return;
+  if (!modal) return;
 
   const mediaEl = document.getElementById("lightbox-media");
   const titleEl = document.getElementById("lightbox-title");
@@ -592,12 +614,6 @@ initCounters(document);
     mediaEl.innerHTML = ""; // stops any playing video
   }
 
-  grid.addEventListener("click", (e) => {
-    const trigger = e.target.closest(".gallery-trigger");
-    if (!trigger) return;
-    openLightbox(Number(trigger.dataset.galleryId));
-  });
-
   closeBtn.addEventListener("click", closeLightbox);
   prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
   nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
@@ -618,6 +634,9 @@ initCounters(document);
     if (e.key === "ArrowLeft") goTo(currentIndex - 1);
     if (e.key === "ArrowRight") goTo(currentIndex + 1);
   });
+
+  // Exposed so the machine detail modal's "Gallery" button can launch it
+  window.openLightbox = openLightbox;
 })();
 
 // ============================================================
@@ -1171,7 +1190,17 @@ if (typeof emailjs !== "undefined") {
     }
 
     Promise.all(sendPromises)
-      .then(() => showFormSuccess(firstName))
+      .then(() => {
+        // The real conversion event — everything else (cta clicks,
+        // whatsapp clicks, view_item) is intent; this is a completed lead.
+        trackEvent("generate_lead", {
+          subject: templateParams.subject,
+          equipment: templateParams.equipment,
+          industry: templateParams.industry,
+          source: templateParams.source,
+        });
+        showFormSuccess(firstName);
+      })
       .catch((error) => {
         console.error("EmailJS submission failed:", error);
         setSubmitButtonLoading(false);
@@ -1420,6 +1449,21 @@ if (typeof emailjs !== "undefined") {
       document.getElementById("modal-placeholder-name").textContent = machine.name;
     }
 
+    // Gallery / video trigger — only shown when the machine has extra media
+    const galleryBtn      = document.getElementById("modal-gallery-btn");
+    const galleryBtnLabel = document.getElementById("modal-gallery-btn-label");
+    const galleryCount     = (machine.gallery || []).length;
+    const videoCount       = (machine.videos || []).length;
+    const totalMediaCount  = 1 + galleryCount + videoCount; // +1 for the main photo
+    if (galleryBtn) {
+      galleryBtn.classList.toggle("hidden", galleryCount === 0 && videoCount === 0);
+      if (galleryBtnLabel) {
+        galleryBtnLabel.textContent = videoCount > 0
+          ? `Gallery & Video (${totalMediaCount})`
+          : `Gallery (${totalMediaCount})`;
+      }
+    }
+
     // Category + tag badges
     document.getElementById("modal-cat-badge").textContent = machine.category.toUpperCase();
     const tagBadge = document.getElementById("modal-tag-badge");
@@ -1525,6 +1569,8 @@ if (typeof emailjs !== "undefined") {
     currentMachine      = machine;
     selectedAccessories = [];
 
+    trackEvent("view_item", { item_id: machine.id, item_name: machine.name });
+
     populateModal(machine);
     switchTab("specifications");
 
@@ -1575,12 +1621,23 @@ if (typeof emailjs !== "undefined") {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && overlay.classList.contains("modal-open")) closeModal();
+    if (e.key !== "Escape" || !overlay.classList.contains("modal-open")) return;
+    // If the media lightbox is open on top of this modal, let its own
+    // Escape handler close that first instead of closing both at once.
+    const lightbox = document.getElementById("machine-lightbox");
+    if (lightbox && !lightbox.classList.contains("hidden")) return;
+    closeModal();
   });
 
   document.getElementById("modal-tab-bar")?.addEventListener("click", (e) => {
     const tab = e.target.closest(".modal-tab");
     if (tab) switchTab(tab.dataset.tab);
+  });
+
+  document.getElementById("modal-gallery-btn")?.addEventListener("click", () => {
+    if (currentMachine && typeof window.openLightbox === "function") {
+      window.openLightbox(currentMachine.id);
+    }
   });
 
   // Expose globally for inline onclick handlers in buildCard()

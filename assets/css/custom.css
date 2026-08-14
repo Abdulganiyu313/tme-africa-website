@@ -178,7 +178,7 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .card-float, .pulse-dot, .pulse-green, .scroll-track-dot { animation: none; }
+  .card-float, .pulse-dot, .pulse-green, .scroll-track-dot, .modal-gallery-btn { animation: none; }
   #scroll-indicator { display: none !important; }
   #hero-bg { background-attachment: scroll !important; }
 }
@@ -441,6 +441,57 @@
   height: 80px;
   background: linear-gradient(transparent, #080C10);
   pointer-events: none;
+}
+
+.modal-gallery-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #FF6B00;
+  border: none;
+  padding: 13px 20px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: #0D1117;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease;
+  animation: galleryBtnPulse 2.5s ease-out infinite;
+}
+
+.modal-gallery-btn:hover {
+  background: #E55F00;
+  transform: translateY(-1px);
+}
+
+.modal-gallery-btn:hover,
+.modal-gallery-btn:focus-visible {
+  animation-play-state: paused;
+}
+
+.modal-gallery-btn svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.modal-gallery-btn.hidden {
+  animation: none;
+}
+
+@keyframes galleryBtnPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.55); }
+  50%       { box-shadow: 0 0 0 8px rgba(255, 107, 0, 0); }
+}
+
+/* Lightbox must render above the product spec modal (z-index 500)
+   when launched from the "View Gallery" button inside it. */
+#machine-lightbox {
+  z-index: 600;
 }
 
 #modal-name-block {
@@ -1065,6 +1116,16 @@ body.modal-scroll-locked {
   }
 }
 
+/* ── Hero: "AFRICA" wordmark — textured letters + continent      */
+/*    outline, exported from the flyer artwork (background        */
+/*    removed, transparent PNG). ────────────────────────────────  */
+.africa-word-img {
+  height: 0.86em;
+  width: auto;
+  display: inline-block;
+  vertical-align: -0.1em;
+}
+
 /* ── Hero load sequence (CSS keyframes, fires once on load) ──── */
 @media (prefers-reduced-motion: no-preference) {
   .hero-anim-prelabel {
@@ -1085,6 +1146,10 @@ body.modal-scroll-locked {
     opacity: 0;
     animation: heroFadeUp 700ms cubic-bezier(0.4,0,0.2,1) 550ms both;
     display: block;
+  }
+  .hero-anim-legalname {
+    opacity: 0;
+    animation: heroFadeIn 600ms cubic-bezier(0.4,0,0.2,1) 600ms both;
   }
   .hero-anim-subtext {
     opacity: 0;
@@ -1206,4 +1271,23 @@ body.modal-scroll-locked {
   .section-reveal.anim-visible::before {
     transform: scaleX(1);
   }
+}
+
+/* ── FAQ accordion (native <details>/<summary>) ────────────────── */
+.faq-item summary {
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker,
+.faq-item summary::marker {
+  display: none;
+  content: '';
+}
+.faq-item .faq-chevron {
+  transition: transform 250ms ease;
+}
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item[open] {
+  border-left-color: #FF6B00;
 }

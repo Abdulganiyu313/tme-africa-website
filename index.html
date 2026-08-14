@@ -1,14 +1,98 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9R13XBY2Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-Y9R13XBY2Z");
+    </script>
+
     <meta charset="UTF-8" />
     <!-- MOBILE FIX: viewport-fit=cover handles iPhone notch/home-bar safe areas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title> TME Africa | Industrial Equipment Integrator</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>TME Africa | Industrial Equipment Integrator</title>
     <meta
       name="description"
-      content=" TME Africa sources, installs, and maintains industrial-grade equipment for manufacturers and processors across Africa."
+      content="TME Africa (Trans-Africa Machinery &amp; Engineering Ltd.) sources, installs, and maintains industrial-grade equipment for manufacturers and processors across Africa."
     />
+    <link rel="canonical" href="https://tme-africa.com/" />
+
+    <!-- Open Graph / Facebook, WhatsApp, LinkedIn link previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tme-africa.com/" />
+    <meta property="og:site_name" content="TME Africa" />
+    <meta property="og:locale" content="en_NG" />
+    <meta property="og:title" content="TME Africa | Industrial Equipment Integrator" />
+    <meta
+      property="og:description"
+      content="Trans-Africa Machinery &amp; Engineering Ltd. — OEM-direct industrial equipment, procurement, installation, and pan-Africa commissioning since 2015."
+    />
+    <meta property="og:image" content="https://tme-africa.com/assets/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="TME Africa — industrial machinery workshop floor" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TME Africa | Industrial Equipment Integrator" />
+    <meta
+      name="twitter:description"
+      content="Trans-Africa Machinery &amp; Engineering Ltd. — OEM-direct industrial equipment, procurement, installation, and pan-Africa commissioning since 2015."
+    />
+    <meta name="twitter:image" content="https://tme-africa.com/assets/og-image.jpg" />
+
+    <!-- Structured data: Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "TME Africa",
+        "legalName": "Trans-Africa Machinery & Engineering Ltd.",
+        "alternateName": ["Trans-Africa Machinery & Engineering Limited", "TME"],
+        "url": "https://tme-africa.com/",
+        "logo": "https://tme-africa.com/assets/logo/new-logo.png",
+        "image": "https://tme-africa.com/assets/og-image.jpg",
+        "description": "OEM-direct industrial equipment integrator — procurement, customization, installation, training, and maintenance for manufacturers and processors across Africa.",
+        "foundingDate": "2015",
+        "identifier": {
+          "@type": "PropertyValue",
+          "name": "RC Number",
+          "value": "9662149"
+        },
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "52 Kastina Road, Off Murtala Muhammed Expressway, Hajj Camp, Fagge",
+            "addressLocality": "Kano",
+            "addressRegion": "Kano State",
+            "addressCountry": "NG"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Lagos–Ibadan Expressway, Sagamu",
+            "addressLocality": "Sagamu",
+            "addressRegion": "Ogun State",
+            "addressCountry": "NG"
+          }
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+234-811-778-8403",
+          "contactType": "sales",
+          "email": "info@tme-africa.com",
+          "areaServed": "Africa"
+        },
+        "sameAs": ["https://linkedin.com/company/tme-africa"]
+      }
+    </script>
 
     <!-- Google Fonts: Barlow (body) + Barlow Condensed (headings) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,35 +102,32 @@
       rel="stylesheet"
     />
 
-    <!-- Tailwind CSS (CDN build, runtime config below) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // NOTE: When we move off the CDN build, port this object into tailwind.config.js
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              steel: "#1C2128", // Primary Dark
-              orange: "#FF6B00", // Safety Orange (accent)
-              crisp: "#F5F5F5", // Text White
-              midgrey: "#3A4149", // Surface (dividers/borders only — fails text contrast)
-              fog: "#8A8F94", // Quiet secondary text on dark bg — ~4.96:1 vs steel, passes WCAG AA
-            },
-            fontFamily: {
-              sans: ["Barlow", "sans-serif"],
-              condensed: ['"Barlow Condensed"', "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+    <!-- Tailwind CSS — precompiled, purged build (see
+         assets/css/tailwind-input.css for the theme + rebuild command).
+         Was previously the cdn.tailwindcss.com Play CDN script, which
+         compiles at runtime in the browser and isn't meant for production. -->
+    <link rel="stylesheet" href="assets/css/tailwind.min.css" />
 
     <link rel="stylesheet" href="assets/css/custom.css" />
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon/favicon-16x16.png"
+    />
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
 
     <!-- Preload hero background — critical LCP image -->
@@ -58,20 +139,62 @@
   <body class="bg-steel text-crisp font-sans antialiased">
     <!-- ===================== NAVIGATION ===================== -->
     <header id="main-nav" class="fixed top-0 left-0 right-0 z-[100]">
-      <div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between">
-
+      <div
+        class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between"
+      >
         <!-- Logo -->
         <a href="#hero" class="flex items-center shrink-0">
-          <img src="assets/logo/new-logo.png" alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd." style="height:50px;width:auto;" />
+          <img
+            src="assets/logo/new-logo.png"
+            alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd."
+            style="height: 50px; width: auto"
+          />
         </a>
 
         <!-- Desktop nav links -->
-        <nav class="hidden md:flex items-center" style="gap:36px;">
-          <a href="#hero"         class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200" style="color:rgba(245,245,245,0.75);" data-section="hero">Home</a>
-          <a href="#services"     class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200" style="color:rgba(245,245,245,0.75);" data-section="services">Services</a>
-          <a href="#machinery"    class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200" style="color:rgba(245,245,245,0.75);" data-section="machinery">Catalog</a>
-          <a href="#case-studies" class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200" style="color:rgba(245,245,245,0.75);" data-section="case-studies">Projects</a>
-          <a href="#contact"      class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200" style="color:rgba(245,245,245,0.75);" data-section="contact">Contact</a>
+        <nav class="hidden md:flex items-center" style="gap: 36px">
+          <a
+            href="#hero"
+            class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200"
+            style="color: rgba(245, 245, 245, 0.75)"
+            data-section="hero"
+            >Home</a
+          >
+          <a
+            href="#services"
+            class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200"
+            style="color: rgba(245, 245, 245, 0.75)"
+            data-section="services"
+            >Services</a
+          >
+          <a
+            href="#machinery"
+            class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200"
+            style="color: rgba(245, 245, 245, 0.75)"
+            data-section="machinery"
+            >Catalog</a
+          >
+          <a
+            href="#case-studies"
+            class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200"
+            style="color: rgba(245, 245, 245, 0.75)"
+            data-section="case-studies"
+            >Projects</a
+          >
+          <a
+            href="#faq"
+            class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200"
+            style="color: rgba(245, 245, 245, 0.75)"
+            data-section="faq"
+            >FAQ</a
+          >
+          <a
+            href="#contact"
+            class="hero-nav-link font-condensed font-semibold text-[12px] uppercase tracking-[0.14em] transition-colors duration-200"
+            style="color: rgba(245, 245, 245, 0.75)"
+            data-section="contact"
+            >Contact</a
+          >
         </nav>
 
         <!-- Desktop CTA -->
@@ -79,8 +202,16 @@
           id="nav-cta-btn"
           type="button"
           class="hidden md:inline-flex items-center justify-center text-white font-condensed font-bold uppercase tracking-[0.1em] text-[12px] nav-cta-btn transition-all duration-200"
-          style="background:#FF6B00;border:2px solid #FF6B00;padding:12px 24px;border-radius:0;cursor:pointer;"
-        >Request a Quote</button>
+          style="
+            background: #ff6b00;
+            border: 2px solid #ff6b00;
+            padding: 12px 24px;
+            border-radius: 0;
+            cursor: pointer;
+          "
+        >
+          Request a Quote
+        </button>
 
         <!-- Mobile hamburger -->
         <!-- MOBILE FIX: w-11 h-11 = 44px minimum tap target -->
@@ -90,305 +221,1006 @@
           aria-label="Open navigation menu"
           aria-expanded="false"
         >
-          <span class="hline block bg-crisp transition-all duration-300" style="width:24px;height:2px;transform-origin:center;"></span>
-          <span class="hline block bg-crisp transition-all duration-300" style="width:24px;height:2px;"></span>
-          <span class="hline block bg-crisp transition-all duration-300" style="width:24px;height:2px;transform-origin:center;"></span>
+          <span
+            class="hline block bg-crisp transition-all duration-300"
+            style="width: 24px; height: 2px; transform-origin: center"
+          ></span>
+          <span
+            class="hline block bg-crisp transition-all duration-300"
+            style="width: 24px; height: 2px"
+          ></span>
+          <span
+            class="hline block bg-crisp transition-all duration-300"
+            style="width: 24px; height: 2px; transform-origin: center"
+          ></span>
         </button>
       </div>
     </header>
 
     <!-- Drawer overlay -->
-    <div id="drawer-overlay" class="fixed inset-0" style="z-index:150;background:rgba(0,0,0,0.7);opacity:0;pointer-events:none;transition:opacity 300ms ease;"></div>
+    <div
+      id="drawer-overlay"
+      class="fixed inset-0"
+      style="
+        z-index: 150;
+        background: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 300ms ease;
+      "
+    ></div>
 
     <!-- Mobile drawer -->
-    <div id="mobile-drawer" class="fixed top-0 h-screen flex flex-col" style="z-index:200;width:85vw;max-width:360px;background:#0D1117;border-left:2px solid #FF6B00;">
+    <div
+      id="mobile-drawer"
+      class="fixed top-0 h-screen flex flex-col"
+      style="
+        z-index: 200;
+        width: 85vw;
+        max-width: 360px;
+        background: #0d1117;
+        border-left: 2px solid #ff6b00;
+      "
+    >
       <!-- Drawer header -->
-      <div class="flex items-center justify-between px-8 py-5" style="border-bottom:1px solid #FF6B00;">
-        <img src="assets/logo/new-logo.png" alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd." style="height:44px;width:auto;" />
-        <button id="drawer-close-btn" class="w-10 h-10 flex items-center justify-center text-crisp hover:text-orange transition-colors" aria-label="Close menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      <div
+        class="flex items-center justify-between px-8 py-5"
+        style="border-bottom: 1px solid #ff6b00"
+      >
+        <img
+          src="assets/logo/new-logo.png"
+          alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd."
+          style="height: 44px; width: auto"
+        />
+        <button
+          id="drawer-close-btn"
+          class="w-10 h-10 flex items-center justify-center text-crisp hover:text-orange transition-colors"
+          aria-label="Close menu"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
       <!-- Drawer links -->
       <nav class="flex-1 flex flex-col overflow-y-auto">
-        <a href="#hero"         class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5" style="border-bottom:1px solid rgba(255,255,255,0.05);">Home</a>
-        <a href="#services"     class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5" style="border-bottom:1px solid rgba(255,255,255,0.05);">Services</a>
-        <a href="#machinery"    class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5" style="border-bottom:1px solid rgba(255,255,255,0.05);">Catalog</a>
-        <a href="#case-studies" class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5" style="border-bottom:1px solid rgba(255,255,255,0.05);">Projects</a>
-        <a href="#contact"      class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5">Contact</a>
+        <a
+          href="#hero"
+          class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5"
+          style="border-bottom: 1px solid rgba(255, 255, 255, 0.05)"
+          >Home</a
+        >
+        <a
+          href="#services"
+          class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5"
+          style="border-bottom: 1px solid rgba(255, 255, 255, 0.05)"
+          >Services</a
+        >
+        <a
+          href="#machinery"
+          class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5"
+          style="border-bottom: 1px solid rgba(255, 255, 255, 0.05)"
+          >Catalog</a
+        >
+        <a
+          href="#case-studies"
+          class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5"
+          style="border-bottom: 1px solid rgba(255, 255, 255, 0.05)"
+          >Projects</a
+        >
+        <a
+          href="#faq"
+          class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5"
+          style="border-bottom: 1px solid rgba(255, 255, 255, 0.05)"
+          >FAQ</a
+        >
+        <a
+          href="#contact"
+          class="drawer-nav-link font-condensed font-bold text-[18px] uppercase tracking-wide text-crisp hover:text-orange transition-all duration-200 px-8 py-5"
+          >Contact</a
+        >
       </nav>
       <!-- Drawer CTA -->
       <div class="px-8 pb-4">
-        <a href="#contact" class="drawer-nav-link flex items-center justify-center text-white font-condensed font-bold uppercase tracking-[0.1em] text-base hover:bg-[#E55F00] transition-colors duration-200" style="background:#FF6B00;height:56px;border-radius:0;">
+        <a
+          href="#contact"
+          class="drawer-nav-link flex items-center justify-center text-white font-condensed font-bold uppercase tracking-[0.1em] text-base hover:bg-[#E55F00] transition-colors duration-200"
+          style="background: #ff6b00; height: 56px; border-radius: 0"
+        >
           Request a Quote →
         </a>
       </div>
       <!-- Contact line -->
       <div class="px-8 pb-8 text-center">
-        <a href="tel:+2348117788403" class="block font-condensed text-[12px] tracking-wide mb-1 hover:text-orange transition-colors" style="color:#9BA3AE;">+234 811 778 8403</a>
-        <a href="https://wa.me/2348117788403" class="block font-condensed text-[12px] tracking-wide hover:text-orange transition-colors" style="color:#9BA3AE;">WhatsApp Us</a>
+        <a
+          href="tel:+2348117788403"
+          class="block font-condensed text-[12px] tracking-wide mb-1 hover:text-orange transition-colors"
+          style="color: #9ba3ae"
+          >+234 811 778 8403</a
+        >
+        <a
+          href="https://wa.me/2348117788403"
+          data-cta-location="nav_drawer"
+          class="block font-condensed text-[12px] tracking-wide hover:text-orange transition-colors"
+          style="color: #9ba3ae"
+          >WhatsApp Us</a
+        >
       </div>
     </div>
 
     <!-- ===================== HERO ===================== -->
-    <section id="hero" class="relative overflow-hidden" style="min-height:100vh;">
-
+    <section
+      id="hero"
+      class="relative overflow-hidden"
+      style="min-height: 100vh"
+    >
       <!-- Layer 1 — Background image -->
       <div
         id="hero-bg"
         class="absolute inset-0"
-        style="z-index:1;background-image:url('assets/hero.jpeg');background-size:cover;background-position:center 30%;background-repeat:no-repeat;background-attachment:fixed;background-color:#0A0D12;"
+        style="
+          z-index: 1;
+          background-image: url(&quot;assets/hero.jpeg&quot;);
+          background-size: cover;
+          background-position: center 30%;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-color: #0a0d12;
+        "
       ></div>
 
       <!-- Layer 2 — Primary gradient -->
-      <div class="absolute inset-0 pointer-events-none" style="z-index:2;background:linear-gradient(110deg,rgba(8,12,16,0.97) 0%,rgba(8,12,16,0.93) 30%,rgba(8,12,16,0.80) 55%,rgba(8,12,16,0.50) 75%,rgba(8,12,16,0.25) 100%);"></div>
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style="
+          z-index: 2;
+          background: linear-gradient(
+            110deg,
+            rgba(8, 12, 16, 0.97) 0%,
+            rgba(8, 12, 16, 0.93) 30%,
+            rgba(8, 12, 16, 0.8) 55%,
+            rgba(8, 12, 16, 0.5) 75%,
+            rgba(8, 12, 16, 0.25) 100%
+          );
+        "
+      ></div>
 
       <!-- Layer 3 — Bottom fade into section 2 -->
-      <div class="absolute left-0 right-0 bottom-0 pointer-events-none" style="z-index:3;height:200px;background:linear-gradient(to bottom,transparent,rgba(8,12,16,0.95));"></div>
+      <div
+        class="absolute left-0 right-0 bottom-0 pointer-events-none"
+        style="
+          z-index: 3;
+          height: 200px;
+          background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(8, 12, 16, 0.95)
+          );
+        "
+      ></div>
 
       <!-- Layer 4 — Industrial texture -->
-      <div class="hero-texture absolute inset-0 pointer-events-none" style="z-index:4;"></div>
+      <div
+        class="hero-texture absolute inset-0 pointer-events-none"
+        style="z-index: 4"
+      ></div>
 
       <!-- HERO CONTENT -->
-      <div class="relative flex flex-col" style="z-index:10;min-height:100vh;padding-top:72px;">
-
+      <div
+        class="relative flex flex-col"
+        style="z-index: 10; min-height: 100vh; padding-top: 72px"
+      >
         <!-- Two-column grid -->
-        <div class="hero-content-grid flex-1 max-w-[1280px] mx-auto w-full px-6 py-12 lg:py-16">
-
+        <div
+          class="hero-content-grid flex-1 max-w-[1280px] mx-auto w-full px-6 py-12 lg:py-16"
+        >
           <!-- ─── LEFT COLUMN ─── -->
           <div class="hero-left">
-
             <!-- Pre-headline label -->
             <!-- ANIM: hero pre-label — slides up 200ms after load -->
-            <div class="hero-anim-prelabel flex items-center flex-wrap gap-3 mb-7">
-              <span class="pulse-dot shrink-0" style="width:8px;height:8px;border-radius:50%;background:#FF6B00;display:inline-block;"></span>
-              <span class="shrink-0" style="width:1px;height:16px;background:rgba(255,107,0,0.4);display:inline-block;"></span>
-              <span class="font-condensed font-semibold text-[11px] uppercase tracking-[0.18em]" style="color:#FF6B00;">Pan-Africa Industrial Integrators &nbsp;&middot;&nbsp; Since 2015</span>
+            <div
+              class="hero-anim-prelabel flex items-center flex-wrap gap-3 mb-7"
+            >
+              <span
+                class="pulse-dot shrink-0"
+                style="
+                  width: 8px;
+                  height: 8px;
+                  border-radius: 50%;
+                  background: #ff6b00;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                class="shrink-0"
+                style="
+                  width: 1px;
+                  height: 16px;
+                  background: rgba(255, 107, 0, 0.4);
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                class="font-condensed font-semibold text-[11px] uppercase tracking-[0.18em]"
+                style="color: #ff6b00"
+                >Pan-Africa Industrial Integrators &nbsp;&middot;&nbsp; Since
+                2015</span
+              >
             </div>
 
             <!-- Headline -->
             <!-- ANIM: hero headline lines — staggered fade-up, 350/450/550ms -->
-            <h1 class="hero-headline font-condensed font-extrabold uppercase mb-7" style="line-height:0.92;letter-spacing:-0.01em;color:#F5F5F5;">
+            <h1
+              class="hero-headline font-condensed font-extrabold uppercase mb-7"
+              style="line-height: 0.92; letter-spacing: -0.01em; color: #f5f5f5"
+            >
               <span class="block hero-h1-l1">We Equip The</span>
               <span class="block hero-h1-l2">Industries That</span>
-              <span class="block hero-h1-l3">Build <span style="color:#FF6B00;">Africa.</span></span>
+              <span class="block hero-h1-l3"
+                >Build
+                <img
+                  src="assets/logo/africa-word.png"
+                  alt="Africa."
+                  class="africa-word-img"
+              /></span>
             </h1>
+
+            <!-- Full legal name -->
+            <!-- ANIM: hero legal name — fades in at 600ms -->
+            <p
+              class="hero-anim-legalname font-condensed font-bold mb-6"
+              style="
+                font-size: clamp(16px, 1.9vw, 21px);
+                letter-spacing: 0.04em;
+                color: #f5f5f5;
+                text-transform: uppercase;
+              "
+            >
+              Trans-Africa Machinery &amp; Engineering Ltd.
+              <span style="color: #9ba3ae; font-weight: 600">(TME Africa)</span>
+            </p>
 
             <!-- Positioning statement -->
             <!-- ANIM: hero subtext — fades in at 650ms -->
-            <p class="hero-anim-subtext font-sans mb-5" style="font-size:17px;line-height:1.7;color:#9BA3AE;max-width:460px;">
-              From OEM factory floors in China to commissioned production lines across the continent — TME delivers complete industrial integration. Procurement. Customization. Installation. Training.
+            <p
+              class="hero-anim-subtext font-sans mb-5"
+              style="
+                font-size: 17px;
+                line-height: 1.7;
+                color: #9ba3ae;
+                max-width: 460px;
+              "
+            >
+              From OEM factory floors in China to commissioned production lines
+              across the continent — TME delivers complete industrial
+              integration. Procurement. Customization. Installation. Training.
             </p>
 
             <!-- Trust micro-signals -->
             <!-- ANIM: hero trust pills — fade up at 750ms -->
-            <div class="hero-anim-pills flex items-center flex-wrap mb-9" style="gap:8px;">
-              <span class="trust-pill font-condensed font-semibold text-[11px] uppercase tracking-wide" style="color:#FF6B00;background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.25);padding:6px 14px;border-radius:2px;">&#10003; OEM Direct &mdash; No Brokers</span>
-              <span class="trust-pill font-condensed font-semibold text-[11px] uppercase tracking-wide" style="color:#FF6B00;background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.25);padding:6px 14px;border-radius:2px;">&#10003; Factory to Site Logistics</span>
-              <span class="trust-pill font-condensed font-semibold text-[11px] uppercase tracking-wide" style="color:#FF6B00;background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.25);padding:6px 14px;border-radius:2px;">&#10003; On-Site Commissioning</span>
+            <div
+              class="hero-anim-pills flex items-center flex-wrap mb-9"
+              style="gap: 8px"
+            >
+              <span
+                class="trust-pill font-condensed font-semibold text-[11px] uppercase tracking-wide"
+                style="
+                  color: #ff6b00;
+                  background: rgba(255, 107, 0, 0.08);
+                  border: 1px solid rgba(255, 107, 0, 0.25);
+                  padding: 6px 14px;
+                  border-radius: 2px;
+                "
+                >&#10003; OEM Direct &mdash; No Brokers</span
+              >
+              <span
+                class="trust-pill font-condensed font-semibold text-[11px] uppercase tracking-wide"
+                style="
+                  color: #ff6b00;
+                  background: rgba(255, 107, 0, 0.08);
+                  border: 1px solid rgba(255, 107, 0, 0.25);
+                  padding: 6px 14px;
+                  border-radius: 2px;
+                "
+                >&#10003; Factory to Site Logistics</span
+              >
+              <span
+                class="trust-pill font-condensed font-semibold text-[11px] uppercase tracking-wide"
+                style="
+                  color: #ff6b00;
+                  background: rgba(255, 107, 0, 0.08);
+                  border: 1px solid rgba(255, 107, 0, 0.25);
+                  padding: 6px 14px;
+                  border-radius: 2px;
+                "
+                >&#10003; On-Site Commissioning</span
+              >
             </div>
 
             <!-- CTA Buttons -->
-            <div class="hero-cta-group flex flex-wrap mb-12" style="gap:16px;">
+            <div class="hero-cta-group flex flex-wrap mb-12" style="gap: 16px">
               <button
                 id="hero-primary-cta"
                 type="button"
                 class="hero-cta-primary font-condensed font-bold uppercase tracking-[0.1em] text-white transition-all duration-[220ms]"
-                style="font-size:14px;padding:16px 36px;height:56px;background:#FF6B00;border:2px solid #FF6B00;border-radius:0;cursor:pointer;"
-              >Request a Quote</button>
+                style="
+                  font-size: 14px;
+                  padding: 16px 36px;
+                  height: 56px;
+                  background: #ff6b00;
+                  border: 2px solid #ff6b00;
+                  border-radius: 0;
+                  cursor: pointer;
+                "
+              >
+                Request a Quote
+              </button>
               <a
                 href="#services"
                 class="hero-cta-secondary inline-flex items-center justify-center font-condensed font-semibold uppercase tracking-[0.08em] transition-all duration-[220ms]"
-                style="font-size:14px;padding:16px 28px;height:56px;background:transparent;color:rgba(245,245,245,0.85);border:1.5px solid rgba(245,245,245,0.2);border-radius:0;"
-              >Explore Our Services &#8595;</a>
+                style="
+                  font-size: 14px;
+                  padding: 16px 28px;
+                  height: 56px;
+                  background: transparent;
+                  color: rgba(245, 245, 245, 0.85);
+                  border: 1.5px solid rgba(245, 245, 245, 0.2);
+                  border-radius: 0;
+                "
+                >Explore Our Services &#8595;</a
+              >
             </div>
 
             <!-- Stats bar -->
-            <div class="hero-stats flex items-center flex-wrap pt-7" style="border-top:1px solid rgba(255,255,255,0.07);">
+            <div
+              class="hero-stats flex items-center flex-wrap pt-7"
+              style="border-top: 1px solid rgba(255, 255, 255, 0.07)"
+            >
               <div class="stat-item">
-                <span class="block font-condensed font-extrabold text-[28px] leading-none text-crisp">10+</span>
-                <span class="block font-sans text-[11px] mt-1" style="color:#9BA3AE;">Years Active</span>
+                <span
+                  class="block font-condensed font-extrabold text-[28px] leading-none text-crisp"
+                  >10+</span
+                >
+                <span
+                  class="block font-sans text-[11px] mt-1"
+                  style="color: #9ba3ae"
+                  >Years Active</span
+                >
               </div>
-              <div class="stat-divider" style="width:1px;height:36px;background:rgba(255,255,255,0.1);margin:0 24px;flex-shrink:0;"></div>
+              <div
+                class="stat-divider"
+                style="
+                  width: 1px;
+                  height: 36px;
+                  background: rgba(255, 255, 255, 0.1);
+                  margin: 0 24px;
+                  flex-shrink: 0;
+                "
+              ></div>
               <div class="stat-item">
-                <span class="block font-condensed font-extrabold text-[28px] leading-none text-crisp">40+</span>
-                <span class="block font-sans text-[11px] mt-1" style="color:#9BA3AE;">Machine Types</span>
+                <span
+                  class="block font-condensed font-extrabold text-[28px] leading-none text-crisp"
+                  >40+</span
+                >
+                <span
+                  class="block font-sans text-[11px] mt-1"
+                  style="color: #9ba3ae"
+                  >Machine Types</span
+                >
               </div>
-              <div class="stat-divider" style="width:1px;height:36px;background:rgba(255,255,255,0.1);margin:0 24px;flex-shrink:0;"></div>
+              <div
+                class="stat-divider"
+                style="
+                  width: 1px;
+                  height: 36px;
+                  background: rgba(255, 255, 255, 0.1);
+                  margin: 0 24px;
+                  flex-shrink: 0;
+                "
+              ></div>
               <div class="stat-item">
-                <span class="block font-condensed font-extrabold text-[28px] leading-none text-crisp">6</span>
-                <span class="block font-sans text-[11px] mt-1" style="color:#9BA3AE;">African Markets</span>
+                <span
+                  class="block font-condensed font-extrabold text-[28px] leading-none text-crisp"
+                  >6</span
+                >
+                <span
+                  class="block font-sans text-[11px] mt-1"
+                  style="color: #9ba3ae"
+                  >African Markets</span
+                >
               </div>
-              <div class="stat-divider" style="width:1px;height:36px;background:rgba(255,255,255,0.1);margin:0 24px;flex-shrink:0;"></div>
+              <div
+                class="stat-divider"
+                style="
+                  width: 1px;
+                  height: 36px;
+                  background: rgba(255, 255, 255, 0.1);
+                  margin: 0 24px;
+                  flex-shrink: 0;
+                "
+              ></div>
               <div class="stat-item">
-                <span class="block font-condensed font-extrabold text-[22px] leading-none" style="color:#FF6B00;">OEM</span>
-                <span class="block font-sans text-[11px] mt-1" style="color:#9BA3AE;">Direct China</span>
+                <span
+                  class="block font-condensed font-extrabold text-[22px] leading-none"
+                  style="color: #ff6b00"
+                  >OEM</span
+                >
+                <span
+                  class="block font-sans text-[11px] mt-1"
+                  style="color: #9ba3ae"
+                  >Direct China</span
+                >
               </div>
             </div>
-          </div><!-- /left col -->
+          </div>
+          <!-- /left col -->
 
           <!-- ─── RIGHT COLUMN: Spec card ─── -->
           <!-- ANIM: hero spec card — slides in from right at 600ms -->
           <div class="hero-right hidden md:flex justify-end items-center">
-            <div class="hero-anim-card relative w-full" style="max-width:420px;">
-
+            <div
+              class="hero-anim-card relative w-full"
+              style="max-width: 420px"
+            >
               <!-- Floating label -->
-              <div class="absolute font-mono text-[9px] uppercase tracking-[0.15em]" style="top:-12px;right:-12px;background:#1C2128;border:1px solid rgba(255,107,0,0.3);padding:4px 10px;color:rgba(255,107,0,0.7);z-index:2;">TME-2025 &middot; VERIFIED</div>
+              <div
+                class="absolute font-mono text-[9px] uppercase tracking-[0.15em]"
+                style="
+                  top: -12px;
+                  right: -12px;
+                  background: #1c2128;
+                  border: 1px solid rgba(255, 107, 0, 0.3);
+                  padding: 4px 10px;
+                  color: rgba(255, 107, 0, 0.7);
+                  z-index: 2;
+                "
+              >
+                TME-2025 &middot; VERIFIED
+              </div>
 
               <!-- Card -->
-              <div class="card-float overflow-hidden" style="background:rgba(13,17,23,0.92);border:1px solid rgba(255,107,0,0.3);border-top:3px solid #FF6B00;border-radius:2px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 0 0 1px rgba(255,107,0,0.08),0 24px 64px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.05);">
-
+              <div
+                class="card-float overflow-hidden"
+                style="
+                  background: rgba(13, 17, 23, 0.92);
+                  border: 1px solid rgba(255, 107, 0, 0.3);
+                  border-top: 3px solid #ff6b00;
+                  border-radius: 2px;
+                  backdrop-filter: blur(20px);
+                  -webkit-backdrop-filter: blur(20px);
+                  box-shadow:
+                    0 0 0 1px rgba(255, 107, 0, 0.08),
+                    0 24px 64px rgba(0, 0, 0, 0.6),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                "
+              >
                 <!-- Card header bar -->
-                <div class="flex items-center justify-between px-5 py-3.5" style="background:rgba(255,107,0,0.06);border-bottom:1px solid rgba(255,107,0,0.15);">
+                <div
+                  class="flex items-center justify-between px-5 py-3.5"
+                  style="
+                    background: rgba(255, 107, 0, 0.06);
+                    border-bottom: 1px solid rgba(255, 107, 0, 0.15);
+                  "
+                >
                   <div class="flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 rounded-full" style="background:#FF6B00;"></span>
-                    <span class="font-condensed font-bold text-[10px] uppercase tracking-[0.2em]" style="color:#FF6B00;">Equipment Specification</span>
+                    <span
+                      class="w-1.5 h-1.5 rounded-full"
+                      style="background: #ff6b00"
+                    ></span>
+                    <span
+                      class="font-condensed font-bold text-[10px] uppercase tracking-[0.2em]"
+                      style="color: #ff6b00"
+                      >Equipment Specification</span
+                    >
                   </div>
                   <div class="flex items-center gap-1.5">
-                    <span class="pulse-green w-1.5 h-1.5 rounded-full" style="background:#22C55E;"></span>
-                    <span class="font-condensed font-semibold text-[9px] uppercase tracking-[0.15em]" style="color:#22C55E;">Available to Order</span>
+                    <span
+                      class="pulse-green w-1.5 h-1.5 rounded-full"
+                      style="background: #22c55e"
+                    ></span>
+                    <span
+                      class="font-condensed font-semibold text-[9px] uppercase tracking-[0.15em]"
+                      style="color: #22c55e"
+                      >Available to Order</span
+                    >
                   </div>
                 </div>
 
                 <!-- Card body -->
                 <div class="px-5 pt-5 pb-4">
-                  <p class="font-condensed font-semibold text-[9px] uppercase tracking-[0.2em] mb-1.5" style="color:#9BA3AE;">Featured Unit &mdash; Ref: TME-LT-1000</p>
-                  <h3 class="font-condensed font-extrabold text-[22px] uppercase text-crisp leading-none mb-2" style="letter-spacing:0.02em;">1M Bed Lathe Machine</h3>
-                  <span class="inline-block font-condensed font-semibold text-[9px] uppercase tracking-[0.15em] mb-4" style="background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.2);padding:3px 10px;color:#FF6B00;">Precision Lathes &nbsp;&middot;&nbsp; Heavy Manufacturing</span>
+                  <p
+                    class="font-condensed font-semibold text-[9px] uppercase tracking-[0.2em] mb-1.5"
+                    style="color: #9ba3ae"
+                  >
+                    Featured Unit &mdash; Ref: TME-LT-1000
+                  </p>
+                  <h3
+                    class="font-condensed font-extrabold text-[22px] uppercase text-crisp leading-none mb-2"
+                    style="letter-spacing: 0.02em"
+                  >
+                    1M Bed Lathe Machine
+                  </h3>
+                  <span
+                    class="inline-block font-condensed font-semibold text-[9px] uppercase tracking-[0.15em] mb-4"
+                    style="
+                      background: rgba(255, 107, 0, 0.1);
+                      border: 1px solid rgba(255, 107, 0, 0.2);
+                      padding: 3px 10px;
+                      color: #ff6b00;
+                    "
+                    >Precision Lathes &nbsp;&middot;&nbsp; Heavy
+                    Manufacturing</span
+                  >
 
                   <!-- Spec table -->
-                  <div class="pt-3.5" style="border-top:1px solid rgba(255,255,255,0.06);">
-                    <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Bed Length</span>
-                      <span class="font-condensed font-semibold text-[12px] text-crisp">1,000 mm (1 Metre)</span>
+                  <div
+                    class="pt-3.5"
+                    style="border-top: 1px solid rgba(255, 255, 255, 0.06)"
+                  >
+                    <div
+                      class="flex justify-between items-center py-2.5"
+                      style="border-bottom: 1px solid rgba(255, 255, 255, 0.04)"
+                    >
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Bed Length</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px] text-crisp"
+                        >1,000 mm (1 Metre)</span
+                      >
                     </div>
-                    <div class="flex justify-between items-center py-2.5" style="background:rgba(255,255,255,0.018);border-bottom:1px solid rgba(255,255,255,0.04);">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Swing Over Bed</span>
-                      <span class="font-condensed font-semibold text-[12px] text-crisp">400 mm</span>
+                    <div
+                      class="flex justify-between items-center py-2.5"
+                      style="
+                        background: rgba(255, 255, 255, 0.018);
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+                      "
+                    >
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Swing Over Bed</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px] text-crisp"
+                        >400 mm</span
+                      >
                     </div>
-                    <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Spindle Speed</span>
-                      <span class="font-condensed font-semibold text-[12px] text-crisp">50 &ndash; 2,000 RPM</span>
+                    <div
+                      class="flex justify-between items-center py-2.5"
+                      style="border-bottom: 1px solid rgba(255, 255, 255, 0.04)"
+                    >
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Spindle Speed</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px] text-crisp"
+                        >50 &ndash; 2,000 RPM</span
+                      >
                     </div>
-                    <div class="flex justify-between items-center py-2.5" style="background:rgba(255,255,255,0.018);border-bottom:1px solid rgba(255,255,255,0.04);">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Motor Power</span>
-                      <span class="font-condensed font-semibold text-[12px] text-crisp">5.5 kW / 7.5 HP</span>
+                    <div
+                      class="flex justify-between items-center py-2.5"
+                      style="
+                        background: rgba(255, 255, 255, 0.018);
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+                      "
+                    >
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Motor Power</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px] text-crisp"
+                        >5.5 kW / 7.5 HP</span
+                      >
                     </div>
-                    <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Voltage</span>
-                      <span class="font-condensed font-semibold text-[12px] text-crisp">380V / 3-Phase</span>
+                    <div
+                      class="flex justify-between items-center py-2.5"
+                      style="border-bottom: 1px solid rgba(255, 255, 255, 0.04)"
+                    >
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Voltage</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px] text-crisp"
+                        >380V / 3-Phase</span
+                      >
                     </div>
-                    <div class="flex justify-between items-center py-2.5" style="background:rgba(255,255,255,0.018);border-bottom:1px solid rgba(255,255,255,0.04);">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Tailstock</span>
-                      <span class="font-condensed font-semibold text-[12px] text-crisp">MT5 Taper</span>
+                    <div
+                      class="flex justify-between items-center py-2.5"
+                      style="
+                        background: rgba(255, 255, 255, 0.018);
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+                      "
+                    >
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Tailstock</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px] text-crisp"
+                        >MT5 Taper</span
+                      >
                     </div>
-                    <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Origin</span>
-                      <span class="font-condensed font-semibold text-[12px] text-crisp">OEM Direct &mdash; China <span class="font-sans font-normal text-[9px]" style="color:#9BA3AE;">&middot; Factory Inspected</span></span>
+                    <div
+                      class="flex justify-between items-center py-2.5"
+                      style="border-bottom: 1px solid rgba(255, 255, 255, 0.04)"
+                    >
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Origin</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px] text-crisp"
+                        >OEM Direct &mdash; China
+                        <span
+                          class="font-sans font-normal text-[9px]"
+                          style="color: #9ba3ae"
+                          >&middot; Factory Inspected</span
+                        ></span
+                      >
                     </div>
                     <div class="flex justify-between items-center py-2.5">
-                      <span class="font-mono text-[10px] uppercase tracking-[0.05em]" style="color:#9BA3AE;">Lead Time</span>
-                      <span class="font-condensed font-semibold text-[12px]" style="color:#FF6B00;">4 &ndash; 6 Weeks</span>
+                      <span
+                        class="font-mono text-[10px] uppercase tracking-[0.05em]"
+                        style="color: #9ba3ae"
+                        >Lead Time</span
+                      >
+                      <span
+                        class="font-condensed font-semibold text-[12px]"
+                        style="color: #ff6b00"
+                        >4 &ndash; 6 Weeks</span
+                      >
                     </div>
                   </div>
 
                   <!-- Compatibility note -->
-                  <div class="mt-3 px-3 py-2.5" style="background:rgba(34,197,94,0.06);border-left:2px solid #22C55E;">
-                    <p class="font-sans text-[11px] leading-relaxed" style="color:#9BA3AE;">
-                      &#10003;&nbsp; Compatible with 3-Jaw &amp; 4-Jaw Chucks, Live Centers, Carbide Cutting Tools, and HSS Drill Bit Sets &mdash; all available from TME.
+                  <div
+                    class="mt-3 px-3 py-2.5"
+                    style="
+                      background: rgba(34, 197, 94, 0.06);
+                      border-left: 2px solid #22c55e;
+                    "
+                  >
+                    <p
+                      class="font-sans text-[11px] leading-relaxed"
+                      style="color: #9ba3ae"
+                    >
+                      &#10003;&nbsp; Compatible with 3-Jaw &amp; 4-Jaw Chucks,
+                      Live Centers, Carbide Cutting Tools, and HSS Drill Bit
+                      Sets &mdash; all available from TME.
                     </p>
                   </div>
                 </div>
 
                 <!-- Card footer buttons -->
-                <div class="px-5 pb-5 pt-4" style="border-top:1px solid rgba(255,107,0,0.15);display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div
+                  class="px-5 pb-5 pt-4"
+                  style="
+                    border-top: 1px solid rgba(255, 107, 0, 0.15);
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 10px;
+                  "
+                >
                   <button
                     id="card-quote-btn"
                     type="button"
                     class="flex items-center justify-center text-white font-condensed font-bold uppercase tracking-[0.08em] text-[12px] hover:bg-[#E55F00] hover:-translate-y-px transition-all duration-200"
-                    style="height:44px;background:#FF6B00;border:none;border-radius:0;cursor:pointer;"
-                  >Request a Quote &rarr;</button>
+                    style="
+                      height: 44px;
+                      background: #ff6b00;
+                      border: none;
+                      border-radius: 0;
+                      cursor: pointer;
+                    "
+                  >
+                    Request a Quote &rarr;
+                  </button>
                   <button
                     id="card-catalog-btn"
                     type="button"
                     class="flex items-center justify-center font-condensed font-semibold uppercase tracking-[0.08em] text-[12px] text-crisp transition-all duration-200"
-                    style="height:44px;background:transparent;border:1px solid rgba(245,245,245,0.2);border-radius:0;cursor:pointer;"
-                  >View Full Catalog</button>
+                    style="
+                      height: 44px;
+                      background: transparent;
+                      border: 1px solid rgba(245, 245, 245, 0.2);
+                      border-radius: 0;
+                      cursor: pointer;
+                    "
+                  >
+                    View Full Catalog
+                  </button>
                 </div>
-              </div><!-- /card -->
+              </div>
+              <!-- /card -->
 
               <!-- Engineering watermark -->
-              <div class="absolute font-mono text-[8px] uppercase tracking-[0.1em] leading-relaxed pointer-events-none" style="bottom:-32px;left:0;color:rgba(255,107,0,0.12);">
+              <div
+                class="absolute font-mono text-[8px] uppercase tracking-[0.1em] leading-relaxed pointer-events-none"
+                style="bottom: -32px; left: 0; color: rgba(255, 107, 0, 0.12)"
+              >
                 <div>OEM Specification Sheet</div>
                 <div>Factory Certified Unit</div>
                 <div>Trans-Africa Machinery &amp; Engineering Ltd.</div>
               </div>
             </div>
-          </div><!-- /right col -->
-
-        </div><!-- /hero-content-grid -->
+          </div>
+          <!-- /right col -->
+        </div>
+        <!-- /hero-content-grid -->
 
         <!-- Service quick-links strip (desktop only) -->
         <!-- ANIM: hero service tiles — fade up at 1100ms -->
-        <div class="hero-anim-tiles hidden md:block max-w-[1280px] mx-auto w-full px-6 mt-8 mb-16">
-          <p class="text-center font-condensed font-semibold text-[10px] uppercase tracking-[0.18em] mb-3" style="color:#FF6B00;">Our Services &mdash; Click to Explore</p>
-          <div class="service-tiles-grid" style="border-top:1px solid rgba(255,107,0,0.15);">
-            <div class="service-tile px-6 py-5" style="background:rgba(8,12,16,0.95);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              <p class="font-condensed font-bold text-[13px] text-white uppercase mb-1">Procurement &amp; Supply</p>
-              <p class="font-sans text-[10px]" style="color:#9BA3AE;">OEM Direct &middot; No Brokers &middot; Full Logistics</p>
+        <div
+          class="hero-anim-tiles hidden md:block max-w-[1280px] mx-auto w-full px-6 mt-8 mb-16"
+        >
+          <p
+            class="text-center font-condensed font-semibold text-[10px] uppercase tracking-[0.18em] mb-3"
+            style="color: #ff6b00"
+          >
+            Our Services &mdash; Click to Explore
+          </p>
+          <div
+            class="service-tiles-grid"
+            style="border-top: 1px solid rgba(255, 107, 0, 0.15)"
+          >
+            <div
+              class="service-tile px-6 py-5"
+              style="background: rgba(8, 12, 16, 0.95)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#FF6B00"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-5 h-5 mb-3"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path
+                  d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              <p
+                class="font-condensed font-bold text-[13px] text-white uppercase mb-1"
+              >
+                Procurement &amp; Supply
+              </p>
+              <p class="font-sans text-[10px]" style="color: #9ba3ae">
+                OEM Direct &middot; No Brokers &middot; Full Logistics
+              </p>
             </div>
-            <div class="service-tile px-6 py-5" style="background:rgba(8,12,16,0.95);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-3"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-              <p class="font-condensed font-bold text-[13px] text-white uppercase mb-1">Engineering &amp; Integration</p>
-              <p class="font-sans text-[10px]" style="color:#9BA3AE;">Installation &middot; Commissioning &middot; Line Integration</p>
+            <div
+              class="service-tile px-6 py-5"
+              style="background: rgba(8, 12, 16, 0.95)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#FF6B00"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-5 h-5 mb-3"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"
+                />
+              </svg>
+              <p
+                class="font-condensed font-bold text-[13px] text-white uppercase mb-1"
+              >
+                Engineering &amp; Integration
+              </p>
+              <p class="font-sans text-[10px]" style="color: #9ba3ae">
+                Installation &middot; Commissioning &middot; Line Integration
+              </p>
             </div>
-            <div class="service-tile px-6 py-5" style="background:rgba(8,12,16,0.95);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <p class="font-condensed font-bold text-[13px] text-white uppercase mb-1">Lifecycle Maintenance</p>
-              <p class="font-sans text-[10px]" style="color:#9BA3AE;">SLA Contracts &middot; Emergency Repair &middot; Spares</p>
+            <div
+              class="service-tile px-6 py-5"
+              style="background: rgba(8, 12, 16, 0.95)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#FF6B00"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-5 h-5 mb-3"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              <p
+                class="font-condensed font-bold text-[13px] text-white uppercase mb-1"
+              >
+                Lifecycle Maintenance
+              </p>
+              <p class="font-sans text-[10px]" style="color: #9ba3ae">
+                SLA Contracts &middot; Emergency Repair &middot; Spares
+              </p>
             </div>
-            <div class="service-tile px-6 py-5" style="background:rgba(8,12,16,0.95);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mb-3"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-              <p class="font-condensed font-bold text-[13px] text-white uppercase mb-1">Training &amp; Consulting</p>
-              <p class="font-sans text-[10px]" style="color:#9BA3AE;">Operator Cert &middot; Factory Audits &middot; Valuation</p>
+            <div
+              class="service-tile px-6 py-5"
+              style="background: rgba(8, 12, 16, 0.95)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#FF6B00"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-5 h-5 mb-3"
+              >
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+              </svg>
+              <p
+                class="font-condensed font-bold text-[13px] text-white uppercase mb-1"
+              >
+                Training &amp; Consulting
+              </p>
+              <p class="font-sans text-[10px]" style="color: #9ba3ae">
+                Operator Cert &middot; Factory Audits &middot; Valuation
+              </p>
             </div>
           </div>
         </div>
 
         <!-- Scroll indicator (hidden on mobile) -->
-        <div id="scroll-indicator" class="hidden md:flex absolute flex-col items-center" style="bottom:64px;left:50%;transform:translateX(-50%);z-index:20;gap:8px;transition:opacity 400ms ease;">
-          <span class="font-condensed font-semibold text-[9px] uppercase tracking-[0.2em]" style="color:rgba(245,245,245,0.3);">Scroll to Explore</span>
-          <div class="relative overflow-hidden" style="width:1px;height:48px;background:rgba(255,255,255,0.1);">
-            <span class="scroll-track-dot absolute" style="top:0;left:0;width:1px;height:16px;background:#FF6B00;"></span>
+        <div
+          id="scroll-indicator"
+          class="hidden md:flex absolute flex-col items-center"
+          style="
+            bottom: 64px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            gap: 8px;
+            transition: opacity 400ms ease;
+          "
+        >
+          <span
+            class="font-condensed font-semibold text-[9px] uppercase tracking-[0.2em]"
+            style="color: rgba(245, 245, 245, 0.3)"
+            >Scroll to Explore</span
+          >
+          <div
+            class="relative overflow-hidden"
+            style="
+              width: 1px;
+              height: 48px;
+              background: rgba(255, 255, 255, 0.1);
+            "
+          >
+            <span
+              class="scroll-track-dot absolute"
+              style="
+                top: 0;
+                left: 0;
+                width: 1px;
+                height: 16px;
+                background: #ff6b00;
+              "
+            ></span>
           </div>
         </div>
-
-      </div><!-- /hero content -->
+      </div>
+      <!-- /hero content -->
 
       <!-- Bottom anchor bar -->
-      <div class="absolute bottom-0 left-0 right-0 flex items-center justify-center" style="height:52px;background:rgba(8,12,16,0.98);border-top:1px solid rgba(255,107,0,0.2);z-index:20;overflow-x:auto;">
+      <div
+        class="absolute bottom-0 left-0 right-0 flex items-center justify-center"
+        style="
+          height: 52px;
+          background: rgba(8, 12, 16, 0.98);
+          border-top: 1px solid rgba(255, 107, 0, 0.2);
+          z-index: 20;
+          overflow-x: auto;
+        "
+      >
         <div class="flex items-center gap-2.5 px-8 shrink-0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <span class="font-condensed font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap" style="color:rgba(245,245,245,0.7);">Kano Headquarters</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#FF6B00"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="width: 14px; height: 14px; flex-shrink: 0"
+          >
+            <path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z" />
+            <circle cx="12" cy="9" r="2.5" />
+          </svg>
+          <span
+            class="font-condensed font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap"
+            style="color: rgba(245, 245, 245, 0.7)"
+            >Kano Headquarters</span
+          >
         </div>
-        <div class="shrink-0" style="width:1px;height:20px;background:rgba(255,255,255,0.08);"></div>
+        <div
+          class="shrink-0"
+          style="
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+          "
+        ></div>
         <div class="flex items-center gap-2.5 px-8 shrink-0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <span class="font-condensed font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap" style="color:rgba(245,245,245,0.7);">Ogun Operations Hub</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#FF6B00"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="width: 14px; height: 14px; flex-shrink: 0"
+          >
+            <path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z" />
+            <circle cx="12" cy="9" r="2.5" />
+          </svg>
+          <span
+            class="font-condensed font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap"
+            style="color: rgba(245, 245, 245, 0.7)"
+            >Ogun Operations Hub</span
+          >
         </div>
-        <div class="shrink-0" style="width:1px;height:20px;background:rgba(255,255,255,0.08);"></div>
+        <div
+          class="shrink-0"
+          style="
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+          "
+        ></div>
         <div class="flex items-center gap-2.5 px-8 shrink-0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <span class="font-condensed font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap" style="color:rgba(245,245,245,0.7);">China OEM Direct</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#FF6B00"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="width: 14px; height: 14px; flex-shrink: 0"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path
+              d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            />
+          </svg>
+          <span
+            class="font-condensed font-semibold text-[11px] uppercase tracking-[0.14em] whitespace-nowrap"
+            style="color: rgba(245, 245, 245, 0.7)"
+            >China OEM Direct</span
+          >
         </div>
       </div>
-
     </section>
 
-        <!-- ===================== TRUST BAR ===================== -->
+    <!-- ===================== TRUST BAR ===================== -->
     <section
       id="trust"
       class="relative bg-steel border-t border-b border-orange/40"
@@ -474,7 +1306,10 @@
 
         <!-- Capabilities Ticker -->
         <!-- ANIM: marquee container — fades in, delay 2 -->
-        <div class="anim-fade-in marquee-wrapper overflow-hidden border-t border-midgrey" data-delay="2">
+        <div
+          class="anim-fade-in marquee-wrapper overflow-hidden border-t border-midgrey"
+          data-delay="2"
+        >
           <div class="marquee-track flex whitespace-nowrap py-3">
             <span
               class="marquee-content inline-flex items-center shrink-0 pr-10 text-fog text-xs sm:text-sm font-sans uppercase tracking-wide"
@@ -512,7 +1347,10 @@
 
     <!-- ===================== SERVICES ===================== -->
     <!-- ANIM: section-reveal — orange sweep line at top on entry -->
-    <section id="services" class="section-reveal bg-steel py-20 lg:py-28 scroll-mt-20">
+    <section
+      id="services"
+      class="section-reveal bg-steel py-20 lg:py-28 scroll-mt-20"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-14 lg:mb-20">
@@ -531,9 +1369,15 @@
             Full-Spectrum Industrial Integration
           </h2>
           <!-- ANIM: orange accent line — draws in from left, delay 2 -->
-          <div class="anim-line-grow w-16 h-[3px] bg-orange mx-auto mb-5" data-delay="2"></div>
+          <div
+            class="anim-line-grow w-16 h-[3px] bg-orange mx-auto mb-5"
+            data-delay="2"
+          ></div>
           <!-- ANIM: subtext — fade in, delay 3 -->
-          <p class="anim-fade-in text-fog text-sm sm:text-base max-w-xl mx-auto" data-delay="3">
+          <p
+            class="anim-fade-in text-fog text-sm sm:text-base max-w-xl mx-auto"
+            data-delay="3"
+          >
             One partner. Every phase. From OEM factory floor to production line.
           </p>
         </div>
@@ -913,7 +1757,10 @@
 
     <!-- ===================== MACHINERY CATALOG ===================== -->
     <!-- ANIM: section-reveal sweep line -->
-    <section id="machinery" class="section-reveal bg-[#0F1318] py-20 lg:py-28 scroll-mt-20">
+    <section
+      id="machinery"
+      class="section-reveal bg-[#0F1318] py-20 lg:py-28 scroll-mt-20"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-12 lg:mb-16">
@@ -932,7 +1779,10 @@
             Industrial Machinery, Engineered to Spec
           </h2>
           <!-- ANIM: catalog subtext — fade in, delay 2 -->
-          <p class="anim-fade-in text-fog text-sm sm:text-base max-w-2xl mx-auto" data-delay="2">
+          <p
+            class="anim-fade-in text-fog text-sm sm:text-base max-w-2xl mx-auto"
+            data-delay="2"
+          >
             All units sourced direct from verified OEM factories. Specifications
             negotiable. No pricing displayed — all quotes are customised to your
             requirements.
@@ -953,26 +1803,86 @@
             id="catalog-filters"
             class="flex gap-2 overflow-x-auto whitespace-nowrap pb-1 lg:pb-0"
           >
-            <button type="button" data-filter="All" aria-pressed="true"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-orange bg-orange text-steel transition-colors duration-200">All</button>
-            <button type="button" data-filter="Lathes" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Lathes</button>
-            <button type="button" data-filter="Milling & Shaping" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Milling &amp; Shaping</button>
-            <button type="button" data-filter="Cutting" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Cutting</button>
-            <button type="button" data-filter="Bending & Rolling" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Bending &amp; Rolling</button>
-            <button type="button" data-filter="Pressing & Welding" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Pressing &amp; Welding</button>
-            <button type="button" data-filter="Drilling & Grinding" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Drilling &amp; Grinding</button>
-            <button type="button" data-filter="Engine & Automotive" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Engine &amp; Automotive</button>
-            <button type="button" data-filter="Industrial Equipment" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Industrial Equipment</button>
-            <button type="button" data-filter="Tooling" aria-pressed="false"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200">Tooling</button>
+            <button
+              type="button"
+              data-filter="All"
+              aria-pressed="true"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-orange bg-orange text-steel transition-colors duration-200"
+            >
+              All
+            </button>
+            <button
+              type="button"
+              data-filter="Lathes"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Lathes
+            </button>
+            <button
+              type="button"
+              data-filter="Milling & Shaping"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Milling &amp; Shaping
+            </button>
+            <button
+              type="button"
+              data-filter="Cutting"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Cutting
+            </button>
+            <button
+              type="button"
+              data-filter="Bending & Rolling"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Bending &amp; Rolling
+            </button>
+            <button
+              type="button"
+              data-filter="Pressing & Welding"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Pressing &amp; Welding
+            </button>
+            <button
+              type="button"
+              data-filter="Drilling & Grinding"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Drilling &amp; Grinding
+            </button>
+            <button
+              type="button"
+              data-filter="Engine & Automotive"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Engine &amp; Automotive
+            </button>
+            <button
+              type="button"
+              data-filter="Industrial Equipment"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Industrial Equipment
+            </button>
+            <button
+              type="button"
+              data-filter="Tooling"
+              aria-pressed="false"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-condensed font-semibold uppercase tracking-wide border border-midgrey text-crisp hover:border-orange transition-colors duration-200"
+            >
+              Tooling
+            </button>
           </div>
 
           <div class="lg:ml-auto lg:w-64 shrink-0">
@@ -1243,7 +2153,10 @@
 
       <!-- Bottom CTA Band (full-bleed) -->
       <!-- ANIM: catalog CTA band — scale in -->
-      <div class="anim-scale-in mt-16 lg:mt-20 bg-orange py-14 lg:py-16 px-4 sm:px-6 lg:px-8" data-delay="0">
+      <div
+        class="anim-scale-in mt-16 lg:mt-20 bg-orange py-14 lg:py-16 px-4 sm:px-6 lg:px-8"
+        data-delay="0"
+      >
         <div class="max-w-2xl mx-auto text-center">
           <!-- ANIM: CTA text — fade up, delay 1 -->
           <p
@@ -1269,7 +2182,10 @@
 
     <!-- ===================== CASE STUDIES / AUTHORITY ===================== -->
     <!-- ANIM: section-reveal sweep line -->
-    <section id="case-studies" class="section-reveal bg-steel py-20 lg:py-28 scroll-mt-20">
+    <section
+      id="case-studies"
+      class="section-reveal bg-steel py-20 lg:py-28 scroll-mt-20"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-14 lg:mb-20">
@@ -1288,9 +2204,15 @@
             Where We've Delivered.
           </h2>
           <!-- ANIM: orange accent line — draws in, delay 2 -->
-          <div class="anim-line-grow w-16 h-[3px] bg-orange mx-auto mb-5" data-delay="2"></div>
+          <div
+            class="anim-line-grow w-16 h-[3px] bg-orange mx-auto mb-5"
+            data-delay="2"
+          ></div>
           <!-- ANIM: subtext — fade in, delay 3 -->
-          <p class="anim-fade-in text-fog text-sm sm:text-base max-w-xl mx-auto" data-delay="3">
+          <p
+            class="anim-fade-in text-fog text-sm sm:text-base max-w-xl mx-auto"
+            data-delay="3"
+          >
             Every project below represents a real facility, a real challenge,
             and a measurable result. We let the outcomes speak.
           </p>
@@ -1334,7 +2256,10 @@
 
           <!-- Content (40%) -->
           <!-- ANIM: featured content panel — slides in from right -->
-          <div class="anim-fade-right lg:w-2/5 p-8 lg:p-10 flex flex-col" data-delay="0">
+          <div
+            class="anim-fade-right lg:w-2/5 p-8 lg:p-10 flex flex-col"
+            data-delay="0"
+          >
             <span
               class="block text-orange text-xs font-condensed font-bold uppercase tracking-[0.2em] mb-3"
               >Case Study — 01</span
@@ -1435,7 +2360,10 @@
             >
             <div class="grid grid-cols-3 gap-3 mb-7">
               <!-- ANIM: outcome stat 1 — scale in, delay 0 -->
-              <div class="anim-scale-in text-center border border-steel/60 py-3 px-1" data-delay="0">
+              <div
+                class="anim-scale-in text-center border border-steel/60 py-3 px-1"
+                data-delay="0"
+              >
                 <span
                   class="counter block font-condensed font-extrabold text-orange text-xl sm:text-2xl"
                   data-target="410"
@@ -1448,7 +2376,10 @@
                 >
               </div>
               <!-- ANIM: outcome stat 2 — scale in, delay 1 -->
-              <div class="anim-scale-in text-center border border-steel/60 py-3 px-1" data-delay="1">
+              <div
+                class="anim-scale-in text-center border border-steel/60 py-3 px-1"
+                data-delay="1"
+              >
                 <span
                   class="counter block font-condensed font-extrabold text-orange text-xl sm:text-2xl"
                   data-target="10"
@@ -1461,7 +2392,10 @@
                 >
               </div>
               <!-- ANIM: outcome stat 3 — scale in, delay 2 -->
-              <div class="anim-scale-in text-center border border-steel/60 py-3 px-1" data-delay="2">
+              <div
+                class="anim-scale-in text-center border border-steel/60 py-3 px-1"
+                data-delay="2"
+              >
                 <span
                   class="counter block font-condensed font-extrabold text-orange text-xl sm:text-2xl"
                   data-target="8"
@@ -1481,9 +2415,7 @@
               class="group inline-flex items-center gap-1 text-orange text-sm font-condensed font-semibold uppercase tracking-wide mt-auto self-start"
             >
               <span aria-hidden="true">→</span
-              ><span class="group-hover:underline"
-                >View Full Case Study</span
-              >
+              ><span class="group-hover:underline">View Full Case Study</span>
             </button>
           </div>
         </div>
@@ -1587,7 +2519,10 @@
               Zero Compromises.
             </p>
             <!-- ANIM: body text — fade left, delay 1 -->
-            <p class="anim-fade-left text-crisp text-sm sm:text-base max-w-md" data-delay="1">
+            <p
+              class="anim-fade-left text-crisp text-sm sm:text-base max-w-md"
+              data-delay="1"
+            >
               Every machine we commission carries the full weight of our
               engineering reputation. We do not cut corners because our name is
               on every installation.
@@ -1652,6 +2587,349 @@
       </div>
     </section>
 
+    <!-- ===================== FAQ ===================== -->
+    <section
+      id="faq"
+      class="section-reveal bg-[#0F1318] py-20 lg:py-28 scroll-mt-20"
+    >
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-14 lg:mb-16">
+          <!-- ANIM: FAQ label — fade in -->
+          <span
+            class="anim-fade-in block font-condensed font-bold text-orange text-xs sm:text-sm uppercase tracking-[0.3em] mb-4"
+            data-delay="0"
+          >
+            Common Questions
+          </span>
+          <!-- ANIM: FAQ headline — fade up, delay 1 -->
+          <h2
+            class="anim-fade-up font-condensed font-extrabold uppercase text-3xl sm:text-4xl lg:text-5xl text-crisp mb-5 leading-tight"
+            data-delay="1"
+          >
+            Frequently Asked Questions
+          </h2>
+          <!-- ANIM: orange accent line — draws in from left, delay 2 -->
+          <div
+            class="anim-line-grow w-16 h-[3px] bg-orange mx-auto mb-5"
+            data-delay="2"
+          ></div>
+          <!-- ANIM: subtext — fade in, delay 3 -->
+          <p
+            class="anim-fade-in text-fog text-sm sm:text-base max-w-xl mx-auto"
+            data-delay="3"
+          >
+            Answers to what clients ask us most before sourcing, installing, or
+            maintaining equipment with TME.
+          </p>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="flex flex-col gap-3">
+          <!-- ANIM: FAQ item 1 — fade up, delay 0 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="0"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >What services does TME Africa provide?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                Full-spectrum industrial integration — sourcing and procurement,
+                customs clearance, installation and commissioning, lifecycle
+                maintenance, spare parts, and on-site technician training, all
+                through one partner.
+              </p>
+            </div>
+          </details>
+
+          <!-- ANIM: FAQ item 2 — fade up, delay 1 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="1"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >How long does it take to source and deliver a machine?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                Lead time depends on the machine and its origin factory — from a
+                few weeks for stocked spares to several months for custom-built
+                production lines. We confirm an exact lead time before you
+                commit to an order.
+              </p>
+            </div>
+          </details>
+
+          <!-- ANIM: FAQ item 3 — fade up, delay 2 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="2"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >Do you handle import duties and customs clearance?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                Yes. Every shipment includes full Nigerian customs and import
+                documentation handled by our team, so equipment arrives ready
+                for installation without added paperwork on your end.
+              </p>
+            </div>
+          </details>
+
+          <!-- ANIM: FAQ item 4 — fade up, delay 3 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="3"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >Is installation included, or do we need our own
+                technicians?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                Installation and commissioning are part of every equipment
+                package. Our engineering team handles installation and line
+                integration on-site, and trains your staff to run the equipment
+                safely from day one.
+              </p>
+            </div>
+          </details>
+
+          <!-- ANIM: FAQ item 5 — fade up, delay 0 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="0"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >What after-sales support do you offer?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                We offer 6- and 12-month preventative maintenance contracts,
+                spare parts procurement direct from our OEM partners, and
+                monthly on-site lubrication, tuning, and inspection visits to
+                keep equipment running at spec.
+              </p>
+            </div>
+          </details>
+
+          <!-- ANIM: FAQ item 6 — fade up, delay 1 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="1"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >Can you train our technicians on the new equipment?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                Yes. We run multi-day, on-site technical training programs as
+                part of commissioning, plus ongoing consulting for teams that
+                need refresher sessions later.
+              </p>
+            </div>
+          </details>
+
+          <!-- ANIM: FAQ item 7 — fade up, delay 2 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="2"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >Which countries do you operate in?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                TME Africa is CAC-registered in Nigeria with pan-Africa
+                operations. We've delivered installations from Kaduna and Lagos
+                to Ogun and Rivers State, backed by verified OEM partnerships.
+              </p>
+            </div>
+          </details>
+
+          <!-- ANIM: FAQ item 8 — fade up, delay 3 -->
+          <details
+            class="faq-item anim-fade-up bg-midgrey border-l-[3px] border-transparent transition-all duration-200"
+            data-delay="3"
+          >
+            <summary
+              class="flex items-center justify-between gap-4 p-5 lg:p-6 cursor-pointer"
+            >
+              <span
+                class="font-condensed font-bold text-crisp uppercase text-base lg:text-lg pr-4"
+                >How do I request a quote, and how fast will you respond?</span
+              >
+              <svg
+                class="faq-chevron w-5 h-5 text-orange shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-5 lg:px-6 pb-5 lg:pb-6">
+              <p class="text-fog text-sm sm:text-base leading-relaxed">
+                Fill out the contact form below or message us on
+                <a
+                  href="https://wa.me/2348117788403"
+                  data-cta-location="faq"
+                  target="_blank"
+                  rel="noopener"
+                  style="color: #ff6b00"
+                  >WhatsApp</a
+                >
+                with your equipment needs — we respond within 24 working hours,
+                and WhatsApp typically gets the fastest reply.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== CONTACT / LEAD CAPTURE ===================== -->
     <section
       id="contact"
@@ -1675,7 +2953,10 @@
             Ready to Engineer Your Next Line?
           </h2>
           <!-- ANIM: subtext — fade in, delay 2 -->
-          <p class="anim-fade-in text-fog text-sm sm:text-base max-w-xl mx-auto" data-delay="2">
+          <p
+            class="anim-fade-in text-fog text-sm sm:text-base max-w-xl mx-auto"
+            data-delay="2"
+          >
             Tell us what you need. We will respond within 24 working hours with
             a full capability assessment.
           </p>
@@ -1854,19 +3135,33 @@
                       <option value="Grinding Machine">Grinding Machine</option>
                       <option value="Drilling Machine">Drilling Machine</option>
                       <option value="Boring Machine">Boring Machine</option>
-                      <option value="Shaping &amp; Slotting Machine">Shaping &amp; Slotting Machine</option>
+                      <option value="Shaping &amp; Slotting Machine">
+                        Shaping &amp; Slotting Machine
+                      </option>
                       <option value="Hydraulic Press">Hydraulic Press</option>
-                      <option value="Metal Forming Machine">Metal Forming Machine</option>
+                      <option value="Metal Forming Machine">
+                        Metal Forming Machine
+                      </option>
                       <option value="Cutting Machine">Cutting Machine</option>
                       <option value="Welding Machine">Welding Machine</option>
-                      <option value="Automotive Reconditioning">Automotive Reconditioning</option>
-                      <option value="Plastic &amp; Rubber Machinery">Plastic &amp; Rubber Machinery</option>
+                      <option value="Automotive Reconditioning">
+                        Automotive Reconditioning
+                      </option>
+                      <option value="Plastic &amp; Rubber Machinery">
+                        Plastic &amp; Rubber Machinery
+                      </option>
                       <option value="Power Equipment">Power Equipment</option>
-                      <option value="Workshop Accessories &amp; Tooling">Workshop Accessories &amp; Tooling</option>
+                      <option value="Workshop Accessories &amp; Tooling">
+                        Workshop Accessories &amp; Tooling
+                      </option>
                     </optgroup>
                     <optgroup label="── Other ──────────────────────">
-                      <option value="Spare Parts / Consumables">Spare Parts / Consumables</option>
-                      <option value="Custom Sourcing Request">Custom Sourcing Request</option>
+                      <option value="Spare Parts / Consumables">
+                        Spare Parts / Consumables
+                      </option>
+                      <option value="Custom Sourcing Request">
+                        Custom Sourcing Request
+                      </option>
                       <option value="General Enquiry">General Enquiry</option>
                     </optgroup>
                   </select>
@@ -1903,7 +3198,10 @@
                   <div
                     id="upload-zone"
                     class="relative border-2 border-dashed rounded transition-colors duration-200 cursor-pointer select-none"
-                    style="border-color:rgba(255,255,255,0.12);background:rgba(255,107,0,0.02);"
+                    style="
+                      border-color: rgba(255, 255, 255, 0.12);
+                      background: rgba(255, 107, 0, 0.02);
+                    "
                   >
                     <!-- hidden real input covers the whole zone -->
                     <input
@@ -1916,35 +3214,105 @@
                     />
 
                     <!-- Placeholder (no file selected) -->
-                    <div id="upload-placeholder" class="flex flex-col items-center justify-center py-8 px-4 text-center pointer-events-none">
-                      <svg class="w-8 h-8 mb-3" style="color:#FF6B00;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="17 8 12 3 7 8"/>
-                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    <div
+                      id="upload-placeholder"
+                      class="flex flex-col items-center justify-center py-8 px-4 text-center pointer-events-none"
+                    >
+                      <svg
+                        class="w-8 h-8 mb-3"
+                        style="color: #ff6b00"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
                       </svg>
-                      <p class="text-crisp text-sm mb-1">Drop a file here or <span style="color:#FF6B00;">browse</span></p>
-                      <p class="text-fog text-xs">JPG · PNG · WEBP · MP4 · MOV &nbsp;·&nbsp; Max 10 MB</p>
+                      <p class="text-crisp text-sm mb-1">
+                        Drop a file here or
+                        <span style="color: #ff6b00">browse</span>
+                      </p>
+                      <p class="text-fog text-xs">
+                        JPG · PNG · WEBP · MP4 · MOV &nbsp;·&nbsp; Max 10 MB
+                      </p>
                     </div>
 
                     <!-- Preview (file selected) -->
-                    <div id="upload-preview" class="hidden flex-col items-center justify-center py-6 px-4 text-center pointer-events-none">
-                      <img id="upload-img-thumb" class="hidden max-h-36 mx-auto mb-3 object-contain rounded" alt="Preview" />
-                      <svg id="upload-video-icon" class="hidden w-10 h-10 mb-3" style="color:#FF6B00;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                    <div
+                      id="upload-preview"
+                      class="hidden flex-col items-center justify-center py-6 px-4 text-center pointer-events-none"
+                    >
+                      <img
+                        id="upload-img-thumb"
+                        class="hidden max-h-36 mx-auto mb-3 object-contain rounded"
+                        alt="Preview"
+                      />
+                      <svg
+                        id="upload-video-icon"
+                        class="hidden w-10 h-10 mb-3"
+                        style="color: #ff6b00"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polygon points="23 7 16 12 23 17 23 7" />
+                        <rect
+                          x="1"
+                          y="5"
+                          width="15"
+                          height="14"
+                          rx="2"
+                          ry="2"
+                        />
                       </svg>
-                      <p id="upload-file-name" class="text-crisp text-sm font-semibold truncate max-w-xs"></p>
-                      <p id="upload-file-size" class="text-fog text-xs mt-1"></p>
+                      <p
+                        id="upload-file-name"
+                        class="text-crisp text-sm font-semibold truncate max-w-xs"
+                      ></p>
+                      <p
+                        id="upload-file-size"
+                        class="text-fog text-xs mt-1"
+                      ></p>
                     </div>
                   </div>
 
                   <!-- Actions row (visible after file picked) -->
-                  <div id="upload-actions" class="hidden flex items-center justify-between mt-2">
-                    <p id="upload-video-note" class="hidden text-fog text-xs">Large video? Send directly via
-                      <a href="https://wa.me/2348117788403" target="_blank" rel="noopener" style="color:#FF6B00;">WhatsApp</a> for faster delivery.
+                  <div
+                    id="upload-actions"
+                    class="hidden flex items-center justify-between mt-2"
+                  >
+                    <p id="upload-video-note" class="hidden text-fog text-xs">
+                      Large video? Send directly via
+                      <a
+                        href="https://wa.me/2348117788403"
+                        data-cta-location="form_upload_note"
+                        target="_blank"
+                        rel="noopener"
+                        style="color: #ff6b00"
+                        >WhatsApp</a
+                      >
+                      for faster delivery.
                     </p>
-                    <button type="button" id="upload-clear-btn" class="ml-auto text-xs font-condensed font-bold uppercase tracking-wide transition-colors" style="color:#FF6B00;">&#x2715; Remove file</button>
+                    <button
+                      type="button"
+                      id="upload-clear-btn"
+                      class="ml-auto text-xs font-condensed font-bold uppercase tracking-wide transition-colors"
+                      style="color: #ff6b00"
+                    >
+                      &#x2715; Remove file
+                    </button>
                   </div>
-                  <p id="upload-error" class="hidden text-red-400 text-xs mt-1.5"></p>
+                  <p
+                    id="upload-error"
+                    class="hidden text-red-400 text-xs mt-1.5"
+                  ></p>
                 </div>
 
                 <div class="mb-7">
@@ -2037,6 +3405,7 @@
               <!-- WhatsApp -->
               <a
                 href="https://wa.me/2348117788403?text=Hello%20TME%2C%20I%20would%20like%20to%20enquire%20about%20your%20industrial%20equipment."
+                data-cta-location="contact_section"
                 target="_blank"
                 rel="noopener"
                 class="flex gap-4 group"
@@ -2101,10 +3470,7 @@
               </a>
 
               <!-- Email -->
-              <a
-                href="mailto:info@tme-africa.com"
-                class="flex gap-4 group"
-              >
+              <a href="mailto:info@tme-africa.com" class="flex gap-4 group">
                 <span
                   class="shrink-0 w-11 h-11 rounded-full bg-steel flex items-center justify-center"
                 >
@@ -2186,7 +3552,10 @@
 
             <!-- Commitment Box -->
             <!-- ANIM: commitment box — scale in, delay 2 -->
-            <div class="anim-scale-in bg-steel border-l-4 border-orange p-6" data-delay="2">
+            <div
+              class="anim-scale-in bg-steel border-l-4 border-orange p-6"
+              data-delay="2"
+            >
               <span
                 class="block text-orange text-xs font-condensed font-bold uppercase tracking-[0.2em] mb-3"
                 >Our Commitment</span
@@ -2249,7 +3618,9 @@
             <p class="text-crisp text-sm">
               52 Kastina Road, Off Murtala Muhammed Expressway,
             </p>
-            <p class="text-crisp text-sm">Hajj Camp, Fagge, Kano State, Nigeria</p>
+            <p class="text-crisp text-sm">
+              Hajj Camp, Fagge, Kano State, Nigeria
+            </p>
             <p class="text-fog text-xs uppercase tracking-wide">
               Heavy Equipment Yard · Installation Base
             </p>
@@ -2277,7 +3648,9 @@
             <p class="text-crisp text-sm">
               12 Behind Conoil Filling Station, Makun,
             </p>
-            <p class="text-crisp text-sm">Lagos–Ibadan Expressway, Sagamu, Ogun State, Nigeria</p>
+            <p class="text-crisp text-sm">
+              Lagos–Ibadan Expressway, Sagamu, Ogun State, Nigeria
+            </p>
             <p class="text-fog text-xs uppercase tracking-wide">
               B2B Sales · Client Liaison · Logistics
             </p>
@@ -2303,7 +3676,9 @@
             >
               China — OEM Direct
             </p>
-            <p class="text-crisp text-sm">Guangzhou & Hunan Province</p>
+            <p class="text-crisp text-sm">
+              Guangzhou，Shandong， Heibi & Hunan Province
+            </p>
             <p class="text-crisp text-sm mb-2">People's Republic of China</p>
             <p class="text-fog text-xs uppercase tracking-wide">
               Factory Sourcing · QA Inspection · Freight
@@ -2322,12 +3697,19 @@
           <!-- Column 1: Brand -->
           <!-- ANIM: footer col 1 — fade up, delay 0 -->
           <div class="anim-fade-up" data-delay="0">
-            <img src="assets/logo/new-logo.png" alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd." style="height:44px;width:auto;" />
+            <img
+              src="assets/logo/new-logo.png"
+              alt="TME Africa — Trans-Africa Machinery &amp; Engineering Ltd."
+              style="height: 44px; width: auto"
+            />
             <p class="text-fog text-xs uppercase tracking-wide mt-3">
+              Trans-Africa Machinery &amp; Engineering Ltd.
+            </p>
+            <p class="text-fog text-xs uppercase tracking-wide mt-1">
               From Factory Floor to Production Line.
             </p>
             <p class="text-fog text-[10px] mt-4">
-              CAC Registered · RC: 9199462
+              CAC Registered · RC: 9662149
             </p>
             <div class="flex gap-2 mt-5">
               <a
@@ -2377,11 +3759,14 @@
                   fill="currentColor"
                   class="w-4 h-4 text-crisp group-hover:text-steel transition-colors duration-200"
                 >
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  />
                 </svg>
               </a>
               <a
                 href="https://wa.me/2348117788403"
+                data-cta-location="footer"
                 target="_blank"
                 rel="noopener"
                 aria-label="WhatsApp"
@@ -2530,6 +3915,13 @@
               </li>
               <li>
                 <a
+                  href="#faq"
+                  class="text-crisp hover:text-orange transition-colors duration-200"
+                  >FAQ</a
+                >
+              </li>
+              <li>
+                <a
                   href="#contact"
                   class="text-crisp hover:text-orange transition-colors duration-200"
                   >Request a Quote</a
@@ -2552,7 +3944,8 @@
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left"
         >
           <p class="text-fog text-xs">
-            © 2026  TME Africa Limited. All rights reserved.
+            © 2026 Trans-Africa Machinery &amp; Engineering Ltd. (TME Africa).
+            All rights reserved.
           </p>
           <p class="text-fog text-xs">Nigeria · Pan-Africa Operations</p>
         </div>
@@ -2563,6 +3956,7 @@
     <!-- Lives outside every section, directly before main.js loads. -->
     <a
       href="https://wa.me/2348117788403?text=Hello%20TME%2C%20I%20would%20like%20to%20enquire%20about%20your%20industrial%20equipment."
+      data-cta-location="floating_button"
       target="_blank"
       rel="noopener"
       id="whatsapp-float"
@@ -2584,51 +3978,138 @@
     <!-- ═══════════════════════════════════════════════════════════
          MACHINE DETAIL MODAL — Phase 2 Section 7
          ═══════════════════════════════════════════════════════════ -->
-    <div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-machine-name">
+    <div
+      id="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-machine-name"
+    >
       <div id="modal-panel">
-
         <!-- Header Bar -->
         <div id="modal-header">
-          <div style="display:flex;align-items:center;gap:10px;">
+          <div style="display: flex; align-items: center; gap: 10px">
             <span class="modal-pulse-dot"></span>
-            <span class="modal-header-label">EQUIPMENT SPECIFICATION — TME AFRICA</span>
+            <span class="modal-header-label"
+              >EQUIPMENT SPECIFICATION — TME AFRICA</span
+            >
           </div>
-          <div style="display:flex;align-items:center;gap:24px;">
+          <div style="display: flex; align-items: center; gap: 24px">
             <span id="modal-ref-tag" class="modal-ref-tag"></span>
-            <button id="modal-close-btn" class="modal-close-btn" aria-label="Close">&times;</button>
+            <button
+              id="modal-close-btn"
+              class="modal-close-btn"
+              aria-label="Close"
+            >
+              &times;
+            </button>
           </div>
         </div>
 
         <!-- Body -->
         <div id="modal-body">
           <div id="modal-layout">
-
             <!-- Left Column: Visual -->
             <div id="modal-left">
               <div id="modal-image-area">
                 <img id="modal-img" src="" alt="" />
                 <div id="modal-placeholder">
-                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:64px;height:64px;">
-                    <rect x="6" y="18" width="52" height="34" rx="2" stroke="rgba(255,107,0,0.2)" stroke-width="2"/>
-                    <rect x="18" y="8" width="28" height="12" rx="1" stroke="rgba(255,107,0,0.15)" stroke-width="1.5"/>
-                    <line x1="6" y1="30" x2="58" y2="30" stroke="rgba(255,107,0,0.12)" stroke-width="1.5"/>
-                    <line x1="6" y1="42" x2="58" y2="42" stroke="rgba(255,107,0,0.12)" stroke-width="1.5"/>
-                    <line x1="22" y1="18" x2="22" y2="52" stroke="rgba(255,107,0,0.12)" stroke-width="1.5"/>
-                    <line x1="42" y1="18" x2="42" y2="52" stroke="rgba(255,107,0,0.12)" stroke-width="1.5"/>
+                  <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style="width: 64px; height: 64px"
+                  >
+                    <rect
+                      x="6"
+                      y="18"
+                      width="52"
+                      height="34"
+                      rx="2"
+                      stroke="rgba(255,107,0,0.2)"
+                      stroke-width="2"
+                    />
+                    <rect
+                      x="18"
+                      y="8"
+                      width="28"
+                      height="12"
+                      rx="1"
+                      stroke="rgba(255,107,0,0.15)"
+                      stroke-width="1.5"
+                    />
+                    <line
+                      x1="6"
+                      y1="30"
+                      x2="58"
+                      y2="30"
+                      stroke="rgba(255,107,0,0.12)"
+                      stroke-width="1.5"
+                    />
+                    <line
+                      x1="6"
+                      y1="42"
+                      x2="58"
+                      y2="42"
+                      stroke="rgba(255,107,0,0.12)"
+                      stroke-width="1.5"
+                    />
+                    <line
+                      x1="22"
+                      y1="18"
+                      x2="22"
+                      y2="52"
+                      stroke="rgba(255,107,0,0.12)"
+                      stroke-width="1.5"
+                    />
+                    <line
+                      x1="42"
+                      y1="18"
+                      x2="42"
+                      y2="52"
+                      stroke="rgba(255,107,0,0.12)"
+                      stroke-width="1.5"
+                    />
                   </svg>
                   <span id="modal-placeholder-name"></span>
                 </div>
                 <span id="modal-cat-badge" class="modal-cat-badge"></span>
-                <span id="modal-tag-badge" class="modal-tag-badge hidden"></span>
+                <span
+                  id="modal-tag-badge"
+                  class="modal-tag-badge hidden"
+                ></span>
                 <div class="modal-img-gradient"></div>
               </div>
+
+              <button
+                type="button"
+                id="modal-gallery-btn"
+                class="modal-gallery-btn hidden"
+                aria-label="View photo and video gallery"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.25"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="1" />
+                  <circle cx="8.5" cy="10" r="1.5" />
+                  <path d="M21 15l-5-5L5 19" />
+                </svg>
+                <span id="modal-gallery-btn-label"></span>
+                <span aria-hidden="true">&rarr;</span>
+              </button>
 
               <div id="modal-name-block">
                 <span class="modal-section-micro">MACHINE DESIGNATION</span>
                 <h2 id="modal-machine-name" class="modal-machine-name"></h2>
                 <div class="modal-meta-row">
                   <span id="modal-ref-inline" class="modal-ref-inline"></span>
-                  <span id="modal-origin-inline" class="modal-origin-inline"></span>
+                  <span
+                    id="modal-origin-inline"
+                    class="modal-origin-inline"
+                  ></span>
                 </div>
               </div>
 
@@ -2648,9 +4129,25 @@
               </div>
 
               <div id="modal-compat-row">
-                <svg viewBox="0 0 12 12" fill="none" style="width:12px;height:12px;flex-shrink:0;">
-                  <circle cx="6" cy="6" r="5" stroke="#22C55E" stroke-width="1.5"/>
-                  <path d="M3.5 6l1.8 1.8 3.2-3.6" stroke="#22C55E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  style="width: 12px; height: 12px; flex-shrink: 0"
+                >
+                  <circle
+                    cx="6"
+                    cy="6"
+                    r="5"
+                    stroke="#22C55E"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M3.5 6l1.8 1.8 3.2-3.6"
+                    stroke="#22C55E"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
                 <span>Compatible accessories available from TME</span>
               </div>
@@ -2659,9 +4156,16 @@
             <!-- Right Column: Data -->
             <div id="modal-right">
               <div id="modal-tab-bar">
-                <button class="modal-tab modal-tab-active" data-tab="specifications">SPECIFICATIONS</button>
+                <button
+                  class="modal-tab modal-tab-active"
+                  data-tab="specifications"
+                >
+                  SPECIFICATIONS
+                </button>
                 <button class="modal-tab" data-tab="services">SERVICES</button>
-                <button class="modal-tab" data-tab="accessories">ACCESSORIES</button>
+                <button class="modal-tab" data-tab="accessories">
+                  ACCESSORIES
+                </button>
               </div>
 
               <!-- Tab: Specifications -->
@@ -2674,7 +4178,9 @@
                   <thead>
                     <tr>
                       <th class="modal-spec-th">PARAMETER</th>
-                      <th class="modal-spec-th" style="text-align:right;">SPECIFICATION</th>
+                      <th class="modal-spec-th" style="text-align: right">
+                        SPECIFICATION
+                      </th>
                     </tr>
                   </thead>
                   <tbody id="modal-spec-tbody"></tbody>
@@ -2683,34 +4189,59 @@
 
               <!-- Tab: Services -->
               <div id="modal-tab-services" class="modal-tab-content hidden">
-                <span class="modal-tab-section-label">WHAT TME PROVIDES WITH THIS MACHINE</span>
+                <span class="modal-tab-section-label"
+                  >WHAT TME PROVIDES WITH THIS MACHINE</span
+                >
                 <div class="modal-service-list">
                   <div class="modal-service-block">
                     <div class="modal-service-num">01</div>
                     <div>
-                      <div class="modal-service-title">DIRECT OEM PROCUREMENT</div>
-                      <div class="modal-service-sub">This machine is sourced directly from our verified factory partner in China. No brokers. Factory-inspected before shipping.</div>
+                      <div class="modal-service-title">
+                        DIRECT OEM PROCUREMENT
+                      </div>
+                      <div class="modal-service-sub">
+                        This machine is sourced directly from our verified
+                        factory partner in China. No brokers. Factory-inspected
+                        before shipping.
+                      </div>
                     </div>
                   </div>
                   <div class="modal-service-block">
                     <div class="modal-service-num">02</div>
                     <div>
-                      <div class="modal-service-title">SPECIFICATION CUSTOMIZATION</div>
-                      <div class="modal-service-sub">Voltage, motor capacity, and structural specs adapted to your facility requirements before the unit leaves the factory.</div>
+                      <div class="modal-service-title">
+                        SPECIFICATION CUSTOMIZATION
+                      </div>
+                      <div class="modal-service-sub">
+                        Voltage, motor capacity, and structural specs adapted to
+                        your facility requirements before the unit leaves the
+                        factory.
+                      </div>
                     </div>
                   </div>
                   <div class="modal-service-block">
                     <div class="modal-service-num">03</div>
                     <div>
-                      <div class="modal-service-title">INSTALLATION &amp; COMMISSIONING</div>
-                      <div class="modal-service-sub">Full mechanical and electrical installation by the TME engineering team. Commissioned to production standard.</div>
+                      <div class="modal-service-title">
+                        INSTALLATION &amp; COMMISSIONING
+                      </div>
+                      <div class="modal-service-sub">
+                        Full mechanical and electrical installation by the TME
+                        engineering team. Commissioned to production standard.
+                      </div>
                     </div>
                   </div>
-                  <div class="modal-service-block" style="border-bottom:none;">
+                  <div class="modal-service-block" style="border-bottom: none">
                     <div class="modal-service-num">04</div>
                     <div>
-                      <div class="modal-service-title">OPERATOR TRAINING &amp; SLA</div>
-                      <div class="modal-service-sub">Multi-day operator certification included. Optional 6 or 12-month maintenance contract available post-commissioning.</div>
+                      <div class="modal-service-title">
+                        OPERATOR TRAINING &amp; SLA
+                      </div>
+                      <div class="modal-service-sub">
+                        Multi-day operator certification included. Optional 6 or
+                        12-month maintenance contract available
+                        post-commissioning.
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2718,29 +4249,43 @@
 
               <!-- Tab: Accessories -->
               <div id="modal-tab-accessories" class="modal-tab-content hidden">
-                <span class="modal-tab-section-label">COMPATIBLE ACCESSORIES FROM TME</span>
-                <p class="modal-accessories-sub">The following accessories are available directly from TME — sourced from the same OEM network.</p>
+                <span class="modal-tab-section-label"
+                  >COMPATIBLE ACCESSORIES FROM TME</span
+                >
+                <p class="modal-accessories-sub">
+                  The following accessories are available directly from TME —
+                  sourced from the same OEM network.
+                </p>
                 <div id="modal-accessories-list"></div>
               </div>
-            </div><!-- /modal-right -->
-
-          </div><!-- /modal-layout -->
-        </div><!-- /modal-body -->
+            </div>
+            <!-- /modal-right -->
+          </div>
+          <!-- /modal-layout -->
+        </div>
+        <!-- /modal-body -->
 
         <!-- Footer Bar -->
         <div id="modal-footer">
           <div>
             <div class="modal-footer-ready">Ready to proceed?</div>
-            <div class="modal-footer-sub">Our team responds within 24 working hours</div>
+            <div class="modal-footer-sub">
+              Our team responds within 24 working hours
+            </div>
           </div>
           <div class="modal-footer-btns">
-            <button id="modal-back-btn" class="modal-btn-secondary">&larr; BACK TO CATALOG</button>
-            <button id="modal-quote-btn" class="modal-btn-primary">REQUEST A QUOTE &rarr;</button>
+            <button id="modal-back-btn" class="modal-btn-secondary">
+              &larr; BACK TO CATALOG
+            </button>
+            <button id="modal-quote-btn" class="modal-btn-primary">
+              REQUEST A QUOTE &rarr;
+            </button>
           </div>
         </div>
-
-      </div><!-- /modal-panel -->
-    </div><!-- /modal-overlay -->
+      </div>
+      <!-- /modal-panel -->
+    </div>
+    <!-- /modal-overlay -->
 
     <!-- Machine catalog data — edit this file to add/update/remove machines -->
     <script src="assets/js/machines-data.js"></script>

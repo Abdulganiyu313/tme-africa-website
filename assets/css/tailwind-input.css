@@ -1,0 +1,43 @@
+/* ============================================================
+   Tailwind CSS — compiled build source
+   ============================================================
+   Replaces the cdn.tailwindcss.com Play CDN script + inline
+   tailwind.config that used to live in each HTML file's <head>.
+   That CDN build compiles utility classes in the browser at
+   runtime — it's explicitly not for production (render-blocking
+   script, no purging, flash-of-unstyled-content on slow loads).
+
+   This file is the single source of truth for the theme (colors,
+   fonts) that used to be duplicated as an inline tailwind.config
+   block in index.html AND all four case-studies/*.html pages.
+
+   To rebuild after changing markup/JS or this file:
+     ./tailwindcss -i assets/css/tailwind-input.css \
+                    -o assets/css/tailwind.min.css --minify
+   (grab the standalone CLI for your platform from
+   https://github.com/tailwindlabs/tailwindcss/releases — no
+   Node/npm required)
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* Explicit sources — the JS files render markup via template
+   strings (catalog cards, machine modals), so their Tailwind
+   classes won't appear as static "class=" attributes anywhere in
+   the HTML. Without these, the classes those templates use would
+   get purged and dynamically-rendered content would lose styling. */
+@source "../js/main.js";
+@source "../js/machines-data.js";
+@source "../../index.html";
+@source "../../case-studies/*.html";
+
+@theme {
+  --color-steel: #1c2128;
+  --color-orange: #ff6b00;
+  --color-crisp: #f5f5f5;
+  --color-midgrey: #3a4149;
+  --color-fog: #8a8f94;
+
+  --font-sans: Barlow, sans-serif;
+  --font-condensed: "Barlow Condensed", sans-serif;
+}
