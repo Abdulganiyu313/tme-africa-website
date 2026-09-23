@@ -30,6 +30,10 @@
 @source "../js/machines-data.js";
 @source "../../index.html";
 @source "../../case-studies/*.html";
+@source "../../services/*.html";
+@source "../../machinery.html";
+@source "../../faq.html";
+@source "../../contact.html";
 
 @theme {
   --color-steel: #1c2128;

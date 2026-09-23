@@ -43,6 +43,109 @@
   transform: translateY(-1px);
 }
 
+/* Services nav dropdown (desktop) */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+.nav-dropdown-caret {
+  width: 9px;
+  height: 9px;
+  transition: transform 200ms ease;
+}
+.nav-dropdown.is-open .nav-dropdown-caret { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 14px;
+  min-width: 260px;
+  background: #0D1117;
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  z-index: 110;
+  padding: 6px 0;
+}
+.nav-dropdown.is-open .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(245, 245, 245, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: color 150ms ease, background 150ms ease;
+}
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover {
+  color: #FF6B00;
+  background: rgba(255, 107, 0, 0.06);
+}
+
+/* Services submenu (mobile drawer) */
+.drawer-dropdown-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.drawer-caret {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 200ms ease;
+}
+.drawer-dropdown.is-open .drawer-caret { transform: rotate(180deg); }
+.drawer-dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  transition: max-height 300ms ease;
+}
+.drawer-dropdown.is-open .drawer-dropdown-menu { max-height: 420px; }
+.drawer-sublink {
+  display: block;
+  padding: 14px 8px 14px 40px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(245, 245, 245, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.drawer-sublink:hover { color: #FF6B00; }
+
+/* Honeypot spam field — visually hidden, still reachable by bots
+   that don't respect CSS, off-screen rather than display:none so
+   more naive scrapers still "see" and fill it in. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Mobile drawer — starts off-screen right */
 #mobile-drawer {
   right: -100%;

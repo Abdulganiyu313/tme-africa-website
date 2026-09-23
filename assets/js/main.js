@@ -61,30 +61,19 @@ document.addEventListener("click", (e) => {
   window.addEventListener("scroll", updateNav, { passive: true });
   updateNav();
 
-  // 2. ACTIVE SECTION DETECTION ─────────────────────────────────
-  const navLinks = document.querySelectorAll(".hero-nav-link");
-  const sectionIds = ["hero", "services", "machinery", "case-studies", "faq", "contact"];
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach((link) => {
-          const active = link.dataset.section === entry.target.id;
-          link.classList.toggle("nav-link-active", active);
-          if (active) {
-            link.style.color = "#FF6B00";
-          } else {
-            link.style.color = "rgba(245,245,245,0.75)";
-          }
-        });
-      });
-    },
-    { threshold: 0.35 },
-  );
-  sectionIds.forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) sectionObserver.observe(el);
+  // 2. ACTIVE NAV LINK — by current page, not scroll position ───
+  // Each page is now its own URL, so "active" is a simple match
+  // against location.pathname rather than which section is in
+  // view. data-nav-match holds either "home" (exact root match)
+  // or a path substring (e.g. "/services/", "/faq.html").
+  const path = window.location.pathname;
+  document.querySelectorAll("[data-nav-match]").forEach((link) => {
+    const key = link.dataset.navMatch;
+    const active = key === "home"
+      ? (path === "/" || path.endsWith("/index.html") && !path.includes("/services/") && !path.includes("/case-studies/"))
+      : path.includes(key);
+    link.classList.toggle("nav-link-active", active);
+    link.style.color = active ? "#FF6B00" : "rgba(245,245,245,0.75)";
   });
 
   // 3. MOBILE DRAWER ────────────────────────────────────────────
@@ -182,6 +171,48 @@ document.addEventListener("click", (e) => {
   }
 })();
 
+// ═══════════════════════════════════════════════════════════════
+// SERVICES NAV DROPDOWN (desktop submenu + mobile drawer submenu)
+// Gated on [data-nav-dropdown] / [data-drawer-dropdown] — safely
+// no-ops on any page/markup that doesn't have them.
+// ═══════════════════════════════════════════════════════════════
+(function () {
+  document.querySelectorAll("[data-nav-dropdown]").forEach((wrapper) => {
+    const toggle = wrapper.querySelector(".nav-dropdown-toggle");
+    const menu = wrapper.querySelector(".nav-dropdown-menu");
+    if (!toggle || !menu) return;
+
+    const close = () => {
+      wrapper.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    };
+    const open = () => {
+      wrapper.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+    };
+
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      wrapper.classList.contains("is-open") ? close() : open();
+    });
+    document.addEventListener("click", (e) => {
+      if (!wrapper.contains(e.target)) close();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  });
+
+  document.querySelectorAll("[data-drawer-dropdown]").forEach((wrapper) => {
+    const toggle = wrapper.querySelector(".drawer-dropdown-toggle");
+    if (!toggle) return;
+    toggle.addEventListener("click", () => {
+      const isOpen = wrapper.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+})();
+
 // ============================================================
 // Shared Helpers
 // Used by Trust Bar, Machinery Catalog, and Case Studies.
@@ -233,22 +264,23 @@ function initCounters(scope = document) {
 }
 
 // --- Contact-form handoff -----------------------------------------
-// Called by Catalog quote buttons and Case Study CTAs. Fills the
-// hidden subject field + pre-fill banner on the real Contact form,
-// optionally pre-selects a matching Equipment Interest option, and
-// scrolls to #contact.
-function preFillEnquiry(subject, equipment, description = "") {
-  // Every "Request a Quote" CTA on the site (hero, nav, spec card,
-  // spare parts, custom sourcing, and the machine-modal quote button)
-  // funnels through here — one hook covers all of them.
-  trackEvent("select_content", { content_type: "quote_cta", item_id: subject });
+// Called by Catalog quote buttons, Case Study CTAs, and service-page
+// CTAs. The enquiry form now lives only on contact.html, so on any
+// other page this hands the intent off via sessionStorage and
+// navigates there; on contact.html itself it fills the form in place
+// (used both for same-page calls and for the handoff pickup below).
+// window.SITE_ROOT (set inline before main.js loads) is "" on
+// root-level pages and "../" on one-level-deep pages (services/*,
+// case-studies/*) so the redirect always resolves correctly.
+const PREFILL_STORAGE_KEY = "tme_prefill";
 
+function applyPrefill(subject, equipment, description = "") {
   const subjectField   = document.getElementById("enquiry-subject");
   const equipmentField = document.getElementById("equipment-interest");
   const descField      = document.getElementById("project-description");
   const banner         = document.getElementById("prefill-banner");
   const bannerText     = document.getElementById("prefill-banner-text");
-  const contactSection = document.getElementById("contact");
+  const contactSection = document.getElementById("contact") || document.getElementById("enquiry-form");
 
   if (subjectField) subjectField.value = subject;
 
@@ -271,6 +303,29 @@ function preFillEnquiry(subject, equipment, description = "") {
   }
 }
 
+function preFillEnquiry(subject, equipment, description = "") {
+  // Every "Request a Quote" CTA on the site (hero, nav, spec card,
+  // spare parts, custom sourcing, service pages, and the machine-modal
+  // quote button) funnels through here — one hook covers all of them.
+  trackEvent("select_content", { content_type: "quote_cta", item_id: subject });
+
+  if (document.getElementById("enquiry-form")) {
+    applyPrefill(subject, equipment, description);
+    return;
+  }
+
+  try {
+    sessionStorage.setItem(
+      PREFILL_STORAGE_KEY,
+      JSON.stringify({ subject, equipment, description }),
+    );
+  } catch (e) {
+    // sessionStorage unavailable (private browsing etc.) — fall
+    // through and still navigate; the form just won't be pre-filled.
+  }
+  window.location.href = (window.SITE_ROOT || "") + "contact.html";
+}
+
 function clearPrefill() {
   const subjectField = document.getElementById("enquiry-subject");
   const equipmentField = document.getElementById("equipment-interest");
@@ -279,7 +334,23 @@ function clearPrefill() {
   if (subjectField) subjectField.value = "";
   if (equipmentField) equipmentField.value = "";
   if (banner) banner.classList.add("hidden");
+  try {
+    sessionStorage.removeItem(PREFILL_STORAGE_KEY);
+  } catch (e) {}
 }
+
+// Pick up a prefill handed off from another page (contact.html only —
+// no-ops everywhere else since #enquiry-form won't exist).
+(function () {
+  if (!document.getElementById("enquiry-form")) return;
+  try {
+    const raw = sessionStorage.getItem(PREFILL_STORAGE_KEY);
+    if (!raw) return;
+    sessionStorage.removeItem(PREFILL_STORAGE_KEY);
+    const data = JSON.parse(raw);
+    applyPrefill(data.subject, data.equipment, data.description);
+  } catch (e) {}
+})();
 
 // Picks up the Trust Bar stats now — the Featured Case Study's
 // metrics are added in this same pass too, since they're static
@@ -772,7 +843,7 @@ initCounters(document);
 // ═══════════════════════════════════════
 const EMAILJS_CONFIG = {
   publicKey: "Roc6csA-p0LiYlC-t",
-  serviceID: "service_gb4rofs",
+  serviceID: "service_1m0vhks",
   templateID_notify: "template_mzoitnc",
   templateID_reply: "template_7fjm0ao",
 };
@@ -1222,6 +1293,495 @@ if (typeof emailjs !== "undefined") {
 })();
 
 // ============================================================
+// Section: Workshop Performance Audit — Booking Form
+// Own form, own IIFE (gated on #audit-booking-form so it's a
+// no-op everywhere except services/workshop-performance-audit.html),
+// but sends through the same EMAILJS_CONFIG/templates as the main
+// enquiry form above — see that file's booking-form brief for the
+// field → template-variable mapping.
+// ============================================================
+
+(function () {
+  const form = document.getElementById("audit-booking-form");
+  if (!form) return;
+
+  const REQUIRED_FIELDS = [
+    { id: "audit-company", label: "Company name" },
+    { id: "audit-contact-person", label: "Contact person" },
+    { id: "audit-phone", label: "Phone / WhatsApp", type: "phone" },
+    { id: "audit-location", label: "Location" },
+    { id: "audit-operation", label: "Type of operation" },
+  ];
+
+  const locationField = document.getElementById("audit-location");
+  const locationOtherWrap = document.getElementById("audit-location-other-wrap");
+  const locationOtherField = document.getElementById("audit-location-other");
+
+  function updateLocationOther() {
+    const isOther = locationField && locationField.value === "Other";
+    locationOtherWrap?.classList.toggle("hidden", !isOther);
+    if (locationOtherField) locationOtherField.required = Boolean(isOther);
+  }
+  locationField?.addEventListener("change", updateLocationOther);
+  updateLocationOther();
+
+  function resolvedLocation() {
+    if (!locationField) return "";
+    if (locationField.value === "Other") {
+      return locationOtherField?.value.trim() || "Other";
+    }
+    return locationField.value;
+  }
+
+  // ── Live WhatsApp deep-link prefill (company + location) ──────────
+  const waLink = document.getElementById("audit-whatsapp-prefill-link");
+  const waBaseText = "Hello Trans-Africa Machinery and Engineering Ltd., I would like to book a free workshop performance audit.";
+  function updateWhatsAppLink() {
+    if (!waLink) return;
+    const company = document.getElementById("audit-company")?.value.trim();
+    const location = resolvedLocation();
+    let text = waBaseText;
+    if (company) text += ` Company: ${company}.`;
+    if (location) text += ` Location: ${location}.`;
+    waLink.href = `https://wa.me/2347078210802?text=${encodeURIComponent(text)}`;
+  }
+  document.getElementById("audit-company")?.addEventListener("input", updateWhatsAppLink);
+  locationField?.addEventListener("change", updateWhatsAppLink);
+  locationOtherField?.addEventListener("input", updateWhatsAppLink);
+
+  function setFieldError(field, errorEl, message) {
+    const hasError = Boolean(message);
+    field.classList.toggle("border-red-500", hasError);
+    field.classList.toggle("border-transparent", !hasError);
+    if (errorEl) {
+      errorEl.textContent = message || "";
+      errorEl.classList.toggle("hidden", !hasError);
+    }
+  }
+
+  function validateForm() {
+    let isValid = true;
+    let firstErrorField = null;
+
+    REQUIRED_FIELDS.forEach(({ id, label, type }) => {
+      const field = document.getElementById(id);
+      const errorEl = document.getElementById(`${id}-error`);
+      if (!field) return;
+
+      const value = field.value.trim();
+      let message = "";
+
+      if (!value) {
+        message = `${label} is required.`;
+      } else if (type === "phone" && value.replace(/\D/g, "").length < 10) {
+        message = "Enter a valid phone number (at least 10 digits).";
+      }
+
+      setFieldError(field, errorEl, message);
+      if (message) {
+        isValid = false;
+        if (!firstErrorField) firstErrorField = field;
+      }
+    });
+
+    if (locationField?.value === "Other") {
+      const message = locationOtherField?.value.trim() ? "" : "Tell us your location.";
+      setFieldError(locationOtherField, document.getElementById("audit-location-other-error"), message);
+      if (message) {
+        isValid = false;
+        if (!firstErrorField) firstErrorField = locationOtherField;
+      }
+    }
+
+    const emailField = document.getElementById("audit-email");
+    const emailErrorEl = document.getElementById("audit-email-error");
+    if (emailField) {
+      const emailValue = emailField.value.trim();
+      const isValidEmail = !emailValue || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+      setFieldError(emailField, emailErrorEl, isValidEmail ? "" : "Enter a valid email address.");
+      if (!isValidEmail) {
+        isValid = false;
+        if (!firstErrorField) firstErrorField = emailField;
+      }
+    }
+
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstErrorField.focus();
+    }
+
+    return isValid;
+  }
+
+  function generateReference() {
+    const last6 = String(Date.now()).slice(-6);
+    const random3 = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+    return `TME-AUDIT-${last6}-${random3}`;
+  }
+
+  function formatDateReceived() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Africa/Lagos",
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).formatToParts(new Date());
+    const get = (type) => parts.find((p) => p.type === type)?.value || "";
+    return `${get("weekday")}, ${get("day")} ${get("month")} ${get("year")} — ${get("hour")}:${get("minute")} WAT`;
+  }
+
+  function getErrorBanner() {
+    let banner = document.getElementById("audit-error-banner");
+    if (!banner) {
+      banner = document.createElement("div");
+      banner.id = "audit-error-banner";
+      banner.className =
+        "hidden bg-red-500/15 border border-red-500 text-red-400 text-sm rounded px-4 py-3 mb-5";
+      banner.textContent =
+        "⚠ There was an error sending your booking request. Please try again or contact us directly on WhatsApp.";
+      document.getElementById("audit-submit-btn")?.insertAdjacentElement("beforebegin", banner);
+    }
+    return banner;
+  }
+  function hideErrorBanner() {
+    document.getElementById("audit-error-banner")?.classList.add("hidden");
+  }
+
+  function showFormSuccess() {
+    document.getElementById("audit-booking-form-fields")?.classList.add("hidden");
+    document.getElementById("audit-booking-form-success")?.classList.remove("hidden");
+    document.getElementById("audit-booking-form-success")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  const SUBMIT_BTN_DEFAULT_HTML = 'Request My Free Audit <span aria-hidden="true">→</span>';
+  const SUBMIT_BTN_LOADING_HTML = `
+    <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M12 2a10 10 0 0 1 10 10h-4a6 6 0 0 0-6-6V2z"></path>
+    </svg>
+    SENDING...
+  `;
+  function setSubmitButtonLoading(isLoading) {
+    const submitBtn = document.getElementById("audit-submit-btn");
+    if (!submitBtn) return;
+    submitBtn.disabled = isLoading;
+    submitBtn.classList.add("inline-flex", "items-center", "justify-center", "gap-2");
+    submitBtn.innerHTML = isLoading ? SUBMIT_BTN_LOADING_HTML : SUBMIT_BTN_DEFAULT_HTML;
+  }
+
+  function submitBooking(event) {
+    event.preventDefault();
+
+    // Honeypot — real visitors never fill this in (hidden via CSS).
+    // Silently pretend success so bots don't learn to probe further.
+    const honeypot = document.getElementById("audit-hp-field");
+    if (honeypot && honeypot.value.trim()) {
+      showFormSuccess();
+      return;
+    }
+
+    if (!validateForm()) return;
+
+    const isConfigured = Object.values(EMAILJS_CONFIG).every((v) => !v.startsWith("PASTE_"));
+    if (typeof emailjs === "undefined" || !isConfigured) {
+      alert("Our booking form isn't fully connected yet — please reach us directly via WhatsApp or phone instead.");
+      return;
+    }
+
+    hideErrorBanner();
+    setSubmitButtonLoading(true);
+
+    const clientEmail = document.getElementById("audit-email")?.value.trim();
+    const location = resolvedLocation();
+    const machines = document.getElementById("audit-machines")?.value.trim();
+    const problem = document.getElementById("audit-problem")?.value.trim();
+    const preferredDate = document.getElementById("audit-date")?.value;
+
+    const messageLines = [
+      "Workshop Performance Audit booking request.",
+      "",
+      `Location: ${location || "Not specified"}`,
+      `Machines run: ${machines || "Not specified"}`,
+      `Biggest problem: ${problem || "Not specified"}`,
+      `Preferred date: ${preferredDate || "Not specified"}`,
+    ];
+
+    const templateParams = {
+      from_name: document.getElementById("audit-contact-person").value.trim(),
+      company: document.getElementById("audit-company").value.trim(),
+      phone: document.getElementById("audit-phone").value.trim(),
+      industry: document.getElementById("audit-operation").value,
+      equipment: machines || "Not specified",
+      message: messageLines.join("\n"),
+      source: "Workshop Audit Booking Form",
+      subject: "Workshop Performance Audit Booking",
+      timestamp: generateReference(),
+      date_received: formatDateReceived(),
+      reply_to: document.getElementById("audit-phone").value.trim(),
+    };
+
+    const sendPromises = [
+      emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_notify, templateParams),
+    ];
+    if (clientEmail) {
+      sendPromises.push(
+        emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_reply, {
+          ...templateParams,
+          to_email: clientEmail,
+        }),
+      );
+    }
+
+    Promise.all(sendPromises)
+      .then(() => {
+        trackEvent("generate_lead", {
+          subject: templateParams.subject,
+          industry: templateParams.industry,
+          source: templateParams.source,
+        });
+        showFormSuccess();
+      })
+      .catch((error) => {
+        console.error("Audit booking submission failed:", error);
+        setSubmitButtonLoading(false);
+        const detail = error?.text || error?.message || "Unknown error";
+        const banner = getErrorBanner();
+        banner.textContent = `⚠ Submission failed (${detail}). Please try again or contact us via WhatsApp.`;
+        banner.classList.remove("hidden");
+      });
+  }
+
+  form.addEventListener("submit", submitBooking);
+  updateWhatsAppLink();
+})();
+
+// ============================================================
+// Section: Mechanical Fitting — Job Request Form
+// Own form, own IIFE (gated on #fit-job-form so it's a no-op
+// everywhere except services/mechanical-fitting.html), sends
+// through the same EMAILJS_CONFIG/templates as the other forms.
+// ============================================================
+
+(function () {
+  const form = document.getElementById("fit-job-form");
+  if (!form) return;
+
+  const REQUIRED_FIELDS = [
+    { id: "fit-company", label: "Company / client name" },
+    { id: "fit-contact-person", label: "Contact person" },
+    { id: "fit-phone", label: "Phone / WhatsApp", type: "phone" },
+    { id: "fit-location", label: "Location of the job" },
+    { id: "fit-work-type", label: "Type of work" },
+    { id: "fit-equipment", label: "Equipment involved" },
+    { id: "fit-problem", label: "Describe the problem or job" },
+    { id: "fit-urgency", label: "Urgency" },
+  ];
+
+  function setFieldError(field, errorEl, message) {
+    const hasError = Boolean(message);
+    field.classList.toggle("border-red-500", hasError);
+    field.classList.toggle("border-transparent", !hasError);
+    if (errorEl) {
+      errorEl.textContent = message || "";
+      errorEl.classList.toggle("hidden", !hasError);
+    }
+  }
+
+  function validateForm() {
+    let isValid = true;
+    let firstErrorField = null;
+
+    REQUIRED_FIELDS.forEach(({ id, label, type }) => {
+      const field = document.getElementById(id);
+      const errorEl = document.getElementById(`${id}-error`);
+      if (!field) return;
+
+      const value = field.value.trim();
+      let message = "";
+
+      if (!value) {
+        message = `${label} is required.`;
+      } else if (type === "phone" && value.replace(/\D/g, "").length < 10) {
+        message = "Enter a valid phone number (at least 10 digits).";
+      }
+
+      setFieldError(field, errorEl, message);
+      if (message) {
+        isValid = false;
+        if (!firstErrorField) firstErrorField = field;
+      }
+    });
+
+    const emailField = document.getElementById("fit-email");
+    const emailErrorEl = document.getElementById("fit-email-error");
+    if (emailField) {
+      const emailValue = emailField.value.trim();
+      const isValidEmail = !emailValue || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+      setFieldError(emailField, emailErrorEl, isValidEmail ? "" : "Enter a valid email address.");
+      if (!isValidEmail) {
+        isValid = false;
+        if (!firstErrorField) firstErrorField = emailField;
+      }
+    }
+
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstErrorField.focus();
+    }
+
+    return isValid;
+  }
+
+  function generateReference() {
+    const last6 = String(Date.now()).slice(-6);
+    const random3 = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+    return `TME-FIT-${last6}-${random3}`;
+  }
+
+  function formatDateReceived() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Africa/Lagos",
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).formatToParts(new Date());
+    const get = (type) => parts.find((p) => p.type === type)?.value || "";
+    return `${get("weekday")}, ${get("day")} ${get("month")} ${get("year")} — ${get("hour")}:${get("minute")} WAT`;
+  }
+
+  function getErrorBanner() {
+    let banner = document.getElementById("fit-error-banner");
+    if (!banner) {
+      banner = document.createElement("div");
+      banner.id = "fit-error-banner";
+      banner.className =
+        "hidden bg-red-500/15 border border-red-500 text-red-400 text-sm rounded px-4 py-3 mb-5";
+      banner.textContent =
+        "⚠ There was an error sending your job request. Please try again or contact us directly on WhatsApp.";
+      document.getElementById("fit-submit-btn")?.insertAdjacentElement("beforebegin", banner);
+    }
+    return banner;
+  }
+  function hideErrorBanner() {
+    document.getElementById("fit-error-banner")?.classList.add("hidden");
+  }
+
+  function showFormSuccess(isEmergency) {
+    document.getElementById("fit-job-form-fields")?.classList.add("hidden");
+    document.getElementById("fit-job-form-success")?.classList.remove("hidden");
+    document.getElementById("fit-emergency-note")?.classList.toggle("hidden", !isEmergency);
+    document.getElementById("fit-job-form-success")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  const SUBMIT_BTN_DEFAULT_HTML = 'Send Job Request <span aria-hidden="true">→</span>';
+  const SUBMIT_BTN_LOADING_HTML = `
+    <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M12 2a10 10 0 0 1 10 10h-4a6 6 0 0 0-6-6V2z"></path>
+    </svg>
+    SENDING...
+  `;
+  function setSubmitButtonLoading(isLoading) {
+    const submitBtn = document.getElementById("fit-submit-btn");
+    if (!submitBtn) return;
+    submitBtn.disabled = isLoading;
+    submitBtn.classList.add("inline-flex", "items-center", "justify-center", "gap-2");
+    submitBtn.innerHTML = isLoading ? SUBMIT_BTN_LOADING_HTML : SUBMIT_BTN_DEFAULT_HTML;
+  }
+
+  function submitJobRequest(event) {
+    event.preventDefault();
+
+    // Honeypot — real visitors never fill this in (hidden via CSS).
+    const honeypot = document.getElementById("fit-hp-field");
+    if (honeypot && honeypot.value.trim()) {
+      showFormSuccess(false);
+      return;
+    }
+
+    if (!validateForm()) return;
+
+    const isConfigured = Object.values(EMAILJS_CONFIG).every((v) => !v.startsWith("PASTE_"));
+    if (typeof emailjs === "undefined" || !isConfigured) {
+      alert("Our job request form isn't fully connected yet — please reach us directly via WhatsApp or phone instead.");
+      return;
+    }
+
+    hideErrorBanner();
+    setSubmitButtonLoading(true);
+
+    const clientEmail = document.getElementById("fit-email")?.value.trim();
+    const urgency = document.getElementById("fit-urgency").value;
+    const isEmergency = urgency === "Emergency (today)";
+
+    const messageLines = [
+      "Mechanical Fitting job request.",
+      "",
+      `Location: ${document.getElementById("fit-location").value.trim()}`,
+      `Type of work: ${document.getElementById("fit-work-type").value}`,
+      `Equipment involved: ${document.getElementById("fit-equipment").value.trim()}`,
+      `Problem / job: ${document.getElementById("fit-problem").value.trim()}`,
+      `Urgency: ${urgency}`,
+      `Preferred date: ${document.getElementById("fit-date")?.value || "Not specified"}`,
+    ];
+
+    const templateParams = {
+      from_name: document.getElementById("fit-contact-person").value.trim(),
+      company: document.getElementById("fit-company").value.trim(),
+      phone: document.getElementById("fit-phone").value.trim(),
+      industry: document.getElementById("fit-work-type").value,
+      equipment: document.getElementById("fit-equipment").value.trim(),
+      message: messageLines.join("\n"),
+      source: "Mechanical Fitting Job Request Form",
+      subject: isEmergency ? "URGENT — Mechanical Fitting Job Request" : "Mechanical Fitting Job Request",
+      timestamp: generateReference(),
+      date_received: formatDateReceived(),
+      reply_to: document.getElementById("fit-phone").value.trim(),
+    };
+
+    const sendPromises = [
+      emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_notify, templateParams),
+    ];
+    if (clientEmail) {
+      sendPromises.push(
+        emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_reply, {
+          ...templateParams,
+          to_email: clientEmail,
+        }),
+      );
+    }
+
+    Promise.all(sendPromises)
+      .then(() => {
+        trackEvent("generate_lead", {
+          subject: templateParams.subject,
+          industry: templateParams.industry,
+          source: templateParams.source,
+        });
+        showFormSuccess(isEmergency);
+      })
+      .catch((error) => {
+        console.error("Fitting job request submission failed:", error);
+        setSubmitButtonLoading(false);
+        const detail = error?.text || error?.message || "Unknown error";
+        const banner = getErrorBanner();
+        banner.textContent = `⚠ Submission failed (${detail}). Please try again or contact us via WhatsApp.`;
+        banner.classList.remove("hidden");
+      });
+  }
+
+  form.addEventListener("submit", submitJobRequest);
+})();
+
+// ============================================================
 // MACHINE DETAIL MODAL — Phase 2 Section 7
 // ============================================================
 
@@ -1404,19 +1964,19 @@ if (typeof emailjs !== "undefined") {
       "Milling & Shaping":
         `The ${name} is a heavy-duty machine tool built for precision flat and contoured surface machining across mild steel, stainless, and aluminium workpieces. It supports a wide range of milling cutters and is supplied with a dividing head for angular work. Sourced direct from OEM and voltage-adapted for Nigerian grid use.`,
       "Cutting":
-        `The ${name} is an industrial-grade cutting system engineered for high-accuracy, high-speed material separation across structural steel, plates, and profiles. CNC-interfaced models are available on request for programmable cutting paths. Commissioned by the TME engineering team with full operator training included.`,
+        `The ${name} is an industrial-grade cutting system engineered for high-accuracy, high-speed material separation across structural steel, plates, and profiles. CNC-interfaced models are available on request for programmable cutting paths. Commissioned by the Trans-Africa Machinery and Engineering Ltd. engineering team with full operator training included.`,
       "Bending & Rolling":
-        `The ${name} is a heavy-duty metal forming machine designed for precise plate rolling, bending, and profile shaping in fabrication workshops. Hydraulic and mechanical drive variants are available, adapted to your facility's power supply and production volume. Full commissioning by TME included.`,
+        `The ${name} is a heavy-duty metal forming machine designed for precise plate rolling, bending, and profile shaping in fabrication workshops. Hydraulic and mechanical drive variants are available, adapted to your facility's power supply and production volume. Full commissioning by Trans-Africa Machinery and Engineering Ltd. included.`,
       "Pressing & Welding":
-        `The ${name} is built for high-force industrial pressing and joining operations in metal fabrication, automotive, and structural applications. Units are factory-tested to rated tonnage and supplied with full press tooling documentation. TME provides installation, calibration, and after-sales support.`,
+        `The ${name} is built for high-force industrial pressing and joining operations in metal fabrication, automotive, and structural applications. Units are factory-tested to rated tonnage and supplied with full press tooling documentation. Trans-Africa Machinery and Engineering Ltd. provides installation, calibration, and after-sales support.`,
       "Drilling & Grinding":
-        `The ${name} is a precision machine tool engineered for accurate hole-making and surface finishing operations across mild steel, cast iron, and non-ferrous alloys. Radial arm models offer extended reach for large workpieces. Supplied with TME's standard 12-month parts and labour warranty.`,
+        `The ${name} is a precision machine tool engineered for accurate hole-making and surface finishing operations across mild steel, cast iron, and non-ferrous alloys. Radial arm models offer extended reach for large workpieces. Supplied with Trans-Africa Machinery and Engineering Ltd.'s standard 12-month parts and labour warranty.`,
       "Engine & Automotive":
         `The ${name} is a specialist automotive reconditioning machine designed to restore engine components to original OEM tolerances. It delivers consistent, repeatable results across crankshafts, engine blocks, and brake components. Trusted by automotive workshops and fleet maintenance centres across Nigeria.`,
       "Industrial Equipment":
-        `The ${name} is a heavy-duty industrial unit built for continuous-duty production environments. Designed to international standards and adapted for African power grid conditions. TME provides supply, installation, and ongoing maintenance support nationwide.`,
+        `The ${name} is a heavy-duty industrial unit built for continuous-duty production environments. Designed to international standards and adapted for African power grid conditions. Trans-Africa Machinery and Engineering Ltd. provides supply, installation, and ongoing maintenance support nationwide.`,
       "Tooling":
-        `The ${name} is a precision workshop consumable sourced from the same OEM network as all TME machinery. Manufactured to DIN/ISO standards for consistent fit, finish, and dimensional accuracy across a wide range of machine tools. Available ex-stock for rapid delivery nationwide.`,
+        `The ${name} is a precision workshop consumable sourced from the same OEM network as all Trans-Africa Machinery and Engineering Ltd. machinery. Manufactured to DIN/ISO standards for consistent fit, finish, and dimensional accuracy across a wide range of machine tools. Available ex-stock for rapid delivery nationwide.`,
     };
     return map[category] || map["Industrial Equipment"];
   }
@@ -1477,7 +2037,7 @@ if (typeof emailjs !== "undefined") {
     // Name block
     document.getElementById("modal-machine-name").textContent = machine.name.toUpperCase();
     document.getElementById("modal-ref-inline").textContent = ref;
-    const origin = (machine.specs && machine.specs["Origin"]) || "OEM Direct — China";
+    const origin = (machine.specs && machine.specs["Origin"]) || "OEM Direct — International";
     document.getElementById("modal-origin-inline").textContent = "⊕ " + origin;
 
     // Quick stats — first 3 spec entries, skipping Origin
@@ -1495,7 +2055,7 @@ if (typeof emailjs !== "undefined") {
     const additionalSpecs = {
       "Customization": "Available on request",
       "Warranty":      "12 Months — Parts & Labour",
-      "After-Sales":   "TME Engineering Team",
+      "After-Sales":   "Trans-Africa Machinery and Engineering Ltd. Engineering Team",
       "Delivery":      "Nationwide — Nigeria",
     };
     const allSpecs = Object.assign({}, machine.specs || {}, additionalSpecs);
