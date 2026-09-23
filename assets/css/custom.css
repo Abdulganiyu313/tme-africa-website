@@ -52,7 +52,6 @@
   background: none;
   border: none;
   cursor: pointer;
-  font: inherit;
   padding: 0;
 }
 .nav-dropdown-caret {
@@ -103,7 +102,6 @@
   background: none;
   border: none;
   cursor: pointer;
-  font: inherit;
   text-align: left;
 }
 .drawer-caret {
