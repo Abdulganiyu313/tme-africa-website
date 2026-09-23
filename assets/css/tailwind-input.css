@@ -35,6 +35,8 @@
 @source "../../faq.html";
 @source "../../contact.html";
 @source "../../machines/*.html";
+@source "../../privacy.html";
+@source "../../terms.html";
 
 @theme {
   --color-steel: #1c2128;
