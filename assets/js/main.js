@@ -138,14 +138,16 @@ document.addEventListener("click", (e) => {
   if (cardQuoteBtn) {
     cardQuoteBtn.addEventListener("click", () => {
       if (typeof preFillEnquiry === "function") {
-        preFillEnquiry("1M Bed Lathe Machine — REF: TME-LT-1000", "Lathe Machine");
+        preFillEnquiry("General Enquiry", "General Enquiry");
       }
       smoothScrollTo("contact");
     });
   }
 
   if (cardCatalogBtn) {
-    cardCatalogBtn.addEventListener("click", () => smoothScrollTo("machinery"));
+    cardCatalogBtn.addEventListener("click", () => {
+      window.location.href = (window.SITE_ROOT || "") + "machinery.html";
+    });
   }
 
   // 7. SERVICE TILES ────────────────────────────────────────────
