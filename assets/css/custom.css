@@ -195,10 +195,6 @@
   .hero-cta-group { flex-direction: column; }
   .hero-cta-primary,
   .hero-cta-secondary { width: 100%; justify-content: center; }
-  /* Stats: 2×2 grid on mobile */
-  .hero-stats { display: grid !important; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .stat-divider { display: none !important; }
-  .stat-item { text-align: center; }
   /* Trust pills: centered */
   .trust-pill { display: inline-flex; }
 }
