@@ -34,6 +34,7 @@
 @source "../../machinery.html";
 @source "../../faq.html";
 @source "../../contact.html";
+@source "../../machines/*.html";
 
 @theme {
   --color-steel: #1c2128;
