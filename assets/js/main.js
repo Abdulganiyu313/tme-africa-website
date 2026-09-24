@@ -2055,6 +2055,7 @@ if (typeof emailjs !== "undefined") {
 
     // Spec table — all specs + standard additions
     const additionalSpecs = {
+      "Availability":  machine.tag === "IN STOCK" ? "In Stock — Ready to Ship" : "Sourced to Order — 4–6 Weeks",
       "Customization": "Available on request",
       "Warranty":      "12 Months — Parts & Labour",
       "After-Sales":   "Trans-Africa Machinery and Engineering Ltd. Engineering Team",
