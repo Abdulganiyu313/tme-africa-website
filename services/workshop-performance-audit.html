@@ -550,8 +550,9 @@
               </div>
 
               <div class="mb-5">
-                <label for="audit-problem" class="block text-crisp text-sm font-semibold mb-1.5">Biggest problem right now <span class="text-fog font-normal">(optional)</span></label>
-                <textarea id="audit-problem" name="problem" rows="3" placeholder="What's costing you the most time or money right now?" class="form-field w-full bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200 resize-none"></textarea>
+                <label for="audit-problem" class="block text-crisp text-sm font-semibold mb-1.5">Biggest problem right now <span class="text-orange">*</span></label>
+                <textarea id="audit-problem" name="problem" required rows="3" placeholder="What's costing you the most time or money right now?" class="form-field w-full bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200 resize-none"></textarea>
+                <p id="audit-problem-error" class="hidden text-red-400 text-xs mt-1.5"></p>
               </div>
 
               <div class="mb-7">

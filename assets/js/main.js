@@ -1296,6 +1296,7 @@ if (typeof emailjs !== "undefined") {
     { id: "audit-email", label: "Email Address", type: "email" },
     { id: "audit-location", label: "Location" },
     { id: "audit-operation", label: "Type of operation" },
+    { id: "audit-problem", label: "Biggest problem right now", minLength: 20 },
   ];
 
   const antiSpam = TME_initAntiSpam("audit");
@@ -1336,7 +1337,7 @@ if (typeof emailjs !== "undefined") {
   locationField?.addEventListener("change", updateWhatsAppLink);
   locationOtherField?.addEventListener("input", updateWhatsAppLink);
 
-  function fieldValidator({ label, type }) {
+  function fieldValidator({ label, type, minLength }) {
     return function (rawValue) {
       const value = (rawValue || "").trim();
       if (!value) return `${label} is required.`;
@@ -1345,6 +1346,9 @@ if (typeof emailjs !== "undefined") {
       }
       if (type === "email" && !TME_isValidEmail(value)) {
         return "Enter a valid email address.";
+      }
+      if (minLength && value.length < minLength) {
+        return `Please provide at least ${minLength} characters.`;
       }
       return "";
     };
