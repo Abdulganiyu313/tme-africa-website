@@ -1004,63 +1004,52 @@ if (typeof emailjs !== "undefined") {
     { id: "full-name", label: "Full Name" },
     { id: "company-name", label: "Company Name" },
     { id: "phone-number", label: "Phone Number", type: "phone" },
+    { id: "email-address", label: "Email Address", type: "email" },
     { id: "industry-sector", label: "Industry / Sector" },
-    { id: "project-description", label: "Project Description / Requirements" },
+    { id: "project-description", label: "Project Description / Requirements", minLength: 20 },
   ];
 
-  function setFieldError(field, errorEl, message) {
-    const hasError = Boolean(message);
-    field.classList.toggle("border-red-500", hasError);
-    field.classList.toggle("border-transparent", !hasError);
-    if (errorEl) {
-      errorEl.textContent = message || "";
-      errorEl.classList.toggle("hidden", !hasError);
-    }
+  // One validator factory used both for blur-time (live) and
+  // submit-time (full-form) checks — see form-validation.js.
+  function fieldValidator({ label, type, minLength }) {
+    return function (rawValue) {
+      const value = (rawValue || "").trim();
+      if (!value) return `${label} is required.`;
+      if (type === "phone" && !TME_validatePhone(value).valid) {
+        return "Enter a valid phone number (e.g. 0803 123 4567 or +234 803 123 4567).";
+      }
+      if (type === "email" && !TME_isValidEmail(value)) {
+        return "Enter a valid email address.";
+      }
+      if (minLength && value.length < minLength) {
+        return `Please provide at least ${minLength} characters.`;
+      }
+      return "";
+    };
   }
+
+  REQUIRED_FIELDS.forEach((cfg) => {
+    const field = document.getElementById(cfg.id);
+    const errorEl = document.getElementById(`${cfg.id}-error`);
+    if (field) TME_wireFieldValidation(field, errorEl, fieldValidator(cfg));
+  });
 
   function validateForm() {
     let isValid = true;
     let firstErrorField = null;
 
-    REQUIRED_FIELDS.forEach(({ id, label, type }) => {
-      const field = document.getElementById(id);
-      const errorEl = document.getElementById(`${id}-error`);
+    REQUIRED_FIELDS.forEach((cfg) => {
+      const field = document.getElementById(cfg.id);
+      const errorEl = document.getElementById(`${cfg.id}-error`);
       if (!field) return;
 
-      const value = field.value.trim();
-      let message = "";
-
-      if (!value) {
-        message = `${label} is required.`;
-      } else if (type === "phone" && value.replace(/\D/g, "").length < 10) {
-        message = "Enter a valid phone number (at least 10 digits).";
-      }
-
-      setFieldError(field, errorEl, message);
+      const message = fieldValidator(cfg)(field.value);
+      TME_setFieldError(field, errorEl, message);
       if (message) {
         isValid = false;
         if (!firstErrorField) firstErrorField = field;
       }
     });
-
-    // Email is optional, but if filled in it must look like an email —
-    // it's the only thing that decides whether the auto-reply can send.
-    const emailField = document.getElementById("email-address");
-    const emailErrorEl = document.getElementById("email-address-error");
-    if (emailField) {
-      const emailValue = emailField.value.trim();
-      const isValidEmail =
-        !emailValue || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-      setFieldError(
-        emailField,
-        emailErrorEl,
-        isValidEmail ? "" : "Enter a valid email address.",
-      );
-      if (!isValidEmail) {
-        isValid = false;
-        if (!firstErrorField) firstErrorField = emailField;
-      }
-    }
 
     if (firstErrorField) {
       firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1070,32 +1059,7 @@ if (typeof emailjs !== "undefined") {
     return isValid;
   }
 
-  // --- Reference number + date, for both templates -------------------
-  // Matches the spec format exactly: "TME-847291-394"
-  function generateReference() {
-    const last6 = String(Date.now()).slice(-6);
-    const random3 = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
-    return `TME-${last6}-${random3}`;
-  }
-
-  // "Monday, 23 June 2025 — 14:32 WAT" — built from formatToParts
-  // rather than a locale string + regex, so the shape never drifts
-  // across browsers. Africa/Lagos has no DST, so "WAT" is always correct.
-  function formatDateReceived() {
-    const parts = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Africa/Lagos",
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    }).formatToParts(new Date());
-
-    const get = (type) => parts.find((p) => p.type === type)?.value || "";
-    return `${get("weekday")}, ${get("day")} ${get("month")} ${get("year")} — ${get("hour")}:${get("minute")} WAT`;
-  }
+  const antiSpam = TME_initAntiSpam("enquiry");
 
   // --- Error banner (synthesized — no new markup in index.html) ------
   function getErrorBanner() {
@@ -1161,15 +1125,8 @@ if (typeof emailjs !== "undefined") {
     REQUIRED_FIELDS.forEach(({ id }) => {
       const field = document.getElementById(id);
       const errorEl = document.getElementById(`${id}-error`);
-      if (field) setFieldError(field, errorEl, "");
+      if (field) TME_setFieldError(field, errorEl, "");
     });
-    const emailField = document.getElementById("email-address");
-    if (emailField)
-      setFieldError(
-        emailField,
-        document.getElementById("email-address-error"),
-        "",
-      );
 
     setSubmitButtonLoading(false);
     hideErrorBanner();
@@ -1181,6 +1138,28 @@ if (typeof emailjs !== "undefined") {
 
   function submitEnquiry(event) {
     event.preventDefault();
+
+    // Honeypot + too-fast submissions are bot behaviour — pretend
+    // success without sending anything or telling the bot why.
+    if (
+      antiSpam.isHoneypotFilled("enquiry-hp-field") ||
+      antiSpam.isTooFast()
+    ) {
+      showFormSuccess(
+        document.getElementById("full-name").value.trim().split(" ")[0] || "there",
+      );
+      return;
+    }
+
+    // A real repeat submission within 30s (double-click, resubmit) —
+    // don't send twice, just show success again.
+    if (antiSpam.isRateLimited()) {
+      showFormSuccess(
+        document.getElementById("full-name").value.trim().split(" ")[0] || "there",
+      );
+      return;
+    }
+
     if (!validateForm()) return;
 
     const isConfigured = Object.values(EMAILJS_CONFIG).every(
@@ -1200,7 +1179,8 @@ if (typeof emailjs !== "undefined") {
 
     const fullName = document.getElementById("full-name").value.trim();
     const firstName = fullName.split(" ")[0];
-    const clientEmail = document.getElementById("email-address")?.value.trim();
+    const clientEmail = TME_normalizeEmail(document.getElementById("email-address").value);
+    const phoneInfo = TME_validatePhone(document.getElementById("phone-number").value);
     const subjectValue = document
       .getElementById("enquiry-subject")
       .value.trim();
@@ -1210,15 +1190,16 @@ if (typeof emailjs !== "undefined") {
     const templateParams = {
       from_name: fullName,
       company: document.getElementById("company-name").value.trim(),
-      phone: document.getElementById("phone-number").value.trim(),
+      phone: phoneInfo.e164,
+      phone_wa: phoneInfo.waDigits,
       industry: document.getElementById("industry-sector").value,
       equipment: document.getElementById("equipment-interest").value,
       message: document.getElementById("project-description").value.trim(),
       source: document.getElementById("hear-about").value,
       subject: subjectValue || "General Enquiry",
-      timestamp: generateReference(),
-      date_received: formatDateReceived(),
-      reply_to: document.getElementById("phone-number").value.trim(),
+      timestamp: TME_formatReference(),
+      date_received: TME_formatDateReceived(),
+      reply_to: clientEmail || phoneInfo.e164,
       // Attachment fields — add {{attachment_name}}, {{attachment_size}},
       // {{attachment_type}}, and {{attachment_preview}} to your EmailJS
       // notify template. For images under 4 MB, attachment_preview is a
@@ -1272,6 +1253,7 @@ if (typeof emailjs !== "undefined") {
           industry: templateParams.industry,
           source: templateParams.source,
         });
+        antiSpam.markSubmitted();
         showFormSuccess(firstName);
       })
       .catch((error) => {
@@ -1311,9 +1293,12 @@ if (typeof emailjs !== "undefined") {
     { id: "audit-company", label: "Company name" },
     { id: "audit-contact-person", label: "Contact person" },
     { id: "audit-phone", label: "Phone / WhatsApp", type: "phone" },
+    { id: "audit-email", label: "Email Address", type: "email" },
     { id: "audit-location", label: "Location" },
     { id: "audit-operation", label: "Type of operation" },
   ];
+
+  const antiSpam = TME_initAntiSpam("audit");
 
   const locationField = document.getElementById("audit-location");
   const locationOtherWrap = document.getElementById("audit-location-other-wrap");
@@ -1351,35 +1336,42 @@ if (typeof emailjs !== "undefined") {
   locationField?.addEventListener("change", updateWhatsAppLink);
   locationOtherField?.addEventListener("input", updateWhatsAppLink);
 
-  function setFieldError(field, errorEl, message) {
-    const hasError = Boolean(message);
-    field.classList.toggle("border-red-500", hasError);
-    field.classList.toggle("border-transparent", !hasError);
-    if (errorEl) {
-      errorEl.textContent = message || "";
-      errorEl.classList.toggle("hidden", !hasError);
-    }
+  function fieldValidator({ label, type }) {
+    return function (rawValue) {
+      const value = (rawValue || "").trim();
+      if (!value) return `${label} is required.`;
+      if (type === "phone" && !TME_validatePhone(value).valid) {
+        return "Enter a valid phone number (e.g. 0803 123 4567 or +234 803 123 4567).";
+      }
+      if (type === "email" && !TME_isValidEmail(value)) {
+        return "Enter a valid email address.";
+      }
+      return "";
+    };
   }
+
+  REQUIRED_FIELDS.forEach((cfg) => {
+    const field = document.getElementById(cfg.id);
+    const errorEl = document.getElementById(`${cfg.id}-error`);
+    if (field) TME_wireFieldValidation(field, errorEl, fieldValidator(cfg));
+  });
+  TME_wireFieldValidation(
+    locationOtherField,
+    document.getElementById("audit-location-other-error"),
+    (value) => ((value || "").trim() ? "" : "Tell us your location."),
+  );
 
   function validateForm() {
     let isValid = true;
     let firstErrorField = null;
 
-    REQUIRED_FIELDS.forEach(({ id, label, type }) => {
-      const field = document.getElementById(id);
-      const errorEl = document.getElementById(`${id}-error`);
+    REQUIRED_FIELDS.forEach((cfg) => {
+      const field = document.getElementById(cfg.id);
+      const errorEl = document.getElementById(`${cfg.id}-error`);
       if (!field) return;
 
-      const value = field.value.trim();
-      let message = "";
-
-      if (!value) {
-        message = `${label} is required.`;
-      } else if (type === "phone" && value.replace(/\D/g, "").length < 10) {
-        message = "Enter a valid phone number (at least 10 digits).";
-      }
-
-      setFieldError(field, errorEl, message);
+      const message = fieldValidator(cfg)(field.value);
+      TME_setFieldError(field, errorEl, message);
       if (message) {
         isValid = false;
         if (!firstErrorField) firstErrorField = field;
@@ -1388,22 +1380,10 @@ if (typeof emailjs !== "undefined") {
 
     if (locationField?.value === "Other") {
       const message = locationOtherField?.value.trim() ? "" : "Tell us your location.";
-      setFieldError(locationOtherField, document.getElementById("audit-location-other-error"), message);
+      TME_setFieldError(locationOtherField, document.getElementById("audit-location-other-error"), message);
       if (message) {
         isValid = false;
         if (!firstErrorField) firstErrorField = locationOtherField;
-      }
-    }
-
-    const emailField = document.getElementById("audit-email");
-    const emailErrorEl = document.getElementById("audit-email-error");
-    if (emailField) {
-      const emailValue = emailField.value.trim();
-      const isValidEmail = !emailValue || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-      setFieldError(emailField, emailErrorEl, isValidEmail ? "" : "Enter a valid email address.");
-      if (!isValidEmail) {
-        isValid = false;
-        if (!firstErrorField) firstErrorField = emailField;
       }
     }
 
@@ -1413,27 +1393,6 @@ if (typeof emailjs !== "undefined") {
     }
 
     return isValid;
-  }
-
-  function generateReference() {
-    const last6 = String(Date.now()).slice(-6);
-    const random3 = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
-    return `TME-AUDIT-${last6}-${random3}`;
-  }
-
-  function formatDateReceived() {
-    const parts = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Africa/Lagos",
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    }).formatToParts(new Date());
-    const get = (type) => parts.find((p) => p.type === type)?.value || "";
-    return `${get("weekday")}, ${get("day")} ${get("month")} ${get("year")} — ${get("hour")}:${get("minute")} WAT`;
   }
 
   function getErrorBanner() {
@@ -1478,10 +1437,15 @@ if (typeof emailjs !== "undefined") {
   function submitBooking(event) {
     event.preventDefault();
 
-    // Honeypot — real visitors never fill this in (hidden via CSS).
-    // Silently pretend success so bots don't learn to probe further.
-    const honeypot = document.getElementById("audit-hp-field");
-    if (honeypot && honeypot.value.trim()) {
+    // Honeypot + too-fast submissions are bot behaviour — pretend
+    // success without sending anything or telling the bot why.
+    if (antiSpam.isHoneypotFilled("audit-hp-field") || antiSpam.isTooFast()) {
+      showFormSuccess();
+      return;
+    }
+
+    // A real repeat submission within 30s — don't send twice.
+    if (antiSpam.isRateLimited()) {
       showFormSuccess();
       return;
     }
@@ -1497,7 +1461,8 @@ if (typeof emailjs !== "undefined") {
     hideErrorBanner();
     setSubmitButtonLoading(true);
 
-    const clientEmail = document.getElementById("audit-email")?.value.trim();
+    const clientEmail = TME_normalizeEmail(document.getElementById("audit-email").value);
+    const phoneInfo = TME_validatePhone(document.getElementById("audit-phone").value);
     const location = resolvedLocation();
     const machines = document.getElementById("audit-machines")?.value.trim();
     const problem = document.getElementById("audit-problem")?.value.trim();
@@ -1515,15 +1480,16 @@ if (typeof emailjs !== "undefined") {
     const templateParams = {
       from_name: document.getElementById("audit-contact-person").value.trim(),
       company: document.getElementById("audit-company").value.trim(),
-      phone: document.getElementById("audit-phone").value.trim(),
+      phone: phoneInfo.e164,
+      phone_wa: phoneInfo.waDigits,
       industry: document.getElementById("audit-operation").value,
       equipment: machines || "Not specified",
       message: messageLines.join("\n"),
       source: "Workshop Audit Booking Form",
       subject: "Workshop Performance Audit Booking",
-      timestamp: generateReference(),
-      date_received: formatDateReceived(),
-      reply_to: document.getElementById("audit-phone").value.trim(),
+      timestamp: TME_formatReference("AUDIT"),
+      date_received: TME_formatDateReceived(),
+      reply_to: clientEmail || phoneInfo.e164,
     };
 
     const sendPromises = [
@@ -1545,6 +1511,7 @@ if (typeof emailjs !== "undefined") {
           industry: templateParams.industry,
           source: templateParams.source,
         });
+        antiSpam.markSubmitted();
         showFormSuccess();
       })
       .catch((error) => {
@@ -1576,59 +1543,55 @@ if (typeof emailjs !== "undefined") {
     { id: "fit-company", label: "Company / client name" },
     { id: "fit-contact-person", label: "Contact person" },
     { id: "fit-phone", label: "Phone / WhatsApp", type: "phone" },
+    { id: "fit-email", label: "Email Address", type: "email" },
     { id: "fit-location", label: "Location of the job" },
     { id: "fit-work-type", label: "Type of work" },
     { id: "fit-equipment", label: "Equipment involved" },
-    { id: "fit-problem", label: "Describe the problem or job" },
+    { id: "fit-problem", label: "Describe the problem or job", minLength: 20 },
     { id: "fit-urgency", label: "Urgency" },
   ];
 
-  function setFieldError(field, errorEl, message) {
-    const hasError = Boolean(message);
-    field.classList.toggle("border-red-500", hasError);
-    field.classList.toggle("border-transparent", !hasError);
-    if (errorEl) {
-      errorEl.textContent = message || "";
-      errorEl.classList.toggle("hidden", !hasError);
-    }
+  const antiSpam = TME_initAntiSpam("fit");
+
+  function fieldValidator({ label, type, minLength }) {
+    return function (rawValue) {
+      const value = (rawValue || "").trim();
+      if (!value) return `${label} is required.`;
+      if (type === "phone" && !TME_validatePhone(value).valid) {
+        return "Enter a valid phone number (e.g. 0803 123 4567 or +234 803 123 4567).";
+      }
+      if (type === "email" && !TME_isValidEmail(value)) {
+        return "Enter a valid email address.";
+      }
+      if (minLength && value.length < minLength) {
+        return `Please provide at least ${minLength} characters.`;
+      }
+      return "";
+    };
   }
+
+  REQUIRED_FIELDS.forEach((cfg) => {
+    const field = document.getElementById(cfg.id);
+    const errorEl = document.getElementById(`${cfg.id}-error`);
+    if (field) TME_wireFieldValidation(field, errorEl, fieldValidator(cfg));
+  });
 
   function validateForm() {
     let isValid = true;
     let firstErrorField = null;
 
-    REQUIRED_FIELDS.forEach(({ id, label, type }) => {
-      const field = document.getElementById(id);
-      const errorEl = document.getElementById(`${id}-error`);
+    REQUIRED_FIELDS.forEach((cfg) => {
+      const field = document.getElementById(cfg.id);
+      const errorEl = document.getElementById(`${cfg.id}-error`);
       if (!field) return;
 
-      const value = field.value.trim();
-      let message = "";
-
-      if (!value) {
-        message = `${label} is required.`;
-      } else if (type === "phone" && value.replace(/\D/g, "").length < 10) {
-        message = "Enter a valid phone number (at least 10 digits).";
-      }
-
-      setFieldError(field, errorEl, message);
+      const message = fieldValidator(cfg)(field.value);
+      TME_setFieldError(field, errorEl, message);
       if (message) {
         isValid = false;
         if (!firstErrorField) firstErrorField = field;
       }
     });
-
-    const emailField = document.getElementById("fit-email");
-    const emailErrorEl = document.getElementById("fit-email-error");
-    if (emailField) {
-      const emailValue = emailField.value.trim();
-      const isValidEmail = !emailValue || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-      setFieldError(emailField, emailErrorEl, isValidEmail ? "" : "Enter a valid email address.");
-      if (!isValidEmail) {
-        isValid = false;
-        if (!firstErrorField) firstErrorField = emailField;
-      }
-    }
 
     if (firstErrorField) {
       firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1636,27 +1599,6 @@ if (typeof emailjs !== "undefined") {
     }
 
     return isValid;
-  }
-
-  function generateReference() {
-    const last6 = String(Date.now()).slice(-6);
-    const random3 = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
-    return `TME-FIT-${last6}-${random3}`;
-  }
-
-  function formatDateReceived() {
-    const parts = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Africa/Lagos",
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    }).formatToParts(new Date());
-    const get = (type) => parts.find((p) => p.type === type)?.value || "";
-    return `${get("weekday")}, ${get("day")} ${get("month")} ${get("year")} — ${get("hour")}:${get("minute")} WAT`;
   }
 
   function getErrorBanner() {
@@ -1702,9 +1644,15 @@ if (typeof emailjs !== "undefined") {
   function submitJobRequest(event) {
     event.preventDefault();
 
-    // Honeypot — real visitors never fill this in (hidden via CSS).
-    const honeypot = document.getElementById("fit-hp-field");
-    if (honeypot && honeypot.value.trim()) {
+    // Honeypot + too-fast submissions are bot behaviour — pretend
+    // success without sending anything or telling the bot why.
+    if (antiSpam.isHoneypotFilled("fit-hp-field") || antiSpam.isTooFast()) {
+      showFormSuccess(false);
+      return;
+    }
+
+    // A real repeat submission within 30s — don't send twice.
+    if (antiSpam.isRateLimited()) {
       showFormSuccess(false);
       return;
     }
@@ -1720,7 +1668,8 @@ if (typeof emailjs !== "undefined") {
     hideErrorBanner();
     setSubmitButtonLoading(true);
 
-    const clientEmail = document.getElementById("fit-email")?.value.trim();
+    const clientEmail = TME_normalizeEmail(document.getElementById("fit-email").value);
+    const phoneInfo = TME_validatePhone(document.getElementById("fit-phone").value);
     const urgency = document.getElementById("fit-urgency").value;
     const isEmergency = urgency === "Emergency (today)";
 
@@ -1738,15 +1687,16 @@ if (typeof emailjs !== "undefined") {
     const templateParams = {
       from_name: document.getElementById("fit-contact-person").value.trim(),
       company: document.getElementById("fit-company").value.trim(),
-      phone: document.getElementById("fit-phone").value.trim(),
+      phone: phoneInfo.e164,
+      phone_wa: phoneInfo.waDigits,
       industry: document.getElementById("fit-work-type").value,
       equipment: document.getElementById("fit-equipment").value.trim(),
       message: messageLines.join("\n"),
       source: "Mechanical Fitting Job Request Form",
       subject: isEmergency ? "URGENT — Mechanical Fitting Job Request" : "Mechanical Fitting Job Request",
-      timestamp: generateReference(),
-      date_received: formatDateReceived(),
-      reply_to: document.getElementById("fit-phone").value.trim(),
+      timestamp: TME_formatReference("FIT"),
+      date_received: TME_formatDateReceived(),
+      reply_to: clientEmail || phoneInfo.e164,
     };
 
     const sendPromises = [
@@ -1768,6 +1718,7 @@ if (typeof emailjs !== "undefined") {
           industry: templateParams.industry,
           source: templateParams.source,
         });
+        antiSpam.markSubmitted();
         showFormSuccess(isEmergency);
       })
       .catch((error) => {

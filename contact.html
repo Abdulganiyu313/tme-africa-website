@@ -248,6 +248,11 @@
             <div id="enquiry-form-fields">
               <form id="enquiry-form" novalidate>
                 <input type="hidden" id="enquiry-subject" name="subject" />
+                <!-- Honeypot — real users never see or fill this in -->
+                <div class="hp-field" aria-hidden="true">
+                  <label for="enquiry-hp-field">Leave this field empty</label>
+                  <input type="text" id="enquiry-hp-field" name="website" tabindex="-1" autocomplete="off" />
+                </div>
 
                 <div class="mb-5">
                   <label
@@ -300,7 +305,7 @@
                     id="phone-number"
                     name="phone"
                     required
-                    placeholder="+234 XXX XXX XXXX"
+                    placeholder="0803 123 4567 or +234 803 123 4567"
                     class="form-field w-full min-h-[48px] bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200"
                   />
                   <p
@@ -313,13 +318,13 @@
                   <label
                     for="email-address"
                     class="block text-crisp text-sm font-semibold mb-1.5"
-                    >Email Address
-                    <span class="text-fog font-normal">(optional)</span></label
+                    >Email Address <span class="text-orange">*</span></label
                   >
                   <input
                     type="email"
                     id="email-address"
                     name="email"
+                    required
                     placeholder="you@company.com"
                     class="form-field w-full min-h-[48px] bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200"
                   />
@@ -328,8 +333,8 @@
                     class="hidden text-red-400 text-xs mt-1.5"
                   ></p>
                   <p class="text-fog text-xs mt-1.5">
-                    We'll send a confirmation here if provided — otherwise we'll
-                    reach you by phone or WhatsApp.
+                    We'll send a confirmation here, and reach you by phone or
+                    WhatsApp as well.
                   </p>
                 </div>
 
@@ -1012,6 +1017,7 @@
     <script>
       window.SITE_ROOT = "";
     </script>
+    <script src="assets/js/form-validation.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
 </html>

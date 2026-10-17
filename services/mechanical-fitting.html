@@ -434,13 +434,13 @@
 
               <div class="mb-5">
                 <label for="fit-phone" class="block text-crisp text-sm font-semibold mb-1.5">Phone / WhatsApp <span class="text-orange">*</span></label>
-                <input type="tel" id="fit-phone" name="phone" required placeholder="+234 XXX XXX XXXX" class="form-field w-full min-h-[48px] bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200" />
+                <input type="tel" id="fit-phone" name="phone" required placeholder="0803 123 4567 or +234 803 123 4567" class="form-field w-full min-h-[48px] bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200" />
                 <p id="fit-phone-error" class="hidden text-red-400 text-xs mt-1.5"></p>
               </div>
 
               <div class="mb-5">
-                <label for="fit-email" class="block text-crisp text-sm font-semibold mb-1.5">Email <span class="text-fog font-normal">(optional)</span></label>
-                <input type="email" id="fit-email" name="email" placeholder="you@company.com" class="form-field w-full min-h-[48px] bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200" />
+                <label for="fit-email" class="block text-crisp text-sm font-semibold mb-1.5">Email <span class="text-orange">*</span></label>
+                <input type="email" id="fit-email" name="email" required placeholder="you@company.com" class="form-field w-full min-h-[48px] bg-steel text-crisp placeholder:text-fog px-4 py-3 rounded border border-transparent focus:border-orange focus:outline-none transition-colors duration-200" />
                 <p id="fit-email-error" class="hidden text-red-400 text-xs mt-1.5"></p>
               </div>
 
@@ -647,6 +647,7 @@
     <script>
       window.SITE_ROOT = "../";
     </script>
+    <script src="../assets/js/form-validation.js"></script>
     <script src="../assets/js/main.js"></script>
   </body>
 </html>
