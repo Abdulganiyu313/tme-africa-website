@@ -1193,6 +1193,7 @@ if (typeof emailjs !== "undefined") {
       phone: phoneInfo.e164,
       phone_wa: phoneInfo.waDigits,
       email: clientEmail,
+      to_email: clientEmail,
       industry: document.getElementById("industry-sector").value,
       equipment: document.getElementById("equipment-interest").value,
       message: document.getElementById("project-description").value.trim(),
@@ -1236,10 +1237,7 @@ if (typeof emailjs !== "undefined") {
         emailjs.send(
           EMAILJS_CONFIG.serviceID,
           EMAILJS_CONFIG.templateID_reply,
-          {
-            ...templateParams,
-            to_email: clientEmail,
-          },
+          templateParams,
         ),
       );
     }
@@ -1488,6 +1486,7 @@ if (typeof emailjs !== "undefined") {
       phone: phoneInfo.e164,
       phone_wa: phoneInfo.waDigits,
       email: clientEmail,
+      to_email: clientEmail,
       industry: document.getElementById("audit-operation").value,
       equipment: machines || "Not specified",
       message: messageLines.join("\n"),
@@ -1503,10 +1502,7 @@ if (typeof emailjs !== "undefined") {
     ];
     if (clientEmail) {
       sendPromises.push(
-        emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_reply, {
-          ...templateParams,
-          to_email: clientEmail,
-        }),
+        emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_reply, templateParams),
       );
     }
 
@@ -1696,6 +1692,7 @@ if (typeof emailjs !== "undefined") {
       phone: phoneInfo.e164,
       phone_wa: phoneInfo.waDigits,
       email: clientEmail,
+      to_email: clientEmail,
       industry: document.getElementById("fit-work-type").value,
       equipment: document.getElementById("fit-equipment").value.trim(),
       message: messageLines.join("\n"),
@@ -1711,10 +1708,7 @@ if (typeof emailjs !== "undefined") {
     ];
     if (clientEmail) {
       sendPromises.push(
-        emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_reply, {
-          ...templateParams,
-          to_email: clientEmail,
-        }),
+        emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID_reply, templateParams),
       );
     }
 
